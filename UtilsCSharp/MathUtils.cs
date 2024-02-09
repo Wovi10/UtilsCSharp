@@ -177,7 +177,97 @@ public static class MathUtils
     public static int GetHighest(int a, int b)
         => a > b ? a : b;
     
+    public static long GetHighest(long a, long b)
+        => a > b ? a : b;
     
+    public static double GetHighest(double a, double b)
+        => a > b ? a : b;
 
     #endregion
+
+    #region GetLowest
+
+    public static int GetLowest(int a, int b)
+        => a < b ? a : b;
+
+    public static long GetLowest(long a, long b)
+        => a < b ? a : b;
+    
+    public static double GetLowest(double a, double b)
+        => a < b ? a : b;
+    
+    #endregion
+
+    #region IsEven
+    
+    public static bool IsEven(int a)
+        => a % 2 == 0;
+    
+    public static bool IsEven(long a)
+        => a % 2 == 0;
+
+    public static bool IsEven(double a)
+        => a % 2 == 0;
+    
+    private static bool GenericIsEven(object a)
+        => a % 2 == 0;
+    
+    #endregion
+    
+    #region IsOdd
+    
+    public static bool IsOdd(int a)
+        => a % 2 != 0;
+    
+    public static bool IsOdd(long a)
+        => a % 2 != 0;
+    
+    public static bool IsOdd(double a)
+        => a % 2 != 0;
+    
+    #endregion
+    
+    #region IsPrime
+    
+    public static bool IsPrime(int a)
+    {
+        if (a <= 1)
+            return false;
+        if (a == 2)
+            return true;
+        if (a % 2 == 0)
+            return false;
+        for (var i = 3; i <= Math.Sqrt(a); i += 2)
+            if (a % i == 0)
+                return false;
+        return true;
+    }
+    
+    public static bool IsPrime(long a)
+    {
+        if (a <= 1)
+            return false;
+        if (a == 2)
+            return true;
+        if (a % 2 == 0)
+            return false;
+        for (var i = 3; i <= Math.Sqrt(a); i += 2)
+            if (a % i == 0)
+                return false;
+        return true;
+    }
+    
+    public static bool IsPrime(double a)
+    {
+        if (a <= 1)
+            return false;
+        if (a == 2)
+            return true;
+        if (a % 2 == 0)
+            return false;
+        for (var i = 3; i <= Math.Sqrt(a); i += 2)
+            if (a % i == 0)
+                return false;
+        return true;
+    }
 }
