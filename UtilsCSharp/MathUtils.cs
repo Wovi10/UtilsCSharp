@@ -474,4 +474,106 @@ public static class MathUtils
     }
     
     #endregion
+
+    #region IsGreaterThan
+
+    /// <summary>
+    /// Compares two integers.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>True or false. Null if equal.</returns>
+    public static bool? IsGreaterThan(int a, int b)
+    {
+        return a > b 
+            ? true 
+            : a < b 
+                ? false 
+                : null;
+    }
+    
+
+    /// <summary>
+    /// Compares two longs.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>True or false. Null if equal.</returns>
+    public static bool? IsGreaterThan(long a, long b)
+    {
+        return a > b 
+            ? true 
+            : a < b 
+                ? false 
+                : null;
+    }
+    
+
+    /// <summary>
+    /// Compares two doubles.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>True or false. Null if equal.</returns>
+    public static bool? IsGreaterThan(double a, double b)
+    {
+        return a > b 
+            ? true 
+            : a < b 
+                ? false 
+                : null;
+    }
+
+    #endregion
+    
+    #region IsLessThan
+
+    /// <summary>
+    /// Compares two integers.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>True or false. Null if equal.</returns>
+    public static bool? IsLessThan(int a, int b)
+    {
+        return a < b 
+            ? true 
+            : a > b 
+                ? false 
+                : null;
+    }
+    
+
+    /// <summary>
+    /// Compares two longs.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>True or false. Null if equal.</returns>
+    public static bool? IsLessThan(long a, long b)
+    {
+        return a < b 
+            ? true 
+            : a > b 
+                ? false 
+                : null;
+    }
+    
+
+    /// <summary>
+    /// Compares two doubles.
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns>True or false. Null if equal.</returns>
+    public static bool? IsLessThan(double a, double b)
+    {
+        return a < b 
+            ? true 
+            : a > b 
+                ? false 
+                : null;
+    }
+    
+    #endregion
 }

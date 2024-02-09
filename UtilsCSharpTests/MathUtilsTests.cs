@@ -686,4 +686,138 @@ public class MathUtilsTests
     }
 
     #endregion
+
+    #region IsGreaterThan
+
+    [Test]
+    public void IsGreaterThan_Integers_True()
+    {
+        var actual = MathUtils.IsGreaterThan(5, 3);
+        Assert.IsTrue(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Integers_Null()
+    {
+        var actual = MathUtils.IsGreaterThan(5, 5);
+        Assert.IsNull(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Integers_False()
+    {
+        var actual = MathUtils.IsGreaterThan(3, 5);
+        Assert.IsFalse(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Longs_True()
+    {
+        var actual = MathUtils.IsGreaterThan(5L, 3L);
+        Assert.IsTrue(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Longs_Null()
+    {
+        var actual = MathUtils.IsGreaterThan(5L, 5L);
+        Assert.IsNull(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Longs_False()
+    {
+        var actual = MathUtils.IsGreaterThan(3L, 5L);
+        Assert.IsFalse(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Doubles_True()
+    {
+        var actual = MathUtils.IsGreaterThan(5.0, 3.0);
+        Assert.IsTrue(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Doubles_Null()
+    {
+        var actual = MathUtils.IsGreaterThan(5.0, 5.0);
+        Assert.IsNull(actual);
+    }
+    
+    [Test]
+    public void IsGreaterThan_Doubles_False()
+    {
+        var actual = MathUtils.IsGreaterThan(3.0, 5.0);
+        Assert.IsFalse(actual);
+    }
+
+    #endregion
+    
+    #region IsLessThan
+    
+    [Test]
+    public void IsLessThan_Integers_True()
+    {
+        var actual = MathUtils.IsLessThan(3, 5);
+        Assert.IsTrue(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Integers_Null()
+    {
+        var actual = MathUtils.IsLessThan(5, 5);
+        Assert.IsNull(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Integers_False()
+    {
+        var actual = MathUtils.IsLessThan(5, 3);
+        Assert.IsFalse(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Longs_True()
+    {
+        var actual = MathUtils.IsLessThan(3L, 5L);
+        Assert.IsTrue(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Longs_Null()
+    {
+        var actual = MathUtils.IsLessThan(5L, 5L);
+        Assert.IsNull(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Longs_False()
+    {
+        var actual = MathUtils.IsLessThan(5L, 3L);
+        Assert.IsFalse(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Doubles_True()
+    {
+        var actual = MathUtils.IsLessThan(3.0, 5.0);
+        Assert.IsTrue(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Doubles_Null()
+    {
+        var actual = MathUtils.IsLessThan(5.0, 5.0);
+        Assert.IsNull(actual);
+    }
+    
+    [Test]
+    public void IsLessThan_Doubles_False()
+    {
+        var actual = MathUtils.IsLessThan(5.0, 3.0);
+        Assert.IsFalse(actual);
+    }
+    
+    #endregion
 }
