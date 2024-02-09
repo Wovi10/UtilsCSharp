@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+        <PackageId>UtilsCSharp</PackageId>
+        <Authors>Wovi10</Authors>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>MathUtils</Title>
+    </PropertyGroup>
+
+</Project>
