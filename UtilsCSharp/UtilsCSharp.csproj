@@ -3,11 +3,9 @@
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>disable</Nullable>
-        <PackageId>UtilsCSharp</PackageId>
+        <Nullable>enable</Nullable>
+        <Title>UtilsCSharp</Title>
         <Authors>Wovi10</Authors>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Title>MathUtils</Title>
     </PropertyGroup>
 
 </Project>

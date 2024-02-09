@@ -208,10 +208,7 @@ public static class MathUtils
 
     public static bool IsEven(double a)
         => a % 2 == 0;
-    
-    private static bool GenericIsEven(object a)
-        => a % 2 == 0;
-    
+
     #endregion
     
     #region IsOdd
@@ -270,4 +267,6 @@ public static class MathUtils
                 return false;
         return true;
     }
+    
+    #endregion
 }
