@@ -16,7 +16,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add(3, 2);
         const int expected = 5;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -24,7 +24,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add(3L, 2L);
         const long expected = 5L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -32,7 +32,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add(3.21, 2.34);
         const double expected = 5.55;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -40,7 +40,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add("3", "2");
         const string expected = "5";
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -48,7 +48,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add("3", "2");
         const string expected = "5";
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -56,7 +56,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add("3.21", "2.34");
         const string expected = "5.55";
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -64,7 +64,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Add("Something", "Else");
         const string expected = "SomethingElse";
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -76,7 +76,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Sub(3, 2);
         const int expected = 1;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -84,7 +84,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Sub(3L, 2L);
         const long expected = 1L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -92,7 +92,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Sub(3.21, 2.34, 2);
         const double expected = 0.87;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -104,7 +104,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Mul(3, 2);
         const int expected = 6;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -112,7 +112,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Mul(3L, 2L);
         const long expected = 6L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -120,7 +120,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Mul(3.21, 2.345, 3);
         const double expected = 7.527;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -132,7 +132,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Div(3, 2);
         const double expected = 1.5;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -146,7 +146,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Div(3L, 2L);
         const double expected = 1.5;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -160,7 +160,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Div(3.21, 2.34, 2);
         const double expected = 1.37;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -178,7 +178,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Gcd(12, 9);
         const int expected = 3;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -186,7 +186,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Gcd(0, 0);
         const int expected = 1;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -194,7 +194,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Gcd(12L, 9L);
         const long expected = 3L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -202,7 +202,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Gcd(0L, 0L);
         const long expected = 1L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -210,7 +210,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Gcd(12.0, 9.0);
         const double expected = 3.0;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -218,7 +218,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Gcd(0.0, 0.0);
         const double expected = 1.0;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -230,7 +230,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Lcm(12, 9);
         const int expected = 36;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -238,7 +238,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Lcm(12L, 9L);
         const long expected = 36L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -246,7 +246,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Lcm(12.0, 9.0);
         const double expected = 36.0;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -259,7 +259,7 @@ public class MathUtilsTests
         const int highest = 12;
         const int lowest = 9;
         var actual = MathUtils.GetHighest(highest, lowest);
-        Assert.AreEqual(highest, actual);
+        Assert.That(actual, Is.EqualTo(highest));
     }
 
     [Test]
@@ -268,7 +268,7 @@ public class MathUtilsTests
         const int highest = 12;
         const int lowest = 9;
         var actual = MathUtils.GetHighest(lowest, highest);
-        Assert.AreEqual(highest, actual);
+        Assert.That(actual, Is.EqualTo(highest));
     }
 
     [Test]
@@ -276,7 +276,7 @@ public class MathUtilsTests
     {
         const int both = 12;
         var actual = MathUtils.GetHighest(both, both);
-        Assert.AreEqual(both, actual);
+        Assert.That(actual, Is.EqualTo(both));
     }
 
     [Test]
@@ -285,7 +285,7 @@ public class MathUtilsTests
         const long highest = 12L;
         const long lowest = 9L;
         var actual = MathUtils.GetHighest(highest, lowest);
-        Assert.AreEqual(highest, actual);
+        Assert.That(actual, Is.EqualTo(highest));
     }
 
     [Test]
@@ -294,7 +294,7 @@ public class MathUtilsTests
         const long highest = 12L;
         const long lowest = 9L;
         var actual = MathUtils.GetHighest(lowest, highest);
-        Assert.AreEqual(highest, actual);
+        Assert.That(actual, Is.EqualTo(highest));
     }
 
     [Test]
@@ -302,7 +302,7 @@ public class MathUtilsTests
     {
         const long both = 12L;
         var actual = MathUtils.GetHighest(both, both);
-        Assert.AreEqual(both, actual);
+        Assert.That(actual, Is.EqualTo(both));
     }
 
     [Test]
@@ -311,7 +311,7 @@ public class MathUtilsTests
         const double highest = 12.0;
         const double lowest = 9.0;
         var actual = MathUtils.GetHighest(highest, lowest);
-        Assert.AreEqual(highest, actual);
+        Assert.That(actual, Is.EqualTo(highest));
     }
 
     [Test]
@@ -320,7 +320,7 @@ public class MathUtilsTests
         const double highest = 12.0;
         const double lowest = 9.0;
         var actual = MathUtils.GetHighest(lowest, highest);
-        Assert.AreEqual(highest, actual);
+        Assert.That(actual, Is.EqualTo(highest));
     }
 
     [Test]
@@ -328,7 +328,7 @@ public class MathUtilsTests
     {
         const double both = 12.0;
         var actual = MathUtils.GetHighest(both, both);
-        Assert.AreEqual(both, actual);
+        Assert.That(actual, Is.EqualTo(both));
     }
 
     #endregion
@@ -341,7 +341,7 @@ public class MathUtilsTests
         const int highest = 12;
         const int lowest = 9;
         var actual = MathUtils.GetLowest(highest, lowest);
-        Assert.AreEqual(lowest, actual);
+        Assert.That(actual, Is.EqualTo(lowest));
     }
 
     [Test]
@@ -350,7 +350,7 @@ public class MathUtilsTests
         const int highest = 12;
         const int lowest = 9;
         var actual = MathUtils.GetLowest(lowest, highest);
-        Assert.AreEqual(lowest, actual);
+        Assert.That(actual, Is.EqualTo(lowest));
     }
 
     [Test]
@@ -358,7 +358,7 @@ public class MathUtilsTests
     {
         const int both = 12;
         var actual = MathUtils.GetLowest(both, both);
-        Assert.AreEqual(both, actual);
+        Assert.That(actual, Is.EqualTo(both));
     }
 
     [Test]
@@ -367,7 +367,7 @@ public class MathUtilsTests
         const long highest = 12L;
         const long lowest = 9L;
         var actual = MathUtils.GetLowest(highest, lowest);
-        Assert.AreEqual(lowest, actual);
+        Assert.That(actual, Is.EqualTo(lowest));
     }
 
     [Test]
@@ -376,7 +376,7 @@ public class MathUtilsTests
         const long highest = 12L;
         const long lowest = 9L;
         var actual = MathUtils.GetLowest(lowest, highest);
-        Assert.AreEqual(lowest, actual);
+        Assert.That(actual, Is.EqualTo(lowest));
     }
 
     [Test]
@@ -384,7 +384,7 @@ public class MathUtilsTests
     {
         const long both = 12L;
         var actual = MathUtils.GetLowest(both, both);
-        Assert.AreEqual(both, actual);
+        Assert.That(actual, Is.EqualTo(both));
     }
 
     [Test]
@@ -393,7 +393,7 @@ public class MathUtilsTests
         const double highest = 12.235;
         const double lowest = 12.234;
         var actual = MathUtils.GetLowest(highest, lowest);
-        Assert.AreEqual(lowest, actual);
+        Assert.That(actual, Is.EqualTo(lowest));
     }
 
     [Test]
@@ -402,7 +402,7 @@ public class MathUtilsTests
         const double highest = 12.0;
         const double lowest = 9.0;
         var actual = MathUtils.GetLowest(lowest, highest);
-        Assert.AreEqual(lowest, actual);
+        Assert.That(actual, Is.EqualTo(lowest));
     }
 
     [Test]
@@ -410,7 +410,7 @@ public class MathUtilsTests
     {
         const double both = 12.0;
         var actual = MathUtils.GetLowest(both, both);
-        Assert.AreEqual(both, actual);
+        Assert.That(actual, Is.EqualTo(both));
     }
 
     #endregion
@@ -421,42 +421,42 @@ public class MathUtilsTests
     public void IsEven_IntegersEven()
     {
         var actual = MathUtils.IsEven(12);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsEven_IntegersOdd()
     {
         var actual = MathUtils.IsEven(9);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsEven_LongsEven()
     {
         var actual = MathUtils.IsEven(12L);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsEven_LongsOdd()
     {
         var actual = MathUtils.IsEven(9L);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsEven_DoublesEven()
     {
         var actual = MathUtils.IsEven(12.0);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsEven_DoublesOdd()
     {
         var actual = MathUtils.IsEven(9.0);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     #endregion
@@ -467,42 +467,42 @@ public class MathUtilsTests
     public void IsOdd_IntegersEven()
     {
         var actual = MathUtils.IsOdd(12);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsOdd_IntegersOdd()
     {
         var actual = MathUtils.IsOdd(9);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsOdd_LongsEven()
     {
         var actual = MathUtils.IsOdd(12L);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsOdd_LongsOdd()
     {
         var actual = MathUtils.IsOdd(9L);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsOdd_DoublesEven()
     {
         var actual = MathUtils.IsOdd(12.0);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsOdd_DoublesOdd()
     {
         var actual = MathUtils.IsOdd(9.0);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     #endregion
@@ -513,42 +513,42 @@ public class MathUtilsTests
     public void IsPrime_Integers_True()
     {
         var actual = MathUtils.IsPrime(7);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsPrime_Integers_False()
     {
         var actual = MathUtils.IsPrime(9);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsPrime_Longs_True()
     {
         var actual = MathUtils.IsPrime(7L);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsPrime_Longs_False()
     {
         var actual = MathUtils.IsPrime(9L);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsPrime_Doubles_True()
     {
         var actual = MathUtils.IsPrime(7.0);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsPrime_Doubles_False()
     {
         var actual = MathUtils.IsPrime(9.0);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     #endregion
@@ -560,7 +560,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.PythagoreanTheorem(3, 4);
         const double expected = 5;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -568,7 +568,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.PythagoreanTheorem(4L, 3L);
         const double expected = 5L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -576,7 +576,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.PythagoreanTheorem(4.0, 3.0);
         const double expected = 5.0;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -584,7 +584,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.PythagoreanTheorem(4.2, 3.1, 4);
         const double expected = 5.2202;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -596,7 +596,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Discriminant(2, 3, 4);
         const double expected = -23;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -604,7 +604,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Discriminant(2L, 3L, 4L);
         const double expected = -23L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -612,7 +612,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Discriminant(2.0, 3.0, 4.0, 2);
         const double expected = -23.00;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     #endregion
@@ -624,7 +624,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Factorial(5);
         const long expected = 120;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -632,7 +632,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Factorial(0);
         const long expected = 1;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -646,7 +646,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Factorial(5L);
         const long expected = 120L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -654,7 +654,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Factorial(0L);
         const long expected = 1L;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -668,7 +668,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Factorial(5.0);
         const double expected = 120.0;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -676,7 +676,7 @@ public class MathUtilsTests
     {
         var actual = MathUtils.Factorial(0.0);
         const double expected = 1.0;
-        Assert.AreEqual(expected, actual);
+        Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
@@ -693,63 +693,63 @@ public class MathUtilsTests
     public void IsGreaterThan_Integers_True()
     {
         var actual = MathUtils.IsGreaterThan(5, 3);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
     
     [Test]
     public void IsGreaterThan_Integers_Null()
     {
         var actual = MathUtils.IsGreaterThan(5, 5);
-        Assert.IsNull(actual);
+        Assert.That(actual, Is.Null);
     }
     
     [Test]
     public void IsGreaterThan_Integers_False()
     {
         var actual = MathUtils.IsGreaterThan(3, 5);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
     
     [Test]
     public void IsGreaterThan_Longs_True()
     {
         var actual = MathUtils.IsGreaterThan(5L, 3L);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
     
     [Test]
     public void IsGreaterThan_Longs_Null()
     {
         var actual = MathUtils.IsGreaterThan(5L, 5L);
-        Assert.IsNull(actual);
+        Assert.That(actual, Is.Null);
     }
     
     [Test]
     public void IsGreaterThan_Longs_False()
     {
         var actual = MathUtils.IsGreaterThan(3L, 5L);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
     
     [Test]
     public void IsGreaterThan_Doubles_True()
     {
         var actual = MathUtils.IsGreaterThan(5.0, 3.0);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
     
     [Test]
     public void IsGreaterThan_Doubles_Null()
     {
         var actual = MathUtils.IsGreaterThan(5.0, 5.0);
-        Assert.IsNull(actual);
+        Assert.That(actual, Is.Null);
     }
     
     [Test]
     public void IsGreaterThan_Doubles_False()
     {
         var actual = MathUtils.IsGreaterThan(3.0, 5.0);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
 
     #endregion
@@ -760,64 +760,82 @@ public class MathUtilsTests
     public void IsLessThan_Integers_True()
     {
         var actual = MathUtils.IsLessThan(3, 5);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
     
     [Test]
     public void IsLessThan_Integers_Null()
     {
         var actual = MathUtils.IsLessThan(5, 5);
-        Assert.IsNull(actual);
+        Assert.That(actual, Is.Null);
     }
     
     [Test]
     public void IsLessThan_Integers_False()
     {
         var actual = MathUtils.IsLessThan(5, 3);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
     
     [Test]
     public void IsLessThan_Longs_True()
     {
         var actual = MathUtils.IsLessThan(3L, 5L);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
     
     [Test]
     public void IsLessThan_Longs_Null()
     {
         var actual = MathUtils.IsLessThan(5L, 5L);
-        Assert.IsNull(actual);
+        Assert.That(actual, Is.Null);
     }
     
     [Test]
     public void IsLessThan_Longs_False()
     {
         var actual = MathUtils.IsLessThan(5L, 3L);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
     
     [Test]
     public void IsLessThan_Doubles_True()
     {
         var actual = MathUtils.IsLessThan(3.0, 5.0);
-        Assert.IsTrue(actual);
+        Assert.That(actual, Is.True);
     }
     
     [Test]
     public void IsLessThan_Doubles_Null()
     {
         var actual = MathUtils.IsLessThan(5.0, 5.0);
-        Assert.IsNull(actual);
+        Assert.That(actual, Is.Null);
     }
     
     [Test]
     public void IsLessThan_Doubles_False()
     {
         var actual = MathUtils.IsLessThan(5.0, 3.0);
-        Assert.IsFalse(actual);
+        Assert.That(actual, Is.False);
     }
     
+    #endregion
+
+    #region NumberOfCombinations
+
+    [Test]
+    public void NumberOfCombinations_Integers()
+    {
+        var actual = MathUtils.NumberOfCombinations(9, 2);
+        const long expected = 36;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void NumberOfCombinations_Throws()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(() => MathUtils.NumberOfCombinations(9, 10));
+    }
+
     #endregion
 }

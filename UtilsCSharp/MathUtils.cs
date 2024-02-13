@@ -576,4 +576,15 @@ public static class MathUtils
     }
     
     #endregion
+
+    #region NumberOfCombinations
+
+    public static long NumberOfCombinations(int numberOfItemsInSet, int sizeOfCombinations)
+    {
+        if (numberOfItemsInSet < sizeOfCombinations)
+            throw new ArgumentOutOfRangeException(nameof(sizeOfCombinations), "numberOfItemsInSet must be greater than or equal to sizeOfCombinations.");
+        return Factorial(numberOfItemsInSet) / (Factorial(sizeOfCombinations) * Factorial(numberOfItemsInSet - sizeOfCombinations));
+    }
+
+    #endregion
 }
