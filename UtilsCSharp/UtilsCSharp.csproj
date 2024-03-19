@@ -6,6 +6,17 @@
         <Nullable>enable</Nullable>
         <Title>UtilsCSharp</Title>
         <Authors>Wovi10</Authors>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>Wovi10.UtilsCSharp</PackageId>
+        <Description>This is a Utils library useful in all kinds of C# projects.</Description>
+        <RepositoryUrl>https://github.com/Wovi10/UtilsCSharp</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+        <PackageReadMeFile>README.md</PackageReadMeFile>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
 
 </Project>
