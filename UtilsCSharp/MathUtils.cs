@@ -9,48 +9,71 @@ public static class MathUtils
     /// <summary>
     /// Add two integers together.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
+    /// <param name="a">int</param>
+    /// <param name="b">int</param>
+    /// <returns>The sum of the two inputs</returns>
     public static int Add(int a, int b) 
         => a + b;
 
     /// <summary>
     /// Add two longs together.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
+    /// <param name="a">long</param>
+    /// <param name="b">long</param>
+    /// <returns>The sum of the two inputs</returns>
     public static long Add(long a, long b)
         => a + b;
 
     /// <summary>
     /// Add two doubles together.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
+    /// <param name="a">double</param>
+    /// <param name="b">double</param>
+    /// <returns>The sum of the two inputs</returns>
     public static double Add(double a, double b)
         => a + b;
 
     /// <summary>
     /// Add two strings together.
-    /// This will check if the strings can be added together in any numerical type. If not, it will concatenate.
+    /// This will concatenate the input.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    public static string Add(string a, string b)
-    {
-        if (int.TryParse(a, out var aInt) && int.TryParse(b, out var bInt))
-            return Add(aInt, bInt).ToString();
-        if (long.TryParse(a, out var aLong) && long.TryParse(b, out var bLong))
-            return Add(aLong, bLong).ToString();
-        if (double.TryParse(a, out var aDouble) && double.TryParse(b, out var bDouble))
-            return Add(aDouble, bDouble).ToString(CultureInfo.InvariantCulture);
+    /// <param name="a">string</param>
+    /// <param name="b">string</param>
+    /// <returns>The concatenated value of the two inputs.</returns>
+    public static string Add(string a, string b) 
+        => $"{a}{b}";
 
-        return $"{a}{b}";
-    }
+    /// <summary>
+    /// This will return the sum of all the entries in the enumerable. 
+    /// </summary>
+    /// <param name="a">IEnumerable of int</param>
+    /// <returns>The sum of all entries.</returns>
+    public static int Add(IEnumerable<int> a) 
+        => a.Aggregate(Add);
+
+    /// <summary>
+    /// This will return the sum of all the entries in the enumerable.
+    /// </summary>
+    /// <param name="a">IEnumerable of long</param>
+    /// <returns>The sum of all entries.</returns>
+    public static long Add(IEnumerable<long> a)
+        => a.Aggregate(Add);
+
+    /// <summary>
+    /// This will return the sum of all the entries in the enumerable.
+    /// </summary>
+    /// <param name="a">IEnumerable of double</param>
+    /// <returns>The sum of all entries.</returns>
+    public static double Add(IEnumerable<double> a)
+        => a.Aggregate(Add);
+    
+    /// <summary>
+    /// This will return the sum of all the entries in the enumerable.
+    /// </summary>
+    /// <param name="a">IEnumerable of string</param>
+    /// <returns>The sum of all entries.</returns>
+    public static string Add(IEnumerable<string> a)
+        => a.Aggregate(Add);
 
     #endregion
 
