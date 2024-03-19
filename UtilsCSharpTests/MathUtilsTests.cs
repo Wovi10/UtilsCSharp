@@ -36,34 +36,42 @@ public class MathUtilsTests
     }
 
     [Test]
-    public void Add_IntegersAsString()
-    {
-        var actual = MathUtils.Add("3", "2");
-        const string expected = "5";
-        Assert.That(actual, Is.EqualTo(expected));
-    }
-
-    [Test]
-    public void Add_LongsAsString()
-    {
-        var actual = MathUtils.Add("3", "2");
-        const string expected = "5";
-        Assert.That(actual, Is.EqualTo(expected));
-    }
-
-    [Test]
-    public void Add_DoublesAsString()
-    {
-        var actual = MathUtils.Add("3.21", "2.34");
-        const string expected = "5.55";
-        Assert.That(actual, Is.EqualTo(expected));
-    }
-
-    [Test]
     public void Add_Strings()
     {
         var actual = MathUtils.Add("Something", "Else");
         const string expected = "SomethingElse";
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Int()
+    {
+        var actual = MathUtils.Add(new List<int> {1,2,3,4});
+        const int expected = 10;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Long()
+    {
+        var actual = MathUtils.Add(new List<long> {1,2,3,4});
+        const long expected = 10;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Double()
+    {
+        var actual = MathUtils.Add(new List<double> {1,2,3,4});
+        const double expected = 10;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    [Test]
+    public void Add_Enumerable_String()
+    {
+        var actual = MathUtils.Add(new List<string> {"1","2","3","4"});
+        const string expected = "1234";
         Assert.That(actual, Is.EqualTo(expected));
     }
 
