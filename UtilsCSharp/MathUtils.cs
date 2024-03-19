@@ -12,7 +12,7 @@ public static class MathUtils
     /// <param name="a">int</param>
     /// <param name="b">int</param>
     /// <returns>The sum of the two inputs</returns>
-    public static int Add(int a, int b) 
+    public static int Add(int a, int b)
         => a + b;
 
     /// <summary>
@@ -40,39 +40,103 @@ public static class MathUtils
     /// <param name="a">string</param>
     /// <param name="b">string</param>
     /// <returns>The concatenated value of the two inputs.</returns>
-    public static string Add(string a, string b) 
+    public static string Add(string a, string b)
         => $"{a}{b}";
 
     /// <summary>
-    /// This will return the sum of all the entries in the enumerable. 
+    /// This will add every number in the enumerable to the seed.
     /// </summary>
     /// <param name="a">IEnumerable of int</param>
-    /// <returns>The sum of all entries.</returns>
-    public static int Add(IEnumerable<int> a) 
+    /// <param name="seed">The initial value.</param>
+    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
+    /// <returns>The sum of the seed and all entries of the collection</returns>
+    public static int Add(IEnumerable<int> a, int seed = 0, int constant = 0)
+    {
+        if (constant == 0 && seed == 0)
+            return Add(a);
+
+        if (constant == 0)
+            return a.Aggregate(seed, Add);
+
+        if (seed == 0)
+            return a.Aggregate((a, b) => Add(Add(a, b), constant));
+
+        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
+    }
+
+    private static int Add(IEnumerable<int> a)
         => a.Aggregate(Add);
 
     /// <summary>
-    /// This will return the sum of all the entries in the enumerable.
+    /// This will add every number in the enumerable to the seed.
     /// </summary>
     /// <param name="a">IEnumerable of long</param>
-    /// <returns>The sum of all entries.</returns>
-    public static long Add(IEnumerable<long> a)
+    /// <param name="seed">The initial value.</param>
+    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
+    /// <returns>The sum of the seed and all entries of the collection</returns>
+    public static long Add(IEnumerable<long> a, long seed = 0, long constant = 0)
+    {
+        if (constant == 0 && seed == 0)
+            return Add(a);
+
+        if (constant == 0)
+            return a.Aggregate(seed, Add);
+
+        if (seed == 0)
+            return a.Aggregate((a, b) => Add(Add(a, b), constant));
+
+        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
+    }
+
+    private static long Add(IEnumerable<long> a)
         => a.Aggregate(Add);
 
     /// <summary>
-    /// This will return the sum of all the entries in the enumerable.
+    /// This will add every number in the enumerable to the seed.
     /// </summary>
-    /// <param name="a">IEnumerable of double</param>
-    /// <returns>The sum of all entries.</returns>
-    public static double Add(IEnumerable<double> a)
+    /// <param name="a">IEnumerable of long</param>
+    /// <param name="seed">The initial value.</param>
+    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
+    /// <returns>The sum of the seed and all entries of the collection</returns>
+    public static double Add(IEnumerable<double> a, double seed = 0.0, double constant = 0.0)
+    {
+        if (constant == 0.0 && seed == 0.0)
+            return Add(a);
+
+        if (constant == 0.0)
+            return a.Aggregate(seed, Add);
+
+        if (seed == 0.0)
+            return a.Aggregate((a, b) => Add(Add(a, b), constant));
+
+        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
+    }
+
+    private static double Add(IEnumerable<double> a)
         => a.Aggregate(Add);
-    
+
     /// <summary>
-    /// This will return the sum of all the entries in the enumerable.
+    /// This will add every number in the enumerable to the seed.
     /// </summary>
-    /// <param name="a">IEnumerable of string</param>
-    /// <returns>The sum of all entries.</returns>
-    public static string Add(IEnumerable<string> a)
+    /// <param name="a">IEnumerable of long</param>
+    /// <param name="seed">The initial value.</param>
+    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
+    /// <returns>The concatenation of the seed and all entries of the collection.</returns>
+    public static string Add(IEnumerable<string> a, string seed = "", string constant = "")
+    {
+        if (constant == "" && seed == "")
+            return Add(a);
+
+        if (constant == "")
+            return a.Aggregate(seed, Add);
+
+        if (seed == "")
+            return a.Aggregate((a, b) => Add(Add(a, b), constant));
+
+        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
+    }
+
+    private static string Add(IEnumerable<string> a)
         => a.Aggregate(Add);
 
     #endregion
@@ -114,7 +178,7 @@ public static class MathUtils
     #endregion
 
     #region Multiply
-    
+
     /// <summary>
     /// Multiply two integers.
     /// </summary>
@@ -123,7 +187,7 @@ public static class MathUtils
     /// <returns></returns>
     public static int Mul(int a, int b)
         => a * b;
-    
+
     /// <summary>
     /// Multiply two longs.
     /// </summary>
@@ -132,7 +196,7 @@ public static class MathUtils
     /// <returns></returns>
     public static long Mul(long a, long b)
         => a * b;
-    
+
     /// <summary>
     /// Multiply two doubles.
     /// </summary>
@@ -144,7 +208,6 @@ public static class MathUtils
     {
         return Math.Round(a * b, returnPrecision);
     }
-    
 
     #endregion
 
@@ -154,27 +217,27 @@ public static class MathUtils
     {
         if (b == 0)
             throw new DivideByZeroException();
-        return (double)a / (double)b;
+        return (double) a / (double) b;
     }
-    
+
     public static double Div(long a, long b)
     {
         if (b == 0)
             throw new DivideByZeroException();
-        return (double)a / (double)b;
+        return (double) a / (double) b;
     }
-    
+
     public static double Div(double a, double b, int? returnPrecision = null)
     {
         if (b == 0)
             throw new DivideByZeroException();
         return returnPrecision == null
-                ? a / b
-                : Math.Round(a / b, returnPrecision.Value);
+            ? a / b
+            : Math.Round(a / b, returnPrecision.Value);
     }
 
     #endregion
-    
+
     #region Greatest Common Dividor
 
     /// <summary>
@@ -214,7 +277,7 @@ public static class MathUtils
             : Gcd(b, a % b);
     }
 
-    
+
     /// <summary>
     /// Greatest Common Dividor of two doubles.
     /// The biggest number that can divide both a and b.
@@ -230,8 +293,8 @@ public static class MathUtils
         if (a == 0 && b == 0)
             return 1;
         return b == 0
-                ? a
-                : Gcd(b, a % b);
+            ? a
+            : Gcd(b, a % b);
     }
 
     #endregion
@@ -274,10 +337,10 @@ public static class MathUtils
 
     public static int GetHighest(int a, int b)
         => a > b ? a : b;
-    
+
     public static long GetHighest(long a, long b)
         => a > b ? a : b;
-    
+
     public static double GetHighest(double a, double b)
         => a > b ? a : b;
 
@@ -290,17 +353,17 @@ public static class MathUtils
 
     public static long GetLowest(long a, long b)
         => a < b ? a : b;
-    
+
     public static double GetLowest(double a, double b)
         => a < b ? a : b;
-    
+
     #endregion
 
     #region IsEven
-    
+
     public static bool IsEven(int a)
         => a % 2 == 0;
-    
+
     public static bool IsEven(long a)
         => a % 2 == 0;
 
@@ -308,20 +371,20 @@ public static class MathUtils
         => a % 2 == 0;
 
     #endregion
-    
+
     #region IsOdd
-    
+
     public static bool IsOdd(int a)
         => a % 2 != 0;
-    
+
     public static bool IsOdd(long a)
         => a % 2 != 0;
-    
+
     public static bool IsOdd(double a)
         => a % 2 != 0;
-    
+
     #endregion
-    
+
     #region IsPrime
 
     public static bool IsPrime(int a)
@@ -341,7 +404,7 @@ public static class MathUtils
                 return false;
         return true;
     }
-    
+
     public static bool IsPrime(long a)
     {
         switch (a)
@@ -377,11 +440,11 @@ public static class MathUtils
                 return false;
         return true;
     }
-    
+
     #endregion
 
     #region PythagoreanTheorem
-    
+
     /// <summary>
     /// The Pythagorean theorem of integers.
     /// </summary>
@@ -390,7 +453,7 @@ public static class MathUtils
     /// <returns>The square root of a squared + b squared</returns>
     public static double PythagoreanTheorem(int a, int b)
         => Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
-    
+
     /// <summary>
     /// The Pythagorean theorem of longs.
     /// </summary>
@@ -412,8 +475,8 @@ public static class MathUtils
         var squaredA = Math.Pow(a, 2);
         var squaredB = Math.Pow(b, 2);
         return returnPrecision == null
-                ? Math.Sqrt(squaredA + squaredB)
-                : Math.Round(Math.Sqrt(squaredA + squaredB), returnPrecision.Value);
+            ? Math.Sqrt(squaredA + squaredB)
+            : Math.Round(Math.Sqrt(squaredA + squaredB), returnPrecision.Value);
     }
 
     #endregion
@@ -452,14 +515,14 @@ public static class MathUtils
     public static double Discriminant(double a, double b, double c, int? returnPrecision)
     {
         return returnPrecision == null
-                ? Math.Pow(b, 2) - 4 * a * c
-                : Math.Round(Math.Pow(b, 2) - 4 * a * c, returnPrecision.Value);
+            ? Math.Pow(b, 2) - 4 * a * c
+            : Math.Round(Math.Pow(b, 2) - 4 * a * c, returnPrecision.Value);
     }
 
     #endregion
-    
+
     #region Factorial
-    
+
     public static int Factorial(int a)
     {
         if (a < 0)
@@ -471,7 +534,7 @@ public static class MathUtils
             _ => a * Factorial(a - 1)
         };
     }
-    
+
     public static long Factorial(long a)
     {
         if (a < 0)
@@ -483,7 +546,7 @@ public static class MathUtils
             _ => a * Factorial(a - 1)
         };
     }
-    
+
     public static double Factorial(double a)
     {
         if (a < 0)
@@ -495,7 +558,7 @@ public static class MathUtils
             _ => a * Factorial(a - 1)
         };
     }
-    
+
     #endregion
 
     #region IsGreaterThan
@@ -508,13 +571,13 @@ public static class MathUtils
     /// <returns>True or false. Null if equal.</returns>
     public static bool? IsGreaterThan(int a, int b)
     {
-        return a > b 
-            ? true 
-            : a < b 
-                ? false 
+        return a > b
+            ? true
+            : a < b
+                ? false
                 : null;
     }
-    
+
 
     /// <summary>
     /// Compares two longs.
@@ -524,13 +587,13 @@ public static class MathUtils
     /// <returns>True or false. Null if equal.</returns>
     public static bool? IsGreaterThan(long a, long b)
     {
-        return a > b 
-            ? true 
-            : a < b 
-                ? false 
+        return a > b
+            ? true
+            : a < b
+                ? false
                 : null;
     }
-    
+
 
     /// <summary>
     /// Compares two doubles.
@@ -540,15 +603,15 @@ public static class MathUtils
     /// <returns>True or false. Null if equal.</returns>
     public static bool? IsGreaterThan(double a, double b)
     {
-        return a > b 
-            ? true 
-            : a < b 
-                ? false 
+        return a > b
+            ? true
+            : a < b
+                ? false
                 : null;
     }
 
     #endregion
-    
+
     #region IsLessThan
 
     /// <summary>
@@ -559,13 +622,13 @@ public static class MathUtils
     /// <returns>True or false. Null if equal.</returns>
     public static bool? IsLessThan(int a, int b)
     {
-        return a < b 
-            ? true 
-            : a > b 
-                ? false 
+        return a < b
+            ? true
+            : a > b
+                ? false
                 : null;
     }
-    
+
 
     /// <summary>
     /// Compares two longs.
@@ -575,13 +638,13 @@ public static class MathUtils
     /// <returns>True or false. Null if equal.</returns>
     public static bool? IsLessThan(long a, long b)
     {
-        return a < b 
-            ? true 
-            : a > b 
-                ? false 
+        return a < b
+            ? true
+            : a > b
+                ? false
                 : null;
     }
-    
+
 
     /// <summary>
     /// Compares two doubles.
@@ -591,13 +654,13 @@ public static class MathUtils
     /// <returns>True or false. Null if equal.</returns>
     public static bool? IsLessThan(double a, double b)
     {
-        return a < b 
-            ? true 
-            : a > b 
-                ? false 
+        return a < b
+            ? true
+            : a > b
+                ? false
                 : null;
     }
-    
+
     #endregion
 
     #region NumberOfCombinations
@@ -605,8 +668,10 @@ public static class MathUtils
     public static long NumberOfCombinations(int numberOfItemsInSet, int sizeOfCombinations)
     {
         if (numberOfItemsInSet < sizeOfCombinations)
-            throw new ArgumentOutOfRangeException(nameof(sizeOfCombinations), "numberOfItemsInSet must be greater than or equal to sizeOfCombinations.");
-        return Factorial(numberOfItemsInSet) / (Factorial(sizeOfCombinations) * Factorial(numberOfItemsInSet - sizeOfCombinations));
+            throw new ArgumentOutOfRangeException(nameof(sizeOfCombinations),
+                "numberOfItemsInSet must be greater than or equal to sizeOfCombinations.");
+        return Factorial(numberOfItemsInSet) /
+               (Factorial(sizeOfCombinations) * Factorial(numberOfItemsInSet - sizeOfCombinations));
     }
 
     #endregion

@@ -46,32 +46,96 @@ public class MathUtilsTests
     [Test]
     public void Add_Enumerable_Int()
     {
-        var actual = MathUtils.Add(new List<int> {1,2,3,4});
+        var actual = MathUtils.Add(new List<int> {1, 2, 3, 4});
         const int expected = 10;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Int_Seed()
+    {
+        var actual = MathUtils.Add(new List<int> {1, 2, 3, 4}, 5);
+        const int expected = 15;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Int_Seed_Constant()
+    {
+        var actual = MathUtils.Add(new List<int> {1, 2, 3, 4}, 5, 6);
+        const int expected = 39;
         Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
     public void Add_Enumerable_Long()
     {
-        var actual = MathUtils.Add(new List<long> {1,2,3,4});
+        var actual = MathUtils.Add(new List<long> {1, 2, 3, 4});
         const long expected = 10;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Long_Seed()
+    {
+        var actual = MathUtils.Add(new List<long> {1, 2, 3, 4}, 5);
+        const long expected = 15;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Long_Seed_Constant()
+    {
+        var actual = MathUtils.Add(new List<long> {1, 2, 3, 4}, 5, 6);
+        const long expected = 39;
         Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test]
     public void Add_Enumerable_Double()
     {
-        var actual = MathUtils.Add(new List<double> {1,2,3,4});
+        var actual = MathUtils.Add(new List<double> {1, 2, 3, 4});
         const double expected = 10;
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
+    [Test]
+    public void Add_Enumerable_Double_Seed()
+    {
+        var actual = MathUtils.Add(new List<double> {1, 2, 3, 4}, 5);
+        const double expected = 15;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_Double_Seed_Constant()
+    {
+        var actual = MathUtils.Add(new List<double> {1, 2, 3, 4}, 5, 6);
+        const double expected = 39;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
     [Test]
     public void Add_Enumerable_String()
     {
-        var actual = MathUtils.Add(new List<string> {"1","2","3","4"});
+        var actual = MathUtils.Add(new List<string> {"1", "2", "3", "4"});
         const string expected = "1234";
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_String_Seed()
+    {
+        var actual = MathUtils.Add(new List<string> {"1", "2", "3", "4"}, "5");
+        const string expected = "51234";
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Add_Enumerable_String_Seed_Constant()
+    {
+        var actual = MathUtils.Add(new List<string> {"1", "2", "3", "4"}, "5", "6");
+        const string expected = "516263646";
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -703,56 +767,56 @@ public class MathUtilsTests
         var actual = MathUtils.IsGreaterThan(5, 3);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
     public void IsGreaterThan_Integers_Null()
     {
         var actual = MathUtils.IsGreaterThan(5, 5);
         Assert.That(actual, Is.Null);
     }
-    
+
     [Test]
     public void IsGreaterThan_Integers_False()
     {
         var actual = MathUtils.IsGreaterThan(3, 5);
         Assert.That(actual, Is.False);
     }
-    
+
     [Test]
     public void IsGreaterThan_Longs_True()
     {
         var actual = MathUtils.IsGreaterThan(5L, 3L);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
     public void IsGreaterThan_Longs_Null()
     {
         var actual = MathUtils.IsGreaterThan(5L, 5L);
         Assert.That(actual, Is.Null);
     }
-    
+
     [Test]
     public void IsGreaterThan_Longs_False()
     {
         var actual = MathUtils.IsGreaterThan(3L, 5L);
         Assert.That(actual, Is.False);
     }
-    
+
     [Test]
     public void IsGreaterThan_Doubles_True()
     {
         var actual = MathUtils.IsGreaterThan(5.0, 3.0);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
     public void IsGreaterThan_Doubles_Null()
     {
         var actual = MathUtils.IsGreaterThan(5.0, 5.0);
         Assert.That(actual, Is.Null);
     }
-    
+
     [Test]
     public void IsGreaterThan_Doubles_False()
     {
@@ -761,72 +825,72 @@ public class MathUtilsTests
     }
 
     #endregion
-    
+
     #region IsLessThan
-    
+
     [Test]
     public void IsLessThan_Integers_True()
     {
         var actual = MathUtils.IsLessThan(3, 5);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
     public void IsLessThan_Integers_Null()
     {
         var actual = MathUtils.IsLessThan(5, 5);
         Assert.That(actual, Is.Null);
     }
-    
+
     [Test]
     public void IsLessThan_Integers_False()
     {
         var actual = MathUtils.IsLessThan(5, 3);
         Assert.That(actual, Is.False);
     }
-    
+
     [Test]
     public void IsLessThan_Longs_True()
     {
         var actual = MathUtils.IsLessThan(3L, 5L);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
     public void IsLessThan_Longs_Null()
     {
         var actual = MathUtils.IsLessThan(5L, 5L);
         Assert.That(actual, Is.Null);
     }
-    
+
     [Test]
     public void IsLessThan_Longs_False()
     {
         var actual = MathUtils.IsLessThan(5L, 3L);
         Assert.That(actual, Is.False);
     }
-    
+
     [Test]
     public void IsLessThan_Doubles_True()
     {
         var actual = MathUtils.IsLessThan(3.0, 5.0);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
     public void IsLessThan_Doubles_Null()
     {
         var actual = MathUtils.IsLessThan(5.0, 5.0);
         Assert.That(actual, Is.Null);
     }
-    
+
     [Test]
     public void IsLessThan_Doubles_False()
     {
         var actual = MathUtils.IsLessThan(5.0, 3.0);
         Assert.That(actual, Is.False);
     }
-    
+
     #endregion
 
     #region NumberOfCombinations
