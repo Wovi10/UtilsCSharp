@@ -12,7 +12,7 @@ public class AlgorithmsTests
     #region Cycle detection
 
     [Test]
-    public void GetCycleLength_Short()
+    public void GetCycleLength_Int_Short()
     {
         var list = new List<int> {1, 1,};
         var expected = 1;
@@ -21,7 +21,7 @@ public class AlgorithmsTests
     }
 
     [Test]
-    public void GetCycleLength_Medium()
+    public void GetCycleLength_Int_Medium()
     {
         var list = new List<int> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
         var expected = 5;
@@ -30,7 +30,7 @@ public class AlgorithmsTests
     }
 
     [Test]
-    public void GetCycleLength_Long()
+    public void GetCycleLength_Int_Long()
     {
         var list = new List<int>
         {
@@ -43,7 +43,7 @@ public class AlgorithmsTests
     }
 
     [Test]
-    public void GetCycleLength_BigNumbers()
+    public void GetCycleLength_Int_BigNumbers()
     {
         var list = new List<int>
         {
@@ -56,16 +56,25 @@ public class AlgorithmsTests
     }
 
     [Test]
-    public void GetCycleLength_NoCycle()
+    public void GetCycleLength_Int_NoCycle()
     {
         var list = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         var expected = 0;
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
+    
+    [Test]
+    public void GetCycleLength_Int_NoCycle2()
+    {
+        var list = new List<int> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 7, 1, 2, 3, 4, 5};
+        var expected = 0;
+        var actual = Algorithms.GetLoopLength(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
     [Test]
-    public void GetCycleLength_MoreCycles()
+    public void GetCycleLength_Int_MoreCycles()
     {
         var list = new List<int> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
         var expected = 5;
@@ -74,9 +83,18 @@ public class AlgorithmsTests
     }
 
     [Test]
-    public void GetCycleLength_OddNumberedList()
+    public void GetCycleLength_Int_OddNumberedList()
     {
         var list = new List<int> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4};
+        var expected = 5;
+        var actual = Algorithms.GetLoopLength(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void GetCycleLength_Int_MiddleOfList()
+    {
+        var list = new List<int> {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
         var expected = 5;
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
