@@ -46,7 +46,6 @@ public class Algorithms
             var hasCycle = false;
             for (var i = n - 1; i >= cycleLength; i--)
             {
-                // Check if the range from "end of list" to "end of list - cycle length" is equal to the range from "end of list - cycle length" to "end of list - 2 * cycle length"
                 var endOfListRange = list[(n - cycleLength)..n];
                 var endOfListMinusCycleLengthRange = list[(n - cycleLength * 2)..(n - cycleLength)];
 
