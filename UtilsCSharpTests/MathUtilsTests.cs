@@ -910,4 +910,48 @@ public class MathUtilsTests
     }
 
     #endregion
+    
+    # region Time
+    
+    [Test]
+    public void MillSecToSec()
+    {
+        var actual = MathUtils.MillSecToSec(1000);
+        const int expected = 1;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    [Test]
+    public void MillSecToMin()
+    {
+        var actual = MathUtils.MillSecToMin(60000);
+        const int expected = 1;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    [Test]
+    public void MillSecToHour()
+    {
+        var actual = MathUtils.MillSecToHour(3600000);
+        const int expected = 1;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    [Test]
+    public void MillSecToDay()
+    {
+        var actual = MathUtils.MillSecToDay(86400000);
+        const int expected = 1;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void MillSecToWeek()
+    {
+        var actual = MathUtils.MillSecToWeek(604800000);
+        const int expected = 1;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
 }
