@@ -72,6 +72,15 @@ public class AlgorithmsTests
         var actual = Algorithms.GetCycleLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
+    
+    [Test]
+    public void GetCycleLength_OddNumberedList()
+    {
+        var list = new List<int> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4};
+        var expected = 5;
+        var actual = Algorithms.GetCycleLength(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
     #endregion
 }
