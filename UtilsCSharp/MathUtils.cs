@@ -675,4 +675,23 @@ public static class MathUtils
     }
 
     #endregion
+
+    #region Time
+
+    public static long MillSecToSec(long milliSeconds)
+        => milliSeconds / 1000;
+
+    public static long MillSecToMin(long milliSeconds)
+        => MillSecToSec(milliSeconds) / 60;
+
+    public static long MillSecToHour(long milliSeconds)
+        => MillSecToMin(milliSeconds) / 60;
+
+    public static long MillSecToDay(long milliSeconds)
+        => MillSecToHour(milliSeconds) / 24;
+
+    public static long MillSecToWeek(long milliSeconds)
+        => MillSecToDay(milliSeconds) / 7;
+
+    #endregion
 }
