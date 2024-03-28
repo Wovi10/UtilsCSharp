@@ -16,9 +16,9 @@ public class Algorithms
         for (var cycleLength = 1; cycleLength <= n / 2; cycleLength++)
         {
             var isCycle = true;
-            for (var i = 0; i < n - cycleLength; i++)
+            for (var i = n - 1; i >= cycleLength; i--)
             {
-                if (list[i] == list[i + cycleLength]) 
+                if (list[i] == list[i - cycleLength]) 
                     continue;
 
                 isCycle = false;
@@ -43,17 +43,21 @@ public class Algorithms
 
         for (var cycleLength = 1; cycleLength <= n / 2; cycleLength++)
         {
-            var isCycle = true;
-            for (var i = 0; i < n - cycleLength; i++)
+            var hasCycle = false;
+            for (var i = n - 1; i >= cycleLength; i--)
             {
-                if (list[i] == list[i + cycleLength]) 
+                // Check if the range from "end of list" to "end of list - cycle length" is equal to the range from "end of list - cycle length" to "end of list - 2 * cycle length"
+                var endOfListRange = list[(n - cycleLength)..n];
+                var endOfListMinusCycleLengthRange = list[(n - cycleLength * 2)..(n - cycleLength)];
+
+                if (!endOfListRange.SequenceEqual(endOfListMinusCycleLengthRange)) 
                     continue;
 
-                isCycle = false;
+                hasCycle = true;
                 break;
             }
 
-            if (isCycle)
+            if (hasCycle)
                 return cycleLength;
         }
 

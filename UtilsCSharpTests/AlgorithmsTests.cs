@@ -72,7 +72,7 @@ public class AlgorithmsTests
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     [Test]
     public void GetCycleLength_OddNumberedList()
     {
@@ -134,6 +134,15 @@ public class AlgorithmsTests
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
+    
+    [Test]
+    public void GetCycleLength_Long_NoCycle2()
+    {
+        var list = new List<long> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 7, 1, 2, 3, 4, 5};
+        var expected = 0;
+        var actual = Algorithms.GetLoopLength(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
     [Test]
     public void GetCycleLength_Long_MoreCycles()
@@ -143,7 +152,7 @@ public class AlgorithmsTests
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     [Test]
     public void GetCycleLength_Long_OddNumberedList()
     {
@@ -152,7 +161,15 @@ public class AlgorithmsTests
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
-    
+
+    [Test]
+    public void GetCycleLength_Long_MiddleOfList()
+    {
+        var list = new List<long> {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
+        var expected = 5;
+        var actual = Algorithms.GetLoopLength(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
     #endregion
 }
