@@ -63,7 +63,7 @@ public class Algorithms
         const int maximumLoopLength = 200;
 
         for (var cycleLength = minimumLoopLength;
-             cycleLength <= n / 2 && cycleLength <= maximumLoopLength;
+             cycleLength <= n / 3 && cycleLength <= maximumLoopLength;
              cycleLength++)
         {
             var hasCycle = false;
