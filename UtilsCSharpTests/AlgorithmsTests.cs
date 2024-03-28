@@ -9,6 +9,8 @@ public class AlgorithmsTests
     {
     }
 
+    #region Cycle detection
+
     [Test]
     public void GetCycleLengthTest_Short()
     {
@@ -70,4 +72,6 @@ public class AlgorithmsTests
         var actual = Algorithms.GetCycleLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
+
+    #endregion
 }
