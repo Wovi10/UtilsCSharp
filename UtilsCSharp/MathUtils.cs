@@ -697,25 +697,25 @@ public static class MathUtils
 
     #region IsBetween
 
-    public static bool IsBetween(this int a, int lowerBound, int upperBound, bool inclusive = true)
+    public static bool IsBetween(this int a, int lowerBound, int upperBound, bool leftInclusive = true, bool rightInclusive = true)
     {
-        return inclusive 
-            ? a >= lowerBound && a <= upperBound 
-            : a > lowerBound && a < upperBound;
+        var left = leftInclusive ? a >= lowerBound : a > lowerBound;
+        var right = rightInclusive ? a <= upperBound : a < upperBound;
+        return left && right;
     }
     
-    public static bool IsBetween(this long a, long lowerBound, long upperBound, bool inclusive = true)
+    public static bool IsBetween(this long a, long lowerBound, long upperBound, bool leftInclusive = true, bool rightInclusive = true)
     {
-        return inclusive 
-            ? a >= lowerBound && a <= upperBound 
-            : a > lowerBound && a < upperBound;
+        var left = leftInclusive ? a >= lowerBound : a > lowerBound;
+        var right = rightInclusive ? a <= upperBound : a < upperBound;
+        return left && right;
     }
-    
-    public static bool IsBetween(this double a, double lowerBound, double upperBound, bool inclusive = true)
+
+    public static bool IsBetween(this double a, double lowerBound, double upperBound, bool leftInclusive = true, bool rightInclusive = true)
     {
-        return inclusive 
-            ? a >= lowerBound && a <= upperBound 
-            : a > lowerBound && a < upperBound;
+        var left = leftInclusive ? a >= lowerBound : a > lowerBound;
+        var right = rightInclusive ? a <= upperBound : a < upperBound;
+        return left && right;
     }
 
     #endregion
