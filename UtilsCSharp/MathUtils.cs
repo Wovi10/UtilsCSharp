@@ -361,33 +361,33 @@ public static class MathUtils
 
     #region IsEven
 
-    public static bool IsEven(int a)
+    public static bool IsEven(this int a)
         => a % 2 == 0;
 
-    public static bool IsEven(long a)
+    public static bool IsEven(this long a)
         => a % 2 == 0;
 
-    public static bool IsEven(double a)
+    public static bool IsEven(this double a)
         => a % 2 == 0;
 
     #endregion
 
     #region IsOdd
 
-    public static bool IsOdd(int a)
+    public static bool IsOdd(this int a)
         => a % 2 != 0;
 
-    public static bool IsOdd(long a)
+    public static bool IsOdd(this long a)
         => a % 2 != 0;
 
-    public static bool IsOdd(double a)
+    public static bool IsOdd(this double a)
         => a % 2 != 0;
 
     #endregion
 
     #region IsPrime
 
-    public static bool IsPrime(int a)
+    public static bool IsPrime(this int a)
     {
         switch (a)
         {
@@ -405,7 +405,7 @@ public static class MathUtils
         return true;
     }
 
-    public static bool IsPrime(long a)
+    public static bool IsPrime(this long a)
     {
         switch (a)
         {
@@ -423,7 +423,7 @@ public static class MathUtils
         return true;
     }
 
-    public static bool IsPrime(double a)
+    public static bool IsPrime(this double a)
     {
         switch (a)
         {
@@ -569,7 +569,7 @@ public static class MathUtils
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsGreaterThan(int a, int b)
+    public static bool? IsGreaterThan(this int a, int b)
     {
         return a > b
             ? true
@@ -585,7 +585,7 @@ public static class MathUtils
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsGreaterThan(long a, long b)
+    public static bool? IsGreaterThan(this long a, long b)
     {
         return a > b
             ? true
@@ -601,7 +601,7 @@ public static class MathUtils
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsGreaterThan(double a, double b)
+    public static bool? IsGreaterThan(this double a, double b)
     {
         return a > b
             ? true
@@ -620,7 +620,7 @@ public static class MathUtils
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsLessThan(int a, int b)
+    public static bool? IsLessThan(this int a, int b)
     {
         return a < b
             ? true
@@ -636,7 +636,7 @@ public static class MathUtils
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsLessThan(long a, long b)
+    public static bool? IsLessThan(this long a, long b)
     {
         return a < b
             ? true
@@ -652,7 +652,7 @@ public static class MathUtils
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsLessThan(double a, double b)
+    public static bool? IsLessThan(this double a, double b)
     {
         return a < b
             ? true
@@ -692,6 +692,31 @@ public static class MathUtils
 
     public static long MillSecToWeek(long milliSeconds)
         => MillSecToDay(milliSeconds) / 7;
+
+    #endregion
+
+    #region IsBetween
+
+    public static bool IsBetween(this int a, int lowerBound, int upperBound, bool inclusive = true)
+    {
+        return inclusive 
+            ? a >= lowerBound && a <= upperBound 
+            : a > lowerBound && a < upperBound;
+    }
+    
+    public static bool IsBetween(this long a, long lowerBound, long upperBound, bool inclusive = true)
+    {
+        return inclusive 
+            ? a >= lowerBound && a <= upperBound 
+            : a > lowerBound && a < upperBound;
+    }
+    
+    public static bool IsBetween(this double a, double lowerBound, double upperBound, bool inclusive = true)
+    {
+        return inclusive 
+            ? a >= lowerBound && a <= upperBound 
+            : a > lowerBound && a < upperBound;
+    }
 
     #endregion
 }

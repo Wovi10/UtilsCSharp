@@ -492,42 +492,46 @@ public class MathUtilsTests
     [Test]
     public void IsEven_IntegersEven()
     {
-        var actual = MathUtils.IsEven(12);
+        var actual = 12.IsEven();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsEven_IntegersOdd()
     {
-        var actual = MathUtils.IsEven(9);
+        var actual = 9.IsEven();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsEven_LongsEven()
     {
-        var actual = MathUtils.IsEven(12L);
+        var valueToTest = 12L;
+        var actual = valueToTest.IsEven();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsEven_LongsOdd()
     {
-        var actual = MathUtils.IsEven(9L);
+        var valueToTest = 9L;
+        var actual = valueToTest.IsEven();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsEven_DoublesEven()
     {
-        var actual = MathUtils.IsEven(12.0);
+        var valueToTest = 12.0;
+        var actual = valueToTest.IsEven();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsEven_DoublesOdd()
     {
-        var actual = MathUtils.IsEven(9.0);
+        var valueToTest = 9.0;
+        var actual = valueToTest.IsEven();
         Assert.That(actual, Is.False);
     }
 
@@ -538,42 +542,46 @@ public class MathUtilsTests
     [Test]
     public void IsOdd_IntegersEven()
     {
-        var actual = MathUtils.IsOdd(12);
+        var actual = 12.IsOdd();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsOdd_IntegersOdd()
     {
-        var actual = MathUtils.IsOdd(9);
+        var actual = 9.IsOdd();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsOdd_LongsEven()
     {
-        var actual = MathUtils.IsOdd(12L);
+        var valueToTest = 12L;
+        var actual = valueToTest.IsOdd();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsOdd_LongsOdd()
     {
-        var actual = MathUtils.IsOdd(9L);
+        var valueToTest = 9L;
+        var actual = valueToTest.IsOdd();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsOdd_DoublesEven()
     {
-        var actual = MathUtils.IsOdd(12.0);
+        var valueToTest = 12.0;
+        var actual = valueToTest.IsOdd();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsOdd_DoublesOdd()
     {
-        var actual = MathUtils.IsOdd(9.0);
+        var valueToTest = 9.0;
+        var actual = valueToTest.IsOdd();
         Assert.That(actual, Is.True);
     }
 
@@ -584,42 +592,46 @@ public class MathUtilsTests
     [Test]
     public void IsPrime_Integers_True()
     {
-        var actual = MathUtils.IsPrime(7);
+        var actual = 7.IsPrime();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsPrime_Integers_False()
     {
-        var actual = MathUtils.IsPrime(9);
+        var actual = 9.IsPrime();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsPrime_Longs_True()
     {
-        var actual = MathUtils.IsPrime(7L);
+        var valueToTest = 7L;
+        var actual = valueToTest.IsPrime();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsPrime_Longs_False()
     {
-        var actual = MathUtils.IsPrime(9L);
+        var valueToTest = 9L;
+        var actual = valueToTest.IsPrime();
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsPrime_Doubles_True()
     {
-        var actual = MathUtils.IsPrime(7.0);
+        var valueToTest = 7.0;
+        var actual = valueToTest.IsPrime();
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsPrime_Doubles_False()
     {
-        var actual = MathUtils.IsPrime(9.0);
+        var valueToTest = 9.0;
+        var actual = valueToTest.IsPrime();
         Assert.That(actual, Is.False);
     }
 
@@ -764,63 +776,69 @@ public class MathUtilsTests
     [Test]
     public void IsGreaterThan_Integers_True()
     {
-        var actual = MathUtils.IsGreaterThan(5, 3);
+        var actual = 5.IsGreaterThan(3);
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsGreaterThan_Integers_Null()
     {
-        var actual = MathUtils.IsGreaterThan(5, 5);
+        var actual = 5.IsGreaterThan(5);
         Assert.That(actual, Is.Null);
     }
 
     [Test]
     public void IsGreaterThan_Integers_False()
     {
-        var actual = MathUtils.IsGreaterThan(3, 5);
+        var actual = 3.IsGreaterThan(5);
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsGreaterThan_Longs_True()
     {
-        var actual = MathUtils.IsGreaterThan(5L, 3L);
+        var firstValue = 5L;
+        var actual = firstValue.IsGreaterThan(3L);
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsGreaterThan_Longs_Null()
     {
-        var actual = MathUtils.IsGreaterThan(5L, 5L);
+        var firstValue = 5L;
+        var actual = firstValue.IsGreaterThan(5L);
         Assert.That(actual, Is.Null);
     }
 
     [Test]
     public void IsGreaterThan_Longs_False()
     {
-        var actual = MathUtils.IsGreaterThan(3L, 5L);
+        var firstValue = 3L;
+        var actual = firstValue.IsGreaterThan(5L);
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsGreaterThan_Doubles_True()
     {
-        var actual = MathUtils.IsGreaterThan(5.0, 3.0);
+        var firstValue = 5.0;
+        var actual = firstValue.IsGreaterThan(3.0);
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsGreaterThan_Doubles_Null()
     {
-        var actual = MathUtils.IsGreaterThan(5.0, 5.0);
+        var firstValue = 5.0;
+        var actual = firstValue.IsGreaterThan(5.0);
         Assert.That(actual, Is.Null);
     }
 
     [Test]
     public void IsGreaterThan_Doubles_False()
     {
-        var actual = MathUtils.IsGreaterThan(3.0, 5.0);
+        var firstValue = 3.0;
+        var actual = firstValue.IsGreaterThan(5.0);
         Assert.That(actual, Is.False);
     }
 
@@ -831,63 +849,69 @@ public class MathUtilsTests
     [Test]
     public void IsLessThan_Integers_True()
     {
-        var actual = MathUtils.IsLessThan(3, 5);
+        var actual = 3.IsLessThan(5);
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsLessThan_Integers_Null()
     {
-        var actual = MathUtils.IsLessThan(5, 5);
+        var actual = 5.IsLessThan(5);
         Assert.That(actual, Is.Null);
     }
 
     [Test]
     public void IsLessThan_Integers_False()
     {
-        var actual = MathUtils.IsLessThan(5, 3);
+        var actual = 5.IsLessThan(3);
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsLessThan_Longs_True()
     {
-        var actual = MathUtils.IsLessThan(3L, 5L);
+        var firstValue = 3L;
+        var actual = firstValue.IsLessThan(5L);
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsLessThan_Longs_Null()
     {
-        var actual = MathUtils.IsLessThan(5L, 5L);
+        var firstValue = 5L;
+        var actual = firstValue.IsLessThan(5L);
         Assert.That(actual, Is.Null);
     }
 
     [Test]
     public void IsLessThan_Longs_False()
     {
-        var actual = MathUtils.IsLessThan(5L, 3L);
+        var firstValue = 5L;
+        var actual = firstValue.IsLessThan(3L);
         Assert.That(actual, Is.False);
     }
 
     [Test]
     public void IsLessThan_Doubles_True()
     {
-        var actual = MathUtils.IsLessThan(3.0, 5.0);
+        var firstValue = 3.0;
+        var actual = firstValue.IsLessThan(5.0);
         Assert.That(actual, Is.True);
     }
 
     [Test]
     public void IsLessThan_Doubles_Null()
     {
-        var actual = MathUtils.IsLessThan(5.0, 5.0);
+        var firstValue = 5.0;
+        var actual = firstValue.IsLessThan(5.0);
         Assert.That(actual, Is.Null);
     }
 
     [Test]
     public void IsLessThan_Doubles_False()
     {
-        var actual = MathUtils.IsLessThan(5.0, 3.0);
+        var firstValue = 5.0;
+        var actual = firstValue.IsLessThan(3.0);
         Assert.That(actual, Is.False);
     }
 
@@ -954,4 +978,98 @@ public class MathUtilsTests
     }
 
     #endregion
+    
+    # region IsBetween
+    
+    [Test]
+    public void IsBetween_IntegersInclusive_True()
+    {
+        var actual = 5.IsBetween(3, 7);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsBetween_IntegersInclusive_False()
+    {
+        var actual = 5.IsBetween(7, 3);
+        Assert.That(actual, Is.False);
+    }
+    
+    [Test]
+    public void IsBetween_IntegersExclusive_True()
+    {
+        var actual = 5.IsBetween(3, 7, false);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsBetween_IntegersExclusive_False()
+    {
+        var actual = 5.IsBetween(7, 3, false);
+        Assert.That(actual, Is.False);
+    }
+    
+    [Test]
+    public void IsBetween_LongsInclusive_True()
+    {
+        var firstValue = 5L;
+        var actual = firstValue.IsBetween(3L, 7L);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsBetween_LongsInclusive_False()
+    {
+        var firstValue = 5L;
+        var actual = firstValue.IsBetween(7L, 3L);
+        Assert.That(actual, Is.False);
+    }
+    
+    [Test]
+    public void IsBetween_LongsExclusive_True()
+    {
+        var firstValue = 5L;
+        var actual = firstValue.IsBetween(3L, 7L, false);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsBetween_LongsExclusive_False()
+    {
+        var firstValue = 5L;
+        var actual = firstValue.IsBetween(7L, 3L, false);
+        Assert.That(actual, Is.False);
+    }
+    
+    [Test]
+    public void IsBetween_DoublesInclusive_True()
+    {
+        var firstValue = 5.0;
+        var actual = firstValue.IsBetween(3.0, 7.0);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsBetween_DoublesInclusive_False()
+    {
+        var firstValue = 5.0;
+        var actual = firstValue.IsBetween(7.0, 3.0);
+        Assert.That(actual, Is.False);
+    }
+    
+    [Test]
+    public void IsBetween_DoublesExclusive_True()
+    {
+        var actual = 5.0.IsBetween(3.0, 7.0, false);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsBetween_DoublesExclusive_False()
+    {
+        var actual = 5.0.IsBetween(7.0, 3.0, false);
+        Assert.That(actual, Is.False);
+    }
+    
+    # endregion
 }
