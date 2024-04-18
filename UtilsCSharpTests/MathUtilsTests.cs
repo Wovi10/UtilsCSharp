@@ -934,9 +934,9 @@ public class MathUtilsTests
     }
 
     #endregion
-    
+
     # region Time
-    
+
     [Test]
     public void MillSecToSec()
     {
@@ -944,7 +944,7 @@ public class MathUtilsTests
         const int expected = 1;
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     [Test]
     public void MillSecToMin()
     {
@@ -952,7 +952,7 @@ public class MathUtilsTests
         const int expected = 1;
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     [Test]
     public void MillSecToHour()
     {
@@ -960,7 +960,7 @@ public class MathUtilsTests
         const int expected = 1;
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     [Test]
     public void MillSecToDay()
     {
@@ -978,98 +978,160 @@ public class MathUtilsTests
     }
 
     #endregion
-    
+
     # region IsBetween
-    
+
     [Test]
-    public void IsBetween_IntegersInclusive_True()
+    public void IsBetween_FullInclusive_True()
     {
-        var actual = 5.IsBetween(3, 7);
+        var valueToTest = 5;
+        var actual = valueToTest.IsBetween(3, 7);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
-    public void IsBetween_IntegersInclusive_False()
+    public void IsBetween_FullInclusive_False()
     {
-        var actual = 5.IsBetween(7, 3);
+        var valueToTest = 2;
+        var actual = valueToTest.IsBetween(3, 7);
         Assert.That(actual, Is.False);
     }
-    
+
     [Test]
-    public void IsBetween_IntegersExclusive_True()
+    public void IsBetween_FullInclusive_LowerEqual()
     {
-        var actual = 5.IsBetween(3, 7, false);
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 7);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
-    public void IsBetween_IntegersExclusive_False()
+    public void IsBetween_FullInclusive_UpperEqual()
     {
-        var actual = 5.IsBetween(7, 3, false);
-        Assert.That(actual, Is.False);
-    }
-    
-    [Test]
-    public void IsBetween_LongsInclusive_True()
-    {
-        var firstValue = 5L;
-        var actual = firstValue.IsBetween(3L, 7L);
+        var valueToTest = 7;
+        var actual = valueToTest.IsBetween(3, 7);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
-    public void IsBetween_LongsInclusive_False()
+    public void IsBetween_FullInclusive_LowerEqualUpperEqual()
     {
-        var firstValue = 5L;
-        var actual = firstValue.IsBetween(7L, 3L);
-        Assert.That(actual, Is.False);
-    }
-    
-    [Test]
-    public void IsBetween_LongsExclusive_True()
-    {
-        var firstValue = 5L;
-        var actual = firstValue.IsBetween(3L, 7L, false);
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 3);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
-    public void IsBetween_LongsExclusive_False()
+    public void IsBetween_LowerInclusive_True()
     {
-        var firstValue = 5L;
-        var actual = firstValue.IsBetween(7L, 3L, false);
-        Assert.That(actual, Is.False);
-    }
-    
-    [Test]
-    public void IsBetween_DoublesInclusive_True()
-    {
-        var firstValue = 5.0;
-        var actual = firstValue.IsBetween(3.0, 7.0);
+        var valueToTest = 5;
+        var actual = valueToTest.IsBetween(3, 7, true, false);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
-    public void IsBetween_DoublesInclusive_False()
+    public void IsBetween_LowerInclusive_False()
     {
-        var firstValue = 5.0;
-        var actual = firstValue.IsBetween(7.0, 3.0);
+        var valueToTest = 2;
+        var actual = valueToTest.IsBetween(3, 7, true, false);
         Assert.That(actual, Is.False);
     }
-    
+
     [Test]
-    public void IsBetween_DoublesExclusive_True()
+    public void IsBetween_LowerInclusive_LowerEqual()
     {
-        var actual = 5.0.IsBetween(3.0, 7.0, false);
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 7, true, false);
         Assert.That(actual, Is.True);
     }
-    
+
     [Test]
-    public void IsBetween_DoublesExclusive_False()
+    public void IsBetween_LowerInclusive_UpperEqual()
     {
-        var actual = 5.0.IsBetween(7.0, 3.0, false);
+        var valueToTest = 7;
+        var actual = valueToTest.IsBetween(3, 7, true, false);
         Assert.That(actual, Is.False);
     }
-    
+
+    [Test]
+    public void IsBetween_LowerInclusive_LowerEqualUpperEqual_False()
+    {
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 3, true, false);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsBetween_UpperInclusive_True()
+    {
+        var valueToTest = 5;
+        var actual = valueToTest.IsBetween(3, 7, false, true);
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
+    public void IsBetween_UpperInclusive_False()
+    {
+        var valueToTest = 2;
+        var actual = valueToTest.IsBetween(3, 7, false, true);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsBetween_UpperInclusive_LowerEqual()
+    {
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 7, false, true);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsBetween_UpperInclusive_UpperEqual()
+    {
+        var valueToTest = 7;
+        var actual = valueToTest.IsBetween(3, 7, false, true);
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
+    public void IsBetween_UpperInclusive_LowerEqualUpperEqual_False()
+    {
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 3, false, true);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsBetween_Exclusive_True()
+    {
+        var valueToTest = 5;
+        var actual = valueToTest.IsBetween(3, 7, false, false);
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
+    public void IsBetween_Exclusive_False()
+    {
+        var valueToTest = 2;
+        var actual = valueToTest.IsBetween(3, 7, false, false);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsBetween_Exclusive_LowerEqual()
+    {
+        var valueToTest = 3;
+        var actual = valueToTest.IsBetween(3, 7, false, false);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsBetween_Exclusive_UpperEqual()
+    {
+        var valueToTest = 7;
+        var actual = valueToTest.IsBetween(3, 7, false, false);
+        Assert.That(actual, Is.False);
+    }
+
     # endregion
 }
