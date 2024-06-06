@@ -203,7 +203,7 @@ public class MathUtilsTests
     public void Divide_Integers()
     {
         var actual = MathUtils.Div(3, 2);
-        const double expected = 1.5;
+        const double expected = 1;
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -217,7 +217,7 @@ public class MathUtilsTests
     public void Divide_Longs()
     {
         var actual = MathUtils.Div(3L, 2L);
-        const double expected = 1.5;
+        const double expected = 1;
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -1134,4 +1134,95 @@ public class MathUtilsTests
     }
 
     # endregion
+
+    [Test]
+    public void IsGreaterThanOrEqualTo_true()
+    {
+        var valueToTest = 5;
+        var actual = valueToTest.IsGreaterThanOrEqualTo(5);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsGreaterThanOrEqualTo_false()
+    {
+        var valueToTest = 5;
+        var actual = valueToTest.IsGreaterThanOrEqualTo(6);
+        Assert.That(actual, Is.False);
+    }
+    
+    [Test]
+    public void IsLessThanOrEqualTo_true()
+    {
+        var valueToTest = 5;
+        var actual = valueToTest.IsLessThanOrEqualTo(5);
+        Assert.That(actual, Is.True);
+    }
+    
+    [Test]
+    public void IsLessThanOrEqualTo_false()
+    {
+        var valueToTest = 5;
+        var actual = valueToTest.IsLessThanOrEqualTo(4);
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void ManhattanDistance()
+    {
+        var actual = MathUtils.ManhattanDistance((0, 0), (3, 4));
+        const int expected = 7;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void IsNegative_negativeNumber()
+    {
+        var input = -5;
+        var actual = input.IsNegative();
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
+    public void IsNegative_positiveNumber()
+    {
+        var input = 5;
+        var actual = input.IsNegative();
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void IsNegative_zero()
+    {
+        var input = 0;
+        var actual = input.IsNegative();
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void Abs_NegativeNumber()
+    {
+        var input = -5;
+        var actual = MathUtils.Abs(input);
+        const int expected = 5;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Abs_PositiveNumber()
+    {
+        var input = 5;
+        var actual = MathUtils.Abs(input);
+        const int expected = 5;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void Abs_Zero()
+    {
+        var input = 0;
+        var actual = MathUtils.Abs(input);
+        const int expected = 0;
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 }

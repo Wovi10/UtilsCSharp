@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+﻿using System.Numerics;
 
 namespace UtilsCSharp;
 
@@ -7,41 +7,17 @@ public static class MathUtils
     #region Add
 
     /// <summary>
-    /// Add two integers together.
+    /// Generic implementation of the Add function.
     /// </summary>
-    /// <param name="a">int</param>
-    /// <param name="b">int</param>
-    /// <returns>The sum of the two inputs</returns>
-    public static int Add(int a, int b)
+    /// <param name="a">parameter 1</param>
+    /// <param name="b">parameter 2</param>
+    /// <typeparam name="TSelf">The type you want to use</typeparam>
+    /// <returns></returns>
+    public static TSelf Add<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
         => a + b;
 
-    /// <summary>
-    /// Add two longs together.
-    /// </summary>
-    /// <param name="a">long</param>
-    /// <param name="b">long</param>
-    /// <returns>The sum of the two inputs</returns>
-    public static long Add(long a, long b)
-        => a + b;
-
-    /// <summary>
-    /// Add two doubles together.
-    /// </summary>
-    /// <param name="a">double</param>
-    /// <param name="b">double</param>
-    /// <returns>The sum of the two inputs</returns>
-    public static double Add(double a, double b)
-        => a + b;
-
-    /// <summary>
-    /// Add two strings together.
-    /// This will concatenate the input.
-    /// </summary>
-    /// <param name="a">string</param>
-    /// <param name="b">string</param>
-    /// <returns>The concatenated value of the two inputs.</returns>
     public static string Add(string a, string b)
-        => $"{a}{b}";
+        => a + b;
 
     /// <summary>
     /// This will add every number in the enumerable to the seed.
@@ -144,21 +120,13 @@ public static class MathUtils
     #region Subtract
 
     /// <summary>
-    /// Subtract two integers.
+    /// Generic implementation of the Subtract function.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
+    /// <param name="a">parameter 1</param>
+    /// <param name="b">parameter 2</param>
+    /// <typeparam name="TSelf">The type to be used.</typeparam>
     /// <returns></returns>
-    public static int Sub(int a, int b)
-        => a - b;
-
-    /// <summary>
-    /// Subtract two longs.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    public static long Sub(long a, long b)
+    public static TSelf Sub<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
         => a - b;
 
     /// <summary>
@@ -180,21 +148,13 @@ public static class MathUtils
     #region Multiply
 
     /// <summary>
-    /// Multiply two integers.
+    /// Generic implementation of the Multiply function.
     /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
+    /// <param name="a">parameter 1</param>
+    /// <param name="b">parameter 2</param>
+    /// <typeparam name="TSelf">The type to be used.</typeparam>
     /// <returns></returns>
-    public static int Mul(int a, int b)
-        => a * b;
-
-    /// <summary>
-    /// Multiply two longs.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    public static long Mul(long a, long b)
+    public static TSelf Mul<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
         => a * b;
 
     /// <summary>
@@ -213,18 +173,19 @@ public static class MathUtils
 
     #region Divide
 
-    public static double Div(int a, int b)
+    /// <summary>
+    /// Generic implementation of the Divide function.
+    /// </summary>
+    /// <param name="a">parameter 1</param>
+    /// <param name="b">parameter 2</param>
+    /// <typeparam name="TSelf">The type to be used.</typeparam>
+    /// <returns></returns>
+    public static TSelf Div<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
     {
-        if (b == 0)
+        if (TSelf.IsZero(b))
             throw new DivideByZeroException();
-        return (double) a / (double) b;
-    }
 
-    public static double Div(long a, long b)
-    {
-        if (b == 0)
-            throw new DivideByZeroException();
-        return (double) a / (double) b;
+        return a / b;
     }
 
     public static double Div(double a, double b, int? returnPrecision = null)
@@ -241,58 +202,17 @@ public static class MathUtils
     #region Greatest Common Dividor
 
     /// <summary>
-    /// Greatest Common Dividor of two integers.
+    /// Generic Greatest Common Dividor.
     /// </summary>
     /// <param name="a"></param>
     /// <param name="b"></param>
-    /// <returns>
-    /// The biggest number that can divide both a and b.
-    /// 1 if both a and b are 0.
-    /// </returns>
-    public static int Gcd(int a, int b)
+    /// <typeparam name="TSelf">The type to be used.</typeparam>
+    /// <returns></returns>
+    public static TSelf Gcd<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
     {
-        if (a == 0 && b == 0)
-            return 1;
-        return b == 0
-            ? a
-            : Gcd(b, a % b);
-    }
-
-    /// <summary>
-    /// Greatest Common Dividor of two longs.
-    /// The biggest number that can divide both a and b.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>
-    /// The biggest number that can divide both a and b.
-    /// 1 if both a and b are 0.
-    /// </returns>
-    public static long Gcd(long a, long b)
-    {
-        if (a == 0 && b == 0)
-            return 1;
-        return b == 0
-            ? a
-            : Gcd(b, a % b);
-    }
-
-
-    /// <summary>
-    /// Greatest Common Dividor of two doubles.
-    /// The biggest number that can divide both a and b.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>
-    /// The biggest number that can divide both a and b.
-    /// 1 if both a and b are 0.
-    /// </returns>
-    public static double Gcd(double a, double b)
-    {
-        if (a == 0 && b == 0)
-            return 1;
-        return b == 0
+        if (a == TSelf.Zero && b == TSelf.Zero)
+            return TSelf.One;
+        return b == TSelf.Zero
             ? a
             : Gcd(b, a % b);
     }
@@ -302,92 +222,48 @@ public static class MathUtils
     #region Least Common Multiple
 
     /// <summary>
-    /// Least Common Multiple of two integers.
-    /// The lowest number that is a multiple of both a and b.
+    /// Generic Least Common Multiple.
     /// </summary>
     /// <param name="a"></param>
     /// <param name="b"></param>
+    /// <typeparam name="TSelf"></typeparam>
     /// <returns></returns>
-    public static int Lcm(int a, int b)
-        => a * b / Gcd(a, b);
-
-    /// <summary>
-    /// Least Common Multiple of two longs.
-    /// The lowest number that is a multiple of both a and b.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    public static long Lcm(long a, long b)
-        => a * b / Gcd(a, b);
-
-    /// <summary>
-    /// Least Common Multiple of two doubles.
-    /// The lowest number that is a multiple of both a and b.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns></returns>
-    public static double Lcm(double a, double b)
+    public static TSelf Lcm<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
         => a * b / Gcd(a, b);
 
     #endregion
 
     #region GetHighest
 
-    public static int GetHighest(int a, int b)
-        => a > b ? a : b;
-
-    public static long GetHighest(long a, long b)
-        => a > b ? a : b;
-
-    public static double GetHighest(double a, double b)
-        => a > b ? a : b;
+    public static T GetHighest<T>(T a, T b) where T : INumber<T>
+        => a.CompareTo(b) > 0 ? a : b;
 
     #endregion
 
     #region GetLowest
 
-    public static int GetLowest(int a, int b)
-        => a < b ? a : b;
-
-    public static long GetLowest(long a, long b)
-        => a < b ? a : b;
-
-    public static double GetLowest(double a, double b)
-        => a < b ? a : b;
+    public static T GetLowest<T>(T a, T b) where T : INumber<T>
+        => a.CompareTo(b) < 0 ? a : b;
 
     #endregion
 
     #region IsEven
 
-    public static bool IsEven(this int a)
-        => a % 2 == 0;
-
-    public static bool IsEven(this long a)
-        => a % 2 == 0;
-
-    public static bool IsEven(this double a)
-        => a % 2 == 0;
+    public static bool IsEven<TSelf>(this TSelf a) where TSelf : INumber<TSelf> =>
+        TSelf.IsEvenInteger(a);
 
     #endregion
 
     #region IsOdd
 
-    public static bool IsOdd(this int a)
-        => a % 2 != 0;
-
-    public static bool IsOdd(this long a)
-        => a % 2 != 0;
-
-    public static bool IsOdd(this double a)
-        => a % 2 != 0;
+    public static bool IsOdd<T>(this T a) where T : INumber<T>
+        => T.IsOddInteger(a);
 
     #endregion
 
     #region IsPrime
 
-    public static bool IsPrime(this int a)
+    public static bool IsPrime<T>(this T a) where T : INumber<T>
     {
         switch (a)
         {
@@ -397,47 +273,13 @@ public static class MathUtils
                 return true;
         }
 
-        if (a % 2 == 0)
+        if (a.IsEven())
             return false;
-        for (var i = 3; i <= Math.Sqrt(a); i += 2)
-            if (a % i == 0)
-                return false;
-        return true;
-    }
 
-    public static bool IsPrime(this long a)
-    {
-        switch (a)
-        {
-            case <= 1:
+        for (var i = 3; i <= Math.Sqrt(double.CreateChecked(a)); i += 2)
+            if (T.IsZero(a % T.CreateChecked(i)))
                 return false;
-            case 2:
-                return true;
-        }
 
-        if (a % 2 == 0)
-            return false;
-        for (var i = 3; i <= Math.Sqrt(a); i += 2)
-            if (a % i == 0)
-                return false;
-        return true;
-    }
-
-    public static bool IsPrime(this double a)
-    {
-        switch (a)
-        {
-            case <= 1:
-                return false;
-            case 2:
-                return true;
-        }
-
-        if (a % 2 == 0)
-            return false;
-        for (var i = 3; i <= Math.Sqrt(a); i += 2)
-            if (a % i == 0)
-                return false;
         return true;
     }
 
@@ -445,233 +287,119 @@ public static class MathUtils
 
     #region PythagoreanTheorem
 
-    /// <summary>
-    /// The Pythagorean theorem of integers.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>The square root of a squared + b squared</returns>
-    public static double PythagoreanTheorem(int a, int b)
-        => Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
-
-    /// <summary>
-    /// The Pythagorean theorem of longs.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>The square root of a squared + b squared</returns>
-    public static double PythagoreanTheorem(long a, long b)
-        => Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
-
-    /// <summary>
-    /// The Pythagorean theorem of doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="returnPrecision">The desired precision of the return value. Ignored if empty.</param>
-    /// <returns>The square root of a squared + b squared</returns>
-    public static double PythagoreanTheorem(double a, double b, int? returnPrecision = null)
+    public static double PythagoreanTheorem<T>(T a, T b, int? returnPrecision = null) where T : INumber<T>
     {
-        var squaredA = Math.Pow(a, 2);
-        var squaredB = Math.Pow(b, 2);
-        return returnPrecision == null
-            ? Math.Sqrt(squaredA + squaredB)
-            : Math.Round(Math.Sqrt(squaredA + squaredB), returnPrecision.Value);
+        var squaredA = Math.Pow(double.CreateChecked(a), 2);
+        var squaredB = Math.Pow(double.CreateChecked(b), 2);
+        return 
+            returnPrecision == null
+                ? Math.Sqrt(squaredA + squaredB)
+                : Math.Round(PythagoreanTheorem(a, b), returnPrecision.Value);
     }
 
     #endregion
 
     #region Discrimant
 
-    /// <summary>
-    /// Discriminant of integers.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="c"></param>
-    /// <returns></returns>
-    public static double Discriminant(int a, int b, int c)
-        => Math.Pow(b, 2) - 4 * a * c;
-
-    /// <summary>
-    /// Discriminant of longs.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="c"></param>
-    /// <returns></returns>
-    public static double Discriminant(long a, long b, long c)
-        => Math.Pow(b, 2) - 4 * a * c;
-
-
-    /// <summary>
-    /// Discriminant of doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="c"></param>
-    /// <param name="returnPrecision"></param>
-    /// <returns></returns>
-    public static double Discriminant(double a, double b, double c, int? returnPrecision)
+    public static double Discriminant<T>(T a, T b, T c, int? returnPrecision = null) where T : INumber<T>
     {
-        return returnPrecision == null
-            ? Math.Pow(b, 2) - 4 * a * c
-            : Math.Round(Math.Pow(b, 2) - 4 * a * c, returnPrecision.Value);
+        return 
+            returnPrecision == null
+                ? Math.Pow(double.CreateChecked(b), 2) - 4 * double.CreateChecked(a) * double.CreateChecked(c)
+                : Math.Round(Discriminant(a, b, c), returnPrecision.Value);
     }
 
     #endregion
 
     #region Factorial
 
-    public static int Factorial(int a)
+    public static T Factorial<T>(T a) where T : INumber<T>
     {
-        if (a < 0)
+        if (a.IsNegative())
             throw new ArgumentOutOfRangeException(nameof(a), "Factorial of a negative number is undefined.");
-        return a switch
-        {
-            0 => 1,
-            1 => 1,
-            _ => a * Factorial(a - 1)
-        };
-    }
 
-    public static long Factorial(long a)
-    {
-        if (a < 0)
-            throw new ArgumentOutOfRangeException(nameof(a), "Factorial of a negative number is undefined.");
-        return a switch
-        {
-            0 => 1,
-            1 => 1,
-            _ => a * Factorial(a - 1)
-        };
-    }
+        if (T.IsZero(a))
+            return T.One;
 
-    public static double Factorial(double a)
-    {
-        if (a < 0)
-            throw new ArgumentOutOfRangeException(nameof(a), "Factorial of a negative number is undefined.");
-        return a switch
-        {
-            0 => 1,
-            1 => 1,
-            _ => a * Factorial(a - 1)
-        };
+        return
+            a.CompareTo(T.One) == 0
+                ? T.One
+                : Mul(a, Factorial(Sub(a, T.One)));
     }
 
     #endregion
 
     #region IsGreaterThan
 
-    /// <summary>
-    /// Compares two integers.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsGreaterThan(this int a, int b)
+    public static bool? IsGreaterThan<T>(this T a, T b) where T : INumber<T>
     {
-        return a > b
-            ? true
-            : a < b
-                ? false
-                : null;
+        return a.CompareTo(b) switch
+        {
+            > 0 => true,
+            < 0 => false,
+            _ => null
+        };
     }
-
-
-    /// <summary>
-    /// Compares two longs.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsGreaterThan(this long a, long b)
-    {
-        return a > b
-            ? true
-            : a < b
-                ? false
-                : null;
-    }
-
-
-    /// <summary>
-    /// Compares two doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsGreaterThan(this double a, double b)
-    {
-        return a > b
-            ? true
-            : a < b
-                ? false
-                : null;
-    }
-
+    
     #endregion
 
     #region IsLessThan
 
-    /// <summary>
-    /// Compares two integers.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsLessThan(this int a, int b)
+    public static bool? IsLessThan<T>(this T a, T b) where T : INumber<T>
     {
-        return a < b
-            ? true
-            : a > b
-                ? false
-                : null;
+        return a.CompareTo(b) switch
+        {
+            < 0 => true,
+            > 0 => false,
+            _ => null
+        };
     }
 
-
-    /// <summary>
-    /// Compares two longs.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsLessThan(this long a, long b)
+    #endregion
+    
+    #region IsGreaterThanOrEqualTo
+    
+    public static bool IsGreaterThanOrEqualTo<T>(this T a, T b) where T : INumber<T>
     {
-        return a < b
-            ? true
-            : a > b
-                ? false
-                : null;
+        return a.CompareTo(b) switch
+        {
+            > 0 => true,
+            < 0 => false,
+            _ => true
+        };
     }
-
-
-    /// <summary>
-    /// Compares two doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <returns>True or false. Null if equal.</returns>
-    public static bool? IsLessThan(this double a, double b)
+    
+    #endregion
+    
+    #region IsLessThanOrEqualTo
+    
+    public static bool IsLessThanOrEqualTo<T>(this T a, T b) where T : INumber<T>
     {
-        return a < b
-            ? true
-            : a > b
-                ? false
-                : null;
+        return a.CompareTo(b) switch
+        {
+            < 0 => true,
+            > 0 => false,
+            _ => true
+        };
     }
-
+    
     #endregion
 
     #region NumberOfCombinations
 
-    public static long NumberOfCombinations(int numberOfItemsInSet, int sizeOfCombinations)
+    public static T NumberOfCombinations<T>(T numberOfItemsInSet, T sizeOfCombinations) where T : INumber<T>
     {
-        if (numberOfItemsInSet < sizeOfCombinations)
+        if (numberOfItemsInSet.IsLessThan(sizeOfCombinations) == true)
             throw new ArgumentOutOfRangeException(nameof(sizeOfCombinations),
                 "numberOfItemsInSet must be greater than or equal to sizeOfCombinations.");
-        return Factorial(numberOfItemsInSet) /
-               (Factorial(sizeOfCombinations) * Factorial(numberOfItemsInSet - sizeOfCombinations));
+
+        return Div(
+                Factorial(numberOfItemsInSet),
+                Mul(
+                    Factorial(sizeOfCombinations), 
+                    Factorial(Sub(numberOfItemsInSet, sizeOfCombinations))
+                    )
+                );
     }
 
     #endregion
@@ -697,29 +425,40 @@ public static class MathUtils
 
     #region IsBetween
 
-    public static bool IsBetween(this int a, int lowerBound, int upperBound, bool leftInclusive = true,
-        bool rightInclusive = true)
+    public static bool IsBetween<T>(this T input, T lowerBound, T upperBound, bool leftInclusive = true,
+        bool rightInclusive = true) where T : INumber<T>
     {
-        var left = leftInclusive ? a >= lowerBound : a > lowerBound;
-        var right = rightInclusive ? a <= upperBound : a < upperBound;
+        var left = leftInclusive ? input.IsGreaterThanOrEqualTo(lowerBound) : input.IsGreaterThan(lowerBound) ?? false;
+        var right = rightInclusive ? input.IsLessThanOrEqualTo(upperBound) : input.IsLessThan(upperBound) ?? false;
+
         return left && right;
     }
 
-    public static bool IsBetween(this long a, long lowerBound, long upperBound, bool leftInclusive = true,
-        bool rightInclusive = true)
+    #endregion
+
+    #region ManhattanDistance
+
+    public static T ManhattanDistance<T>((T,T) point1, (T,T) point2) where T : INumber<T>
     {
-        var left = leftInclusive ? a >= lowerBound : a > lowerBound;
-        var right = rightInclusive ? a <= upperBound : a < upperBound;
-        return left && right;
+        var x = Abs(Sub(point1.Item1, point2.Item1));
+        var y = Abs(Sub(point1.Item2, point2.Item2));
+
+        return Add(x, y);
     }
 
-    public static bool IsBetween(this double a, double lowerBound, double upperBound, bool leftInclusive = true,
-        bool rightInclusive = true)
-    {
-        var left = leftInclusive ? a >= lowerBound : a > lowerBound;
-        var right = rightInclusive ? a <= upperBound : a < upperBound;
-        return left && right;
-    }
+    #endregion
+
+    #region Abs
+    
+    public static T Abs<T>(T a) where T : INumber<T>
+        => a.IsNegative() ? Sub(T.Zero, a) : a;
+
+    #endregion
+
+    #region IsNegative
+
+    public static bool IsNegative<T>(this T a) where T : INumber<T>
+        => a.IsLessThan(T.Zero) == true;
 
     #endregion
 }

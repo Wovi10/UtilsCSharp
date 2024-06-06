@@ -2,39 +2,44 @@
 
 namespace UtilsCSharp.Objects;
 
-public abstract class NodeBase(int internalX, int internalY)
+public abstract class NodeBase<T>(T internalX, T internalY) where T : struct
 {
-    public int X { get; } = internalX;
-    public int Y { get; } = internalY;
+    public T X { get; } = internalX;
+    public T Y { get; } = internalY;
 
     public override bool Equals(object? obj)
     {
-        if (obj is NodeBase point)
-            return Equals(point);
+        if (obj is NodeBase<T> point)
+            return EqualityComparer<T>.Default.Equals(X, point.X) && EqualityComparer<T>.Default.Equals(Y, point.Y);
 
         return false;
     }
 
-    public virtual bool Equals(NodeBase other)
-        => X == other.X && Y == other.Y;
-
     public override int GetHashCode()
-        => HashCode.Combine(X, Y);
+    {
+        unchecked
+        {
+            var hash = 17;
+            hash = hash * 23 + EqualityComparer<T>.Default.GetHashCode(X);
+            hash = hash * 23 + EqualityComparer<T>.Default.GetHashCode(Y);
+            return hash;
+        }
+    }
 
     public override string ToString()
         => $"({X},{Y})";
 
-    public void Deconstruct(out int x, out int y)
+    public void Deconstruct(out T x, out T y)
     {
         x = X;
         y = Y;
     }
 
-    public static bool operator ==(NodeBase left, NodeBase right)
+    public static bool operator ==(NodeBase<T> left, NodeBase<T> right)
         => left.Equals(right);
 
-    public static bool operator !=(NodeBase left, NodeBase right)
+    public static bool operator !=(NodeBase<T> left, NodeBase<T> right)
         => !left.Equals(right);
 
-    public abstract NodeBase Move(Direction direction);
+    public abstract (T, T) Move(Direction direction, int distance = 1);
 }

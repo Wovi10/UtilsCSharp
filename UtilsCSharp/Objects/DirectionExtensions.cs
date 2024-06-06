@@ -1,4 +1,5 @@
 ﻿using UtilsCSharp.Enums;
+using UtilsCSharp.Utils;
 
 namespace UtilsCSharp.Objects;
 
@@ -20,10 +21,10 @@ public static class DirectionExtensions
     {
         return offset switch
         {
-            (0, -1) => WindDirection.North,
-            (1, 0) => WindDirection.East,
-            (0, 1) => WindDirection.South,
-            (-1, 0) => WindDirection.West,
+            _ when offset == Offset.Up => WindDirection.North,
+            _ when offset == Offset.Right => WindDirection.East,
+            _ when offset == Offset.Down => WindDirection.South,
+            _ when offset == Offset.Left => WindDirection.West,
             _ => WindDirection.None
         };
     }
@@ -44,10 +45,10 @@ public static class DirectionExtensions
     {
         return offset switch
         {
-            (0, -1) => Direction.Up,
-            (1, 0) => Direction.Right,
-            (0, 1) => Direction.Down,
-            (-1, 0) => Direction.Left,
+            _ when offset == Offset.Up => Direction.Up,
+            _ when offset == Offset.Right => Direction.Right,
+            _ when offset == Offset.Down => Direction.Down,
+            _ when offset == Offset.Left => Direction.Left,
             _ => Direction.None
         };
     }
@@ -56,11 +57,11 @@ public static class DirectionExtensions
     {
         return direction switch
         {
-            Direction.Up => (0, -1),
-            Direction.Right => (1, 0),
-            Direction.Down => (0, 1),
-            Direction.Left => (-1, 0),
-            _ => (0, 0)
+            Direction.Up => Offset.Up,
+            Direction.Right => Offset.Right,
+            Direction.Down => Offset.Down,
+            Direction.Left => Offset.Left,
+            _ => Offset.Still
         };
     }
 
@@ -68,11 +69,11 @@ public static class DirectionExtensions
     {
         return direction switch
         {
-            WindDirection.North => (0, -1),
-            WindDirection.East => (1, 0),
-            WindDirection.South => (0, 1),
-            WindDirection.West => (-1, 0),
-            _ => (0, 0)
+            WindDirection.North => Offset.Up,
+            WindDirection.East => Offset.Right,
+            WindDirection.South => Offset.Down,
+            WindDirection.West => Offset.Left,
+            _ => Offset.Still
         };
     }
 }

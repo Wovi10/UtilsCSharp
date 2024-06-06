@@ -13,4 +13,5 @@ public static class Constants
     public const string Pipe = "|";
     public const string SemiColon = ";";
     public const string Space = " ";
+    public const string QuestionMark = "?";
 }
