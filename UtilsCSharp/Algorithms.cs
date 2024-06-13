@@ -68,4 +68,24 @@ public static class Algorithms
     }
     
     #endregion
+
+    public static List<T> SelectionSort<T>(List<T> list) where T : struct, INumber<T>
+    {
+        for (var i = 0; i < list.Count; i++)
+        {
+            var minimum = i;
+            for (var j = i+1; j < list.Count; j++)
+            {
+                if (list[j] < list[minimum])
+                    minimum = j;
+            }
+            
+            if (minimum == i)
+                continue;
+            
+            (list[i], list[minimum]) = (list[minimum], list[i]);
+        }
+
+        return list;
+    }
 }
