@@ -13,7 +13,7 @@
         <RepositoryType>GitHub</RepositoryType>
         <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
         <PackageReadMeFile>README.md</PackageReadMeFile>
-        <Version>1.6.1</Version>
+        <Version>2.0.0</Version>
     </PropertyGroup>
     
     <ItemGroup>

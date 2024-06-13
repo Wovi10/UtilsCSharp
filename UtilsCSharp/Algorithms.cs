@@ -13,7 +13,7 @@ public static class Algorithms
     /// <param name="list">A list in which to find a repeating pattern.</param>
     /// <typeparam name="T">The type used in the list.</typeparam>
     /// <returns>The length of the loop. 0 if no loop was found. Loop has to be repeated at least 3 times.</returns>
-    public static T GetLoopLength<T>(List<T> list) where T: INumber<T>
+    public static T GetLoopLength<T>(List<T> list) where T: struct, INumber<T>
     {
         var listCount = list.Count;
         const int minimumLoopLength = 3;
@@ -45,5 +45,27 @@ public static class Algorithms
         return T.Zero; // No cycle found
     }
 
+    public static List<T> BubbleSort<T>(List<T> list) where T: struct, INumber<T>
+    {
+        bool swapped;
+        do
+        {
+            swapped = false;
+            for (var i = 0; i < list.Count - 1; i++)
+            {
+                var current = list[i];
+                var next = list[i + 1];
+
+                if (current <= next)
+                    continue;
+
+                (list[i], list[i + 1]) = (next, current);
+                swapped = true;
+            }
+        } while (swapped);
+
+        return list;
+    }
+    
     #endregion
 }

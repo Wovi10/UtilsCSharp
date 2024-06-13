@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using UtilsCSharp.Utils;
 
 namespace UtilsCSharp;
 
@@ -6,264 +7,127 @@ public static class MathUtils
 {
     #region Add
 
-    /// <summary>
-    /// Generic implementation of the Add function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type you want to use</typeparam>
-    /// <returns></returns>
-    public static TSelf Add<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
+    public static TSelf Add<TSelf>(this TSelf a, TSelf b) where TSelf: struct, INumber<TSelf>, IComparable<TSelf>
         => a + b;
 
-    public static string Add(string a, string b)
-        => a + b;
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of int</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The sum of the seed and all entries of the collection</returns>
-    public static int Add(IEnumerable<int> a, int seed = 0, int constant = 0)
+    public static T Add<T>(IEnumerable<T> list, T seed = default, T constant = default) where T: struct, INumber<T>
     {
-        if (constant == 0 && seed == 0)
-            return Add(a);
+        if (constant == T.Zero && seed == T.Zero)
+            return list.Aggregate(Add);
 
-        if (constant == 0)
-            return a.Aggregate(seed, Add);
+        if (constant == T.Zero)
+            return list.Aggregate(seed, Add);
 
-        if (seed == 0)
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
+        if (seed == T.Zero)
+            return list.Aggregate((a, b) => Add(Add(a, b), constant));
 
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
+        return list.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
     }
-
-    private static int Add(IEnumerable<int> a)
-        => a.Aggregate(Add);
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of long</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The sum of the seed and all entries of the collection</returns>
-    public static long Add(IEnumerable<long> a, long seed = 0, long constant = 0)
-    {
-        if (constant == 0 && seed == 0)
-            return Add(a);
-
-        if (constant == 0)
-            return a.Aggregate(seed, Add);
-
-        if (seed == 0)
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
-
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
-    }
-
-    private static long Add(IEnumerable<long> a)
-        => a.Aggregate(Add);
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of long</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The sum of the seed and all entries of the collection</returns>
-    public static double Add(IEnumerable<double> a, double seed = 0.0, double constant = 0.0)
-    {
-        if (constant == 0.0 && seed == 0.0)
-            return Add(a);
-
-        if (constant == 0.0)
-            return a.Aggregate(seed, Add);
-
-        if (seed == 0.0)
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
-
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
-    }
-
-    private static double Add(IEnumerable<double> a)
-        => a.Aggregate(Add);
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of long</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The concatenation of the seed and all entries of the collection.</returns>
-    public static string Add(IEnumerable<string> a, string seed = "", string constant = "")
-    {
-        if (constant == "" && seed == "")
-            return Add(a);
-
-        if (constant == "")
-            return a.Aggregate(seed, Add);
-
-        if (seed == "")
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
-
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
-    }
-
-    private static string Add(IEnumerable<string> a)
-        => a.Aggregate(Add);
 
     #endregion
 
     #region Subtract
-
-    /// <summary>
-    /// Generic implementation of the Subtract function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Sub<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
-        => a - b;
-
-    /// <summary>
-    /// Subtract to doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="precision">Required precision of the output (ignored if left empty)</param>
-    /// <returns></returns>
-    public static double Sub(double a, double b, int? precision = null)
+    
+    public static T Sub<T>(this T a, T b, int? precision = null) where T: struct, INumber<T>
     {
         if (precision == null)
             return a - b;
-        return Math.Round(a - b, precision.Value);
+        
+        var subAsDouble = double.CreateChecked(Sub(a, b));
+        var rounded = Math.Round(subAsDouble, precision.Value);
+
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Multiply
 
-    /// <summary>
-    /// Generic implementation of the Multiply function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Mul<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
-        => a * b;
-
-    /// <summary>
-    /// Multiply two doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="returnPrecision">The desired precision of the return value.</param>
-    /// <returns></returns>
-    public static double Mul(double a, double b, int returnPrecision)
+    public static T Mul<T>(this T a, T b, int? precision = null) where T: struct, INumber<T>
     {
-        return Math.Round(a * b, returnPrecision);
+        if(precision == null)
+            return a * b;
+
+        var mulAsDouble = double.CreateChecked(Mul(a, b));
+        var rounded = Math.Round(mulAsDouble, precision.Value);
+
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Divide
 
-    /// <summary>
-    /// Generic implementation of the Divide function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Div<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
+    public static T Div<T>(this T a, T b, int? precision = null) where T: struct, INumber<T>
     {
-        if (TSelf.IsZero(b))
+        if (T.IsZero(b))
             throw new DivideByZeroException();
 
-        return a / b;
-    }
+        if (precision == null)
+            return a / b;
 
-    public static double Div(double a, double b, int? returnPrecision = null)
-    {
-        if (b == 0)
-            throw new DivideByZeroException();
-        return returnPrecision == null
-            ? a / b
-            : Math.Round(a / b, returnPrecision.Value);
+        var divAsDouble = double.CreateChecked(Div(a, b));
+        var rounded = Math.Round(divAsDouble, precision.Value);
+
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Greatest Common Dividor
 
-    /// <summary>
-    /// Generic Greatest Common Dividor.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Gcd<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
+    public static T GcdWith<T>(this T a, T b) where T: struct, INumber<T>
     {
-        if (a == TSelf.Zero && b == TSelf.Zero)
-            return TSelf.One;
-        return b == TSelf.Zero
-            ? a
-            : Gcd(b, a % b);
+        while (true)
+        {
+            if (a == T.Zero && b == T.Zero) return T.One;
+            if (b == T.Zero) return a;
+            var a1 = a;
+            a = b;
+            b = a1 % b;
+        }
     }
 
     #endregion
 
     #region Least Common Multiple
 
-    /// <summary>
-    /// Generic Least Common Multiple.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <typeparam name="TSelf"></typeparam>
-    /// <returns></returns>
-    public static TSelf Lcm<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
-        => a * b / Gcd(a, b);
+    public static T Lcm<T>(this T a, T b) where T: struct, INumber<T>
+        => a * b / a.GcdWith(b);
 
     #endregion
 
     #region GetHighest
 
-    public static T GetHighest<T>(T a, T b) where T : INumber<T>
+    public static T GetHighest<T>(T a, T b) where T: struct, INumber<T>
         => a.CompareTo(b) > 0 ? a : b;
 
     #endregion
 
     #region GetLowest
 
-    public static T GetLowest<T>(T a, T b) where T : INumber<T>
+    public static T GetLowest<T>(T a, T b) where T: struct, INumber<T>
         => a.CompareTo(b) < 0 ? a : b;
 
     #endregion
 
     #region IsEven
 
-    public static bool IsEven<TSelf>(this TSelf a) where TSelf : INumber<TSelf> =>
-        TSelf.IsEvenInteger(a);
+    public static bool IsEven<T>(this T a) where T: struct, INumber<T>
+        => T.IsEvenInteger(a);
 
     #endregion
 
     #region IsOdd
 
-    public static bool IsOdd<T>(this T a) where T : INumber<T>
+    public static bool IsOdd<T>(this T a) where T: struct, INumber<T>
         => T.IsOddInteger(a);
 
     #endregion
 
     #region IsPrime
 
-    public static bool IsPrime<T>(this T a) where T : INumber<T>
+    public static bool IsPrime<T>(this T a) where T: struct, INumber<T>
     {
         switch (a)
         {
@@ -287,33 +151,47 @@ public static class MathUtils
 
     #region PythagoreanTheorem
 
-    public static double PythagoreanTheorem<T>(T a, T b, int? returnPrecision = null) where T : INumber<T>
+    public static T PythagoreanTheorem<T>(T a, T b, int? returnPrecision = null) where T: struct, INumber<T>
     {
-        var squaredA = Math.Pow(double.CreateChecked(a), 2);
-        var squaredB = Math.Pow(double.CreateChecked(b), 2);
-        return 
-            returnPrecision == null
-                ? Math.Sqrt(squaredA + squaredB)
-                : Math.Round(PythagoreanTheorem(a, b), returnPrecision.Value);
+        var squaredA = Mul(a, a);
+        var squaredB = Mul(b, b);
+
+        if (returnPrecision == null)
+        {
+            var added = Add(squaredA, squaredB);
+            var addedAsDouble = double.CreateChecked(added);
+
+            return T.CreateChecked(Math.Sqrt(addedAsDouble));
+        }
+
+        var pythagoreanTheoremAsDouble = double.CreateChecked(PythagoreanTheorem(a, b));
+        var rounded = Math.Round(pythagoreanTheoremAsDouble, returnPrecision.Value);
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Discrimant
 
-    public static double Discriminant<T>(T a, T b, T c, int? returnPrecision = null) where T : INumber<T>
+    public static T Discriminant<T>(T a, T b, T c, int? returnPrecision = null) where T: struct, INumber<T>
     {
-        return 
-            returnPrecision == null
-                ? Math.Pow(double.CreateChecked(b), 2) - 4 * double.CreateChecked(a) * double.CreateChecked(c)
-                : Math.Round(Discriminant(a, b, c), returnPrecision.Value);
+        var bSquared = Mul(b, b);
+        var fourA_C = Mul(T.CreateChecked(4), Mul(a, c));
+
+        if (returnPrecision == null)
+            return bSquared - fourA_C;
+
+        var discriminantAsDouble = double.CreateChecked(Discriminant(a, b, c));
+        var rounded = Math.Round(discriminantAsDouble, returnPrecision.Value);
+
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Factorial
 
-    public static T Factorial<T>(T a) where T : INumber<T>
+    public static T Factorial<T>(this T a) where T: struct, INumber<T>
     {
         if (a.IsNegative())
             throw new ArgumentOutOfRangeException(nameof(a), "Factorial of a negative number is undefined.");
@@ -331,35 +209,39 @@ public static class MathUtils
 
     #region IsGreaterThan
 
-    public static bool? IsGreaterThan<T>(this T a, T b) where T : INumber<T>
+    public static bool IsGreaterThan<T>(this T a, T b) where T: struct, INumber<T>
     {
         return a.CompareTo(b) switch
         {
             > 0 => true,
-            < 0 => false,
-            _ => null
+            _ => false
         };
     }
-    
+
+    public static bool? IsBiggerThan<T>(this T a, T b) where T: struct, INumber<T>
+        => a.IsGreaterThan(b);
+
     #endregion
 
     #region IsLessThan
 
-    public static bool? IsLessThan<T>(this T a, T b) where T : INumber<T>
+    public static bool IsLessThan<T>(this T a, T b) where T: struct, INumber<T>
     {
         return a.CompareTo(b) switch
         {
             < 0 => true,
-            > 0 => false,
-            _ => null
+            _ => false
         };
     }
+    
+    public static bool? IsSmallerThan<T>(this T a, T b) where T: struct, INumber<T>
+        => a.IsLessThan(b);
 
     #endregion
-    
+
     #region IsGreaterThanOrEqualTo
-    
-    public static bool IsGreaterThanOrEqualTo<T>(this T a, T b) where T : INumber<T>
+
+    public static bool IsGreaterThanOrEqualTo<T>(this T a, T b) where T: struct, INumber<T>
     {
         return a.CompareTo(b) switch
         {
@@ -368,12 +250,12 @@ public static class MathUtils
             _ => true
         };
     }
-    
+
     #endregion
-    
+
     #region IsLessThanOrEqualTo
-    
-    public static bool IsLessThanOrEqualTo<T>(this T a, T b) where T : INumber<T>
+
+    public static bool IsLessThanOrEqualTo<T>(this T a, T b) where T: struct, INumber<T>
     {
         return a.CompareTo(b) switch
         {
@@ -382,21 +264,21 @@ public static class MathUtils
             _ => true
         };
     }
-    
+
     #endregion
 
     #region NumberOfCombinations
 
-    public static T NumberOfCombinations<T>(T numberOfItemsInSet, T sizeOfCombinations) where T : INumber<T>
+    public static T NumberOfCombinations<T>(T numberOfItemsInSet, T sizeOfCombinations) where T: struct, INumber<T>
     {
-        if (numberOfItemsInSet.IsLessThan(sizeOfCombinations) == true)
+        if (IsLessThan(numberOfItemsInSet, sizeOfCombinations))
             throw new ArgumentOutOfRangeException(nameof(sizeOfCombinations),
                 "numberOfItemsInSet must be greater than or equal to sizeOfCombinations.");
 
         return Div(
                 Factorial(numberOfItemsInSet),
                 Mul(
-                    Factorial(sizeOfCombinations), 
+                    Factorial(sizeOfCombinations),
                     Factorial(Sub(numberOfItemsInSet, sizeOfCombinations))
                     )
                 );
@@ -406,30 +288,75 @@ public static class MathUtils
 
     #region Time
 
-    public static long MillSecToSec(long milliSeconds)
-        => milliSeconds / 1000;
+    public static T MillSecToSec<T>(T milliSeconds) where T: struct, INumber<T>
+        => Div(milliSeconds, T.CreateChecked(Constants.MillSecInSec));
 
-    public static long MillSecToMin(long milliSeconds)
-        => MillSecToSec(milliSeconds) / 60;
+    public static T MillSecToMin<T>(T milliSeconds) where T: struct, INumber<T>
+        => Div(MillSecToSec(milliSeconds), T.CreateChecked(Constants.SecInMin));
 
-    public static long MillSecToHour(long milliSeconds)
-        => MillSecToMin(milliSeconds) / 60;
+    public static T MillSecToHour<T>(T milliSeconds) where T: struct, INumber<T>
+        => Div(MillSecToMin(milliSeconds), T.CreateChecked(Constants.MinInHour));
 
-    public static long MillSecToDay(long milliSeconds)
-        => MillSecToHour(milliSeconds) / 24;
+    public static T MillSecToDay<T>(T milliSeconds) where T: struct, INumber<T>
+        => Div(MillSecToHour(milliSeconds), T.CreateChecked(Constants.HourInDay));
 
-    public static long MillSecToWeek(long milliSeconds)
-        => MillSecToDay(milliSeconds) / 7;
+    public static T MillSecToWeek<T>(T milliSeconds) where T: struct, INumber<T>
+        => Div(MillSecToDay(milliSeconds), T.CreateChecked(Constants.DayInWeek));
+
+    public static T SecToMillSec<T>(T seconds) where T: struct, INumber<T>
+        => Mul(seconds, T.CreateChecked(Constants.MillSecInSec));
+
+    public static T SecToMin<T>(T seconds) where T: struct, INumber<T>
+        => Div(seconds, T.CreateChecked(Constants.SecInMin));
+
+    public static T SecToHour<T>(T seconds) where T: struct, INumber<T>
+        => Div(SecToMin(seconds), T.CreateChecked(Constants.MinInHour));
+
+    public static T SecToDay<T>(T seconds) where T: struct, INumber<T>
+        => Div(SecToHour(seconds), T.CreateChecked(Constants.HourInDay));
+
+    public static T SecToWeek<T>(T seconds) where T: struct, INumber<T>
+        => Div(SecToDay(seconds), T.CreateChecked(Constants.DayInWeek));
+
+    public static T MinToMillSec<T>(T minutes) where T: struct, INumber<T>
+        => Mul(MinToSec(minutes), T.CreateChecked(Constants.MillSecInSec));
+
+    public static T MinToSec<T>(T minutes) where T: struct, INumber<T>
+        => Mul(minutes, T.CreateChecked(Constants.SecInMin));
+
+    public static T MinToHour<T>(T minutes) where T: struct, INumber<T>
+        => Div(minutes, T.CreateChecked(Constants.MinInHour));
+
+    public static T MinToDay<T>(T minutes) where T: struct, INumber<T>
+        => Div(MinToHour(minutes), T.CreateChecked(Constants.HourInDay));
+
+    public static T MinToWeek<T>(T minutes) where T: struct, INumber<T>
+        => Div(MinToDay(minutes), T.CreateChecked(Constants.DayInWeek));
+
+    public static T HourToMillSec<T>(T hours) where T: struct, INumber<T>
+        => Mul(HourToSec(hours), T.CreateChecked(Constants.MillSecInSec));
+
+    public static T HourToSec<T>(T hours) where T: struct, INumber<T>
+        => Mul(HourToMin(hours), T.CreateChecked(Constants.SecInMin));
+
+    public static T HourToMin<T>(T hours) where T: struct, INumber<T>
+        => Mul(hours, T.CreateChecked(Constants.MinInHour));
+
+    public static T HourToDay<T>(T hours) where T: struct, INumber<T>
+        => Div(hours, T.CreateChecked(Constants.HourInDay));
+
+    public static T HourToWeek<T>(T hours) where T: struct, INumber<T>
+        => Div(HourToDay(hours), T.CreateChecked(Constants.DayInWeek));
 
     #endregion
 
     #region IsBetween
 
     public static bool IsBetween<T>(this T input, T lowerBound, T upperBound, bool leftInclusive = true,
-        bool rightInclusive = true) where T : INumber<T>
+        bool rightInclusive = true) where T: struct, INumber<T>
     {
-        var left = leftInclusive ? input.IsGreaterThanOrEqualTo(lowerBound) : input.IsGreaterThan(lowerBound) ?? false;
-        var right = rightInclusive ? input.IsLessThanOrEqualTo(upperBound) : input.IsLessThan(upperBound) ?? false;
+        var left = leftInclusive ? IsGreaterThanOrEqualTo(input,lowerBound) : IsGreaterThan(input, lowerBound);
+        var right = rightInclusive ? IsLessThanOrEqualTo(input, upperBound) : IsLessThan(input, upperBound);
 
         return left && right;
     }
@@ -438,7 +365,7 @@ public static class MathUtils
 
     #region ManhattanDistance
 
-    public static T ManhattanDistance<T>((T,T) point1, (T,T) point2) where T : INumber<T>
+    public static T ManhattanDistance<T>((T,T) point1, (T,T) point2) where T: struct, INumber<T>
     {
         var x = Abs(Sub(point1.Item1, point2.Item1));
         var y = Abs(Sub(point1.Item2, point2.Item2));
@@ -449,16 +376,16 @@ public static class MathUtils
     #endregion
 
     #region Abs
-    
-    public static T Abs<T>(T a) where T : INumber<T>
-        => a.IsNegative() ? Sub(T.Zero, a) : a;
+
+    public static T Abs<T>(this T a) where T: struct, INumber<T>
+        => IsNegative(a) ? Sub(T.Zero, a) : a;
 
     #endregion
 
     #region IsNegative
 
-    public static bool IsNegative<T>(this T a) where T : INumber<T>
-        => a.IsLessThan(T.Zero) == true;
+    public static bool IsNegative<T>(this T a) where T: struct, INumber<T>
+        => IsLessThan(a, T.Zero);
 
     #endregion
 }
