@@ -1,4 +1,6 @@
-﻿namespace UtilsCSharpTests.MathUtils;
+﻿using UtilsCSharpTests.Utils;
+
+namespace UtilsCSharpTests.MathUtils;
 
 public static class TestData
 {
@@ -160,5 +162,295 @@ public static class TestData
         new object[] {120D, 5D},
         new object[] {1D, 0D},
         new object[] {0D, -5D}
+    };
+    
+    public static object[] IsGreaterThan { get; } =
+    {
+        // {expected, first, second}
+        new object[] {true, 5, 3},
+        new object[] {false, 5, 5},
+        new object[] {false, 3, 5},
+        new object[] {true, 5L, 3L},
+        new object[] {false, 5L, 5L},
+        new object[] {false, 3L, 5L},
+        new object[] {true, 5D, 3D},
+        new object[] {false, 5D, 5D},
+        new object[] {false, 3D, 5D}
+    };
+
+    public static object[] IsSmallerThan { get; } =
+    {
+        // {expected, first, second}
+        new object[] {false, 5, 3},
+        new object[] {false, 5, 5},
+        new object[] {true, 3, 5},
+        new object[] {false, 5L, 3L},
+        new object[] {false, 5L, 5L},
+        new object[] {true, 3L, 5L},
+        new object[] {false, 5D, 3D},
+        new object[] {false, 5D, 5D},
+        new object[] {true, 3D, 5D}
+    };
+
+    public static object[] NumberOfCombinations { get; } =
+    {
+        // {expected, first, second}
+        new object[] {36, 9, 2},
+        new object[] {36L, 9L, 2L},
+        new object[] {36.0, 9.0, 2.0},
+        new object[] {36, 2, 9},
+        new object[] {36L, 2L, 9L},
+        new object[] {36.0, 2.0, 9.0}
+    };
+
+    public static object[] MillSecToSec { get; } =
+    {
+        // {expected, first}
+        new object[] {0.001, 1},
+        new object[] {0.001, 1L},
+        new object[] {0.001, 1D},
+        new object[] {1, 1000},
+        new object[] {1L, 1000L},
+        new object[] {1D, 1000D}
+    };
+    
+    public static object[] MillSecToMin { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 60000},
+        new object[] {1L, 60000L},
+        new object[] {1D, 60000D}
+    };
+    
+    public static object[] MillSecToHour { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 3600000},
+        new object[] {1L, 3600000L},
+        new object[] {1D, 3600000D}
+    };
+    
+    public static object[] MillSecToDay { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 86400000},
+        new object[] {1L, 86400000L},
+        new object[] {1D, 86400000D}
+    };
+    
+    public static object[] MillSecToWeek { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 604800000},
+        new object[] {1L, 604800000L},
+        new object[] {1D, 604800000D}
+    };
+    
+    public static object[] SecToMillSec { get; } =
+    {
+        // {expected, first}
+        new object[] {1000, 1},
+        new object[] {1000L, 1L},
+        new object[] {1000D, 1D}
+    };
+    
+    public static object[] SecToMin { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 60},
+        new object[] {1L, 60L},
+        new object[] {1D, 60D}
+    };
+    
+    public static object[] SecToHour { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 3600},
+        new object[] {1L, 3600L},
+        new object[] {1D, 3600D}
+    };
+    
+    public static object[] SecToDay { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 86400},
+        new object[] {1L, 86400L},
+        new object[] {1D, 86400D}
+    };
+    
+    public static object[] SecToWeek { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 604800},
+        new object[] {1L, 604800L},
+        new object[] {1D, 604800D}
+    };
+    
+    public static object[] MinToMillSec { get; } =
+    {
+        // {expected, first}
+        new object[] {60000, 1},
+        new object[] {60000L, 1L},
+        new object[] {60000D, 1D}
+    };
+    
+    public static object[] MinToSec { get; } =
+    {
+        // {expected, first}
+        new object[] {60, 1},
+        new object[] {60L, 1L},
+        new object[] {60D, 1D}
+    };
+    
+    public static object[] MinToHour { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 60},
+        new object[] {1L, 60L},
+        new object[] {1D, 60D}
+    };
+    
+    public static object[] MinToDay { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 1440},
+        new object[] {1L, 1440L},
+        new object[] {1D, 1440D}
+    };
+    
+    public static object[] MinToWeek { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 10080},
+        new object[] {1L, 10080L},
+        new object[] {1D, 10080D}
+    };
+    
+    public static object[] HourToMillSec { get; } =
+    {
+        // {expected, first}
+        new object[] {3600000, 1},
+        new object[] {3600000L, 1L},
+        new object[] {3600000D, 1D}
+    };
+    
+    public static object[] HourToSec { get; } =
+    {
+        // {expected, first}
+        new object[] {3600, 1},
+        new object[] {3600L, 1L},
+        new object[] {3600D, 1D}
+    };
+    
+    public static object[] HourToMin { get; } =
+    {
+        // {expected, first}
+        new object[] {60, 1},
+        new object[] {60L, 1L},
+        new object[] {60D, 1D}
+    };
+    
+    public static object[] HourToDay { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 24},
+        new object[] {1L, 24L},
+        new object[] {1D, 24D}
+    };
+    
+    public static object[] HourToWeek { get; } =
+    {
+        // {expected, first}
+        new object[] {1, 168},
+        new object[] {1L, 168L},
+        new object[] {1D, 168D}
+    };
+
+    public static object[] IsBetween { get; } =
+    {
+        // {expected, first, lowerBound, upperBound, leftInclusive, rightInclusive}
+        new object[] {true, 5, 3, 7, Constants.Inclusive, Constants.Inclusive},
+        new object[] {false, 2, 3, 7, Constants.Inclusive, Constants.Inclusive},
+        new object[] {true, 3, 3, 7, Constants.Inclusive, Constants.Inclusive},
+        new object[] {true, 7, 3, 7, Constants.Inclusive, Constants.Inclusive},
+        new object[] {true, 3, 3, 3, Constants.Inclusive, Constants.Inclusive},
+        new object[] {true, 5, 3, 7, Constants.Inclusive, Constants.Exclusive},
+        new object[] {false, 2, 3, 7, Constants.Inclusive, Constants.Exclusive},
+        new object[] {true, 3, 3, 7, Constants.Inclusive, Constants.Exclusive},
+        new object[] {false, 7, 3, 7, Constants.Inclusive, Constants.Exclusive},
+        new object[] {false, 3, 3, 3, Constants.Inclusive, Constants.Exclusive},
+        new object[] {true, 5, 3, 7, Constants.Exclusive, Constants.Inclusive},
+        new object[] {false, 2, 3, 7, Constants.Exclusive, Constants.Inclusive},
+        new object[] {false, 3, 3, 7, Constants.Exclusive, Constants.Inclusive},
+        new object[] {true, 7, 3, 7, Constants.Exclusive, Constants.Inclusive},
+        new object[] {false, 3, 3, 3, Constants.Exclusive, Constants.Inclusive},
+        new object[] {true, 5, 3, 7, Constants.Exclusive, Constants.Exclusive},
+        new object[] {false, 2, 3, 7, Constants.Exclusive, Constants.Exclusive},
+        new object[] {false, 3, 3, 7, Constants.Exclusive, Constants.Exclusive},
+        new object[] {false, 7, 3, 7, Constants.Exclusive, Constants.Exclusive}
+    };
+
+    public static object[] IsGreaterThanOrEqualTo { get; } =
+    {
+        // {expected, first, second}
+        new object[] {true, 5, 3},
+        new object[] {true, 5, 5},
+        new object[] {false, 3, 5},
+        new object[] {true, 5L, 3L},
+        new object[] {true, 5L, 5L},
+        new object[] {false, 3L, 5L},
+        new object[] {true, 5D, 3D},
+        new object[] {true, 5D, 5D},
+        new object[] {false, 3D, 5D}
+    };
+    
+    public static object[] IsLessThanOrEqualTo { get; } =
+    {
+        // {expected, first, second}
+        new object[] {false, 5, 3},
+        new object[] {true, 5, 5},
+        new object[] {true, 3, 5},
+        new object[] {false, 5L, 3L},
+        new object[] {true, 5L, 5L},
+        new object[] {true, 3L, 5L},
+        new object[] {false, 5D, 3D},
+        new object[] {true, 5D, 5D},
+        new object[] {true, 3D, 5D}
+    };
+    
+    public static object[] ManhattanDistance { get; } =
+    {
+        // {expected, (x1, y1), (x2, y2)}
+        new object[] {2, (1, 1), (2, 2)},
+        new object[] {2L, (1L, 1L), (2L, 2L)},
+        new object[] {2.0, (1.0, 1.0), (2.0, 2.0)}
+    };
+    
+    public static object[] IsNegative { get; } =
+    {
+        // {expected, first}
+        new object[] {true, -5},
+        new object[] {false, 5},
+        new object[] {false, 0},
+        new object[] {true, -5L},
+        new object[] {false, 5L},
+        new object[] {false, 0},
+        new object[] {true, -5D},
+        new object[] {false, 5D},
+        new object[] {false, 0D}
+    };
+    
+    public static object[] Abs { get; } =
+    {
+        // {expected, first}
+        new object[] {5, -5},
+        new object[] {5, 5},
+        new object[] {0, 0},
+        new object[] {5L, -5L},
+        new object[] {5L, 5L},
+        new object[] {0L, 0L},
+        new object[] {5D, -5D},
+        new object[] {5D, 5D},
+        new object[] {0D, 0D}
     };
 }
