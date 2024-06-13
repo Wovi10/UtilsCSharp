@@ -47,16 +47,23 @@ public static class Algorithms
 
     public static List<T> BubbleSort<T>(List<T> list) where T: struct, INumber<T>
     {
-        for (var i = 0; i < list.Count; i++)
+        bool swapped;
+        do
         {
-            var currentItem = list[i];
-            for (var j = i + 1; j < list.Count; j++)
+            swapped = false;
+            for (var i = 0; i < list.Count - 1; i++)
             {
-                if (currentItem.IsGreaterThan(list[j]))
-                    (list[j], currentItem) = (currentItem, list[j]);
+                var current = list[i];
+                var next = list[i + 1];
+
+                if (current <= next)
+                    continue;
+
+                (list[i], list[i + 1]) = (next, current);
+                swapped = true;
             }
-        }
-        
+        } while (swapped);
+
         return list;
     }
     

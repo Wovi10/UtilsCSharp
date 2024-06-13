@@ -14,7 +14,7 @@ public class AlgorithmsTests
 
     [Test, TestOf("GetLoopLength")]
     [TestCaseSource(typeof(TestData), nameof(TestData.GetLoopLength))]
-    public void GetCycleLength<T>(T expected, List<T> list) where T : struct, INumber<T>
+    public void GetLoopLength<T>(T expected, List<T> list) where T : struct, INumber<T>
     {
         var actual = Algorithms.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
@@ -24,14 +24,13 @@ public class AlgorithmsTests
     
     #region BubbleSort
     
-    // [Test]
-    // public void BubbleSort_Int()
-    // {
-    //     var list = new List<int> {5, 3, 1, 4, 2};
-    //     var expected = new List<int> {1, 2, 3, 4, 5};
-    //     var actual = Algorithms<int>.BubbleSort(list);
-    //     Assert.That(actual, Is.EqualTo(expected));
-    // }
+    [Test, TestOf("BubbleSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.BubbleSort))]
+    public void BubbleSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = Algorithms.BubbleSort(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
     
     #endregion
 }
