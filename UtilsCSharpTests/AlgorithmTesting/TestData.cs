@@ -51,7 +51,7 @@ public static class TestData
         return list;
     }
 
-    public static object[] BubbleSort { get; } =
+    public static object[] Sorting { get; } =
     {
         // expectedList, inputList
         new object[] {new List<int> {1, 2, 3, 4, 5}, new List<int> {5, 3, 1, 4, 2}},
@@ -64,4 +64,6 @@ public static class TestData
         new object[] {new List<double> {1D, 2D, 3D, 4D, 5D}, new List<double> {5D, 4D, 3D, 2D, 1D}},
         new object[] {new List<double> {1D, 2D, 3D, 4D, 5D}, new List<double> {1D, 2D, 3D, 4D, 5D}}
     };
+    
+    
 }
