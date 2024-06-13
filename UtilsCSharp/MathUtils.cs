@@ -2,199 +2,73 @@
 
 namespace UtilsCSharp;
 
-public static class MathUtils
+public static class MathUtils<T> where T: struct, INumber<T>, IComparable<T>
 {
     #region Add
 
-    /// <summary>
-    /// Generic implementation of the Add function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type you want to use</typeparam>
-    /// <returns></returns>
-    public static TSelf Add<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
+    public static T Add(T a, T b)
         => a + b;
 
-    public static string Add(string a, string b)
-        => a + b;
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of int</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The sum of the seed and all entries of the collection</returns>
-    public static int Add(IEnumerable<int> a, int seed = 0, int constant = 0)
+    public static T Add(IEnumerable<T> list, T seed = default, T constant = default)
     {
-        if (constant == 0 && seed == 0)
-            return Add(a);
+        if (constant == T.Zero && seed == T.Zero)
+            return list.Aggregate(Add);
 
-        if (constant == 0)
-            return a.Aggregate(seed, Add);
+        if (constant == T.Zero)
+            return list.Aggregate(seed, Add);
 
-        if (seed == 0)
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
+        if (seed == T.Zero)
+            return list.Aggregate((a, b) => Add(Add(a, b), constant));
 
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
+        return list.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
     }
-
-    private static int Add(IEnumerable<int> a)
-        => a.Aggregate(Add);
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of long</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The sum of the seed and all entries of the collection</returns>
-    public static long Add(IEnumerable<long> a, long seed = 0, long constant = 0)
-    {
-        if (constant == 0 && seed == 0)
-            return Add(a);
-
-        if (constant == 0)
-            return a.Aggregate(seed, Add);
-
-        if (seed == 0)
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
-
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
-    }
-
-    private static long Add(IEnumerable<long> a)
-        => a.Aggregate(Add);
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of long</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The sum of the seed and all entries of the collection</returns>
-    public static double Add(IEnumerable<double> a, double seed = 0.0, double constant = 0.0)
-    {
-        if (constant == 0.0 && seed == 0.0)
-            return Add(a);
-
-        if (constant == 0.0)
-            return a.Aggregate(seed, Add);
-
-        if (seed == 0.0)
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
-
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
-    }
-
-    private static double Add(IEnumerable<double> a)
-        => a.Aggregate(Add);
-
-    /// <summary>
-    /// This will add every number in the enumerable to the seed.
-    /// </summary>
-    /// <param name="a">IEnumerable of long</param>
-    /// <param name="seed">The initial value.</param>
-    /// <param name="constant">If given, this constant will be added everytime two entries are added.</param>
-    /// <returns>The concatenation of the seed and all entries of the collection.</returns>
-    public static string Add(IEnumerable<string> a, string seed = "", string constant = "")
-    {
-        if (constant == "" && seed == "")
-            return Add(a);
-
-        if (constant == "")
-            return a.Aggregate(seed, Add);
-
-        if (seed == "")
-            return a.Aggregate((a, b) => Add(Add(a, b), constant));
-
-        return a.Aggregate(seed, (a, b) => Add(Add(a, b), constant));
-    }
-
-    private static string Add(IEnumerable<string> a)
-        => a.Aggregate(Add);
 
     #endregion
 
     #region Subtract
-
-    /// <summary>
-    /// Generic implementation of the Subtract function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Sub<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
-        => a - b;
-
-    /// <summary>
-    /// Subtract to doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="precision">Required precision of the output (ignored if left empty)</param>
-    /// <returns></returns>
-    public static double Sub(double a, double b, int? precision = null)
+    
+    public static T Sub(T a, T b, int? precision = null)
     {
         if (precision == null)
             return a - b;
-        return Math.Round(a - b, precision.Value);
+        
+        var subAsDouble = double.CreateChecked(Sub(a, b));
+        var rounded = Math.Round(subAsDouble, precision.Value);
+
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Multiply
 
-    /// <summary>
-    /// Generic implementation of the Multiply function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Mul<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
-        => a * b;
-
-    /// <summary>
-    /// Multiply two doubles.
-    /// </summary>
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    /// <param name="returnPrecision">The desired precision of the return value.</param>
-    /// <returns></returns>
-    public static double Mul(double a, double b, int returnPrecision)
+    public static T Mul(T a, T b, int? precision = null)
     {
-        return Math.Round(a * b, returnPrecision);
+        if(precision == null)
+            return a * b;
+        
+        var mulAsDouble = double.CreateChecked(Mul(a, b));
+        var rounded = Math.Round(mulAsDouble, precision.Value);
+
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Divide
 
-    /// <summary>
-    /// Generic implementation of the Divide function.
-    /// </summary>
-    /// <param name="a">parameter 1</param>
-    /// <param name="b">parameter 2</param>
-    /// <typeparam name="TSelf">The type to be used.</typeparam>
-    /// <returns></returns>
-    public static TSelf Div<TSelf>(TSelf a, TSelf b) where TSelf : INumber<TSelf>
+    public static T Div(T a, T b, int? precision = null)
     {
-        if (TSelf.IsZero(b))
+        if (T.IsZero(b))
             throw new DivideByZeroException();
 
-        return a / b;
-    }
+        if (precision == null)
+            return a / b;
+        
+        var divAsDouble = double.CreateChecked(Div(a, b));
+        var rounded = Math.Round(divAsDouble, precision.Value);
 
-    public static double Div(double a, double b, int? returnPrecision = null)
-    {
-        if (b == 0)
-            throw new DivideByZeroException();
-        return returnPrecision == null
-            ? a / b
-            : Math.Round(a / b, returnPrecision.Value);
+        return T.CreateChecked(rounded);
     }
 
     #endregion
@@ -235,35 +109,35 @@ public static class MathUtils
 
     #region GetHighest
 
-    public static T GetHighest<T>(T a, T b) where T : INumber<T>
+    public static T GetHighest(T a, T b)
         => a.CompareTo(b) > 0 ? a : b;
 
     #endregion
 
     #region GetLowest
 
-    public static T GetLowest<T>(T a, T b) where T : INumber<T>
+    public static T GetLowest(T a, T b)
         => a.CompareTo(b) < 0 ? a : b;
 
     #endregion
 
     #region IsEven
 
-    public static bool IsEven<TSelf>(this TSelf a) where TSelf : INumber<TSelf> =>
-        TSelf.IsEvenInteger(a);
+    public static bool IsEven(T a) =>
+        T.IsEvenInteger(a);
 
     #endregion
 
     #region IsOdd
 
-    public static bool IsOdd<T>(this T a) where T : INumber<T>
+    public static bool IsOdd(T a)
         => T.IsOddInteger(a);
 
     #endregion
 
     #region IsPrime
 
-    public static bool IsPrime<T>(this T a) where T : INumber<T>
+    public static bool IsPrime(T a)
     {
         switch (a)
         {
@@ -273,7 +147,7 @@ public static class MathUtils
                 return true;
         }
 
-        if (a.IsEven())
+        if (IsEven(a))
             return false;
 
         for (var i = 3; i <= Math.Sqrt(double.CreateChecked(a)); i += 2)
@@ -287,35 +161,49 @@ public static class MathUtils
 
     #region PythagoreanTheorem
 
-    public static double PythagoreanTheorem<T>(T a, T b, int? returnPrecision = null) where T : INumber<T>
+    public static T PythagoreanTheorem(T a, T b, int? returnPrecision = null)
     {
-        var squaredA = Math.Pow(double.CreateChecked(a), 2);
-        var squaredB = Math.Pow(double.CreateChecked(b), 2);
-        return 
-            returnPrecision == null
-                ? Math.Sqrt(squaredA + squaredB)
-                : Math.Round(PythagoreanTheorem(a, b), returnPrecision.Value);
+        var squaredA = Mul(a, a);
+        var squaredB = Mul(b, b);
+
+        if (returnPrecision == null)
+        {
+            var added = Add(squaredA, squaredB);
+            var addedAsDouble = double.CreateChecked(added);
+
+            return T.CreateChecked(Math.Sqrt(addedAsDouble));
+        }
+
+        var pythagoreanTheoremAsDouble = double.CreateChecked(PythagoreanTheorem(a, b));
+        var rounded = Math.Round(pythagoreanTheoremAsDouble, returnPrecision.Value);
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Discrimant
 
-    public static double Discriminant<T>(T a, T b, T c, int? returnPrecision = null) where T : INumber<T>
+    public static T Discriminant(T a, T b, T c, int? returnPrecision = null)
     {
-        return 
-            returnPrecision == null
-                ? Math.Pow(double.CreateChecked(b), 2) - 4 * double.CreateChecked(a) * double.CreateChecked(c)
-                : Math.Round(Discriminant(a, b, c), returnPrecision.Value);
+        var bSquared = Mul(b, b);
+        var fourAC = Mul(T.CreateChecked(4), Mul(a, c));
+
+        if (returnPrecision == null)
+            return bSquared - fourAC;
+        
+        var discriminantAsDouble = double.CreateChecked(Discriminant(a, b, c));
+        var rounded = Math.Round(discriminantAsDouble, returnPrecision.Value);
+        
+        return T.CreateChecked(rounded);
     }
 
     #endregion
 
     #region Factorial
 
-    public static T Factorial<T>(T a) where T : INumber<T>
+    public static T Factorial(T a)
     {
-        if (a.IsNegative())
+        if (IsNegative(a))
             throw new ArgumentOutOfRangeException(nameof(a), "Factorial of a negative number is undefined.");
 
         if (T.IsZero(a))
@@ -331,7 +219,7 @@ public static class MathUtils
 
     #region IsGreaterThan
 
-    public static bool? IsGreaterThan<T>(this T a, T b) where T : INumber<T>
+    public static bool? IsGreaterThan(T a, T b)
     {
         return a.CompareTo(b) switch
         {
@@ -340,12 +228,15 @@ public static class MathUtils
             _ => null
         };
     }
+
+    public static bool? IsBiggerThan(T a, T b)
+        => IsGreaterThan(a, b);
     
     #endregion
 
     #region IsLessThan
 
-    public static bool? IsLessThan<T>(this T a, T b) where T : INumber<T>
+    public static bool? IsLessThan(T a, T b)
     {
         return a.CompareTo(b) switch
         {
@@ -359,7 +250,7 @@ public static class MathUtils
     
     #region IsGreaterThanOrEqualTo
     
-    public static bool IsGreaterThanOrEqualTo<T>(this T a, T b) where T : INumber<T>
+    public static bool IsGreaterThanOrEqualTo(T a, T b)
     {
         return a.CompareTo(b) switch
         {
@@ -373,7 +264,7 @@ public static class MathUtils
     
     #region IsLessThanOrEqualTo
     
-    public static bool IsLessThanOrEqualTo<T>(this T a, T b) where T : INumber<T>
+    public static bool IsLessThanOrEqualTo(T a, T b)
     {
         return a.CompareTo(b) switch
         {
@@ -387,9 +278,9 @@ public static class MathUtils
 
     #region NumberOfCombinations
 
-    public static T NumberOfCombinations<T>(T numberOfItemsInSet, T sizeOfCombinations) where T : INumber<T>
+    public static T NumberOfCombinations(T numberOfItemsInSet, T sizeOfCombinations)
     {
-        if (numberOfItemsInSet.IsLessThan(sizeOfCombinations) == true)
+        if (IsLessThan(numberOfItemsInSet, sizeOfCombinations) == true)
             throw new ArgumentOutOfRangeException(nameof(sizeOfCombinations),
                 "numberOfItemsInSet must be greater than or equal to sizeOfCombinations.");
 
@@ -425,11 +316,11 @@ public static class MathUtils
 
     #region IsBetween
 
-    public static bool IsBetween<T>(this T input, T lowerBound, T upperBound, bool leftInclusive = true,
-        bool rightInclusive = true) where T : INumber<T>
+    public static bool IsBetween(T input, T lowerBound, T upperBound, bool leftInclusive = true,
+        bool rightInclusive = true)
     {
-        var left = leftInclusive ? input.IsGreaterThanOrEqualTo(lowerBound) : input.IsGreaterThan(lowerBound) ?? false;
-        var right = rightInclusive ? input.IsLessThanOrEqualTo(upperBound) : input.IsLessThan(upperBound) ?? false;
+        var left = leftInclusive ? IsGreaterThanOrEqualTo(input,lowerBound) : IsGreaterThan(input, lowerBound) ?? false;
+        var right = rightInclusive ? IsLessThanOrEqualTo(input, upperBound) : IsLessThan(input, upperBound) ?? false;
 
         return left && right;
     }
@@ -438,7 +329,7 @@ public static class MathUtils
 
     #region ManhattanDistance
 
-    public static T ManhattanDistance<T>((T,T) point1, (T,T) point2) where T : INumber<T>
+    public static T ManhattanDistance((T,T) point1, (T,T) point2)
     {
         var x = Abs(Sub(point1.Item1, point2.Item1));
         var y = Abs(Sub(point1.Item2, point2.Item2));
@@ -450,15 +341,15 @@ public static class MathUtils
 
     #region Abs
     
-    public static T Abs<T>(T a) where T : INumber<T>
-        => a.IsNegative() ? Sub(T.Zero, a) : a;
+    public static T Abs(T a)
+        => IsNegative(a) ? Sub(T.Zero, a) : a;
 
     #endregion
 
     #region IsNegative
 
-    public static bool IsNegative<T>(this T a) where T : INumber<T>
-        => a.IsLessThan(T.Zero) == true;
+    public static bool IsNegative(T a)
+        => IsLessThan(a, T.Zero) == true;
 
     #endregion
 }

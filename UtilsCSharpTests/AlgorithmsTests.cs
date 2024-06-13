@@ -20,7 +20,7 @@ public class AlgorithmsTests
             1, 1, 2
         };
         const int expected = 3;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -32,7 +32,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5
         };
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -45,7 +45,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
         };
         const int expected = 20;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -58,7 +58,7 @@ public class AlgorithmsTests
             25, 12, 13
         };
         const int expected = 3;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -67,7 +67,7 @@ public class AlgorithmsTests
     {
         var list = new List<int> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -80,7 +80,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5, 7,
             1, 2, 3, 4, 5};
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -95,7 +95,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5
         };
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -110,7 +110,7 @@ public class AlgorithmsTests
             5, 1, 2, 3, 4
         };
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -124,7 +124,7 @@ public class AlgorithmsTests
             0,1,2,3,4,6
         };
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -139,7 +139,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5
         };
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -152,7 +152,7 @@ public class AlgorithmsTests
                 list.Add(i);
         
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -166,7 +166,7 @@ public class AlgorithmsTests
             1, 1, 2
         };
         const int expected = 3;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -180,7 +180,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5
         };
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -194,7 +194,7 @@ public class AlgorithmsTests
             1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
         };
         const int expected = 20;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -208,7 +208,7 @@ public class AlgorithmsTests
             25, 12, 13
         };
         const int expected = 3;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -217,7 +217,7 @@ public class AlgorithmsTests
     {
         var list = new List<long> {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -226,7 +226,7 @@ public class AlgorithmsTests
     {
         var list = new List<long> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 7, 1, 2, 3, 4, 5};
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -235,7 +235,7 @@ public class AlgorithmsTests
     {
         var list = new List<long> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -244,7 +244,7 @@ public class AlgorithmsTests
     {
         var list = new List<long> {1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4};
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -258,7 +258,7 @@ public class AlgorithmsTests
             0,1,2,3,4,6
         };
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -267,7 +267,7 @@ public class AlgorithmsTests
     {
         var list = new List<long> {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5};
         const int expected = 5;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -276,7 +276,7 @@ public class AlgorithmsTests
     {
         var list = new List<int> {1, 2};
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<int>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -285,7 +285,7 @@ public class AlgorithmsTests
     {
         var list = new List<long> {1, 2};
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -298,7 +298,20 @@ public class AlgorithmsTests
                 list.Add(i);
         
         const int expected = 0;
-        var actual = Algorithms.GetLoopLength(list);
+        var actual = Algorithms<long>.GetLoopLength(list);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    #endregion
+    
+    #region BubbleSort
+    
+    [Test]
+    public void BubbleSort_Int()
+    {
+        var list = new List<int> {5, 3, 1, 4, 2};
+        var expected = new List<int> {1, 2, 3, 4, 5};
+        var actual = Algorithms<int>.BubbleSort(list);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
