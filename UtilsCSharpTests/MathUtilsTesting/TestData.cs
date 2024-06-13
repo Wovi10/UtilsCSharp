@@ -1,6 +1,6 @@
 ﻿using UtilsCSharpTests.Utils;
 
-namespace UtilsCSharpTests.MathUtils;
+namespace UtilsCSharpTests.MathUtilsTesting;
 
 public static class TestData
 {

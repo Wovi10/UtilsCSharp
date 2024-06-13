@@ -1,7 +1,7 @@
 using System.Numerics;
 using UtilsCSharp;
 
-namespace UtilsCSharpTests.MathUtils;
+namespace UtilsCSharpTests.MathUtilsTesting;
 
 [TestFixture]
 public class MathUtilsTests
@@ -17,7 +17,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.AddCasesNumbers))]
     public void Add<T>(T expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Add(first, second);
+        var actual = first.Add(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -25,7 +25,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.AddCasesEnumerable))]
     public void Add<T>(T expected, IEnumerable<T> numbers, T seed, T constant) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Add(numbers, seed, constant);
+        var actual = MathUtils.Add(numbers, seed, constant);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -37,7 +37,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.SubtractCasesNumbers))]
     public void Subtract<T>(T expected, T first, T second, int? precision = null) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Sub(first, second, precision);
+        var actual = first.Sub(second, precision);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -49,7 +49,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MultiplyCasesNumbers))]
     public void Multiply<T>(T expected, T first, T second, int? precision = null) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Mul(first, second, precision);
+        var actual = first.Mul(second, precision);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -63,11 +63,11 @@ public class MathUtilsTests
     {
         if (second != T.Zero)
         {
-            var actual = MathUtils<T>.Div(first, second, precision);
+            var actual = first.Div(second, precision);
             Assert.That(actual, Is.EqualTo(expected));
         }
         else
-            Assert.Throws<DivideByZeroException>(() => MathUtils<T>.Div(first, second, precision));
+            Assert.Throws<DivideByZeroException>(() => first.Div(second, precision));
     }
 
     #endregion
@@ -78,7 +78,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.GcdCases))]
     public void Gcd<T>(T expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Gcd(first, second);
+        var actual = first.GcdWith(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -90,7 +90,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.LcmCases))]
     public void Lcm<T>(T expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Lcm(first, second);
+        var actual = first.Lcm(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -102,7 +102,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.GetHighest))]
     public void GetHighest<T>(T expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.GetHighest(first, second);
+        var actual = MathUtils.GetHighest(first, second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -114,7 +114,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.GetLowest))]
     public void GetLowest<T>(T expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.GetLowest(first, second);
+        var actual = MathUtils.GetLowest(first, second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -126,7 +126,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsEven))]
     public void IsEven<T>(bool expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsEven(first);
+        var actual = first.IsEven();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -138,7 +138,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsOdd))]
     public void IsOdd<T>(bool expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsOdd(first);
+        var actual = first.IsOdd();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -150,7 +150,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsPrime))]
     public void IsPrime<T>(bool expected, T first) where T : struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsPrime(first);
+        var actual = first.IsPrime();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -162,7 +162,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.PythagoreanTheorem))]
     public void PythagoreanTheorem<T>(T expected, T first, T second, int? precision = null) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.PythagoreanTheorem(first, second, precision);
+        var actual = MathUtils.PythagoreanTheorem(first, second, precision);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -174,7 +174,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.Discriminant))]
     public void Discriminant<T>(T expected, T a, T b, T c, int? precision = null) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Discriminant(a, b, c, precision);
+        var actual = MathUtils.Discriminant(a, b, c, precision);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -188,11 +188,11 @@ public class MathUtilsTests
     {
         if (first >= T.Zero)
         {
-            var actual = MathUtils<T>.Factorial(first);
+            var actual = first.Factorial();
             Assert.That(actual, Is.EqualTo(expected));
         }
         else
-            Assert.Throws<ArgumentOutOfRangeException>(() => MathUtils<T>.Factorial(first));
+            Assert.Throws<ArgumentOutOfRangeException>(() => first.Factorial());
     }
 
     #endregion
@@ -203,7 +203,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsGreaterThan))]
     public void IsGreaterThan<T>(bool? expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsGreaterThan(first, second);
+        var actual = first.IsGreaterThan(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -211,7 +211,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsGreaterThan))]
     public void IsBiggerThan<T>(bool? expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsBiggerThan(first, second);
+        var actual = first.IsBiggerThan(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -223,7 +223,15 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsSmallerThan))]
     public void IsLessThan<T>(bool? expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsLessThan(first, second);
+        var actual = first.IsLessThan(second);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    [Test, TestOf("IsSmallerThan")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.IsSmallerThan))]
+    public void IsSmallerThan<T>(bool? expected, T first, T second) where T: struct, INumber<T>
+    {
+        var actual = first.IsSmallerThan(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -235,11 +243,11 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.NumberOfCombinations))]
     public void NumberOfCombinations<T>(T expected, T numberOfItemsInSet, T sizeOfCombinations) where T: struct, INumber<T>
     {
-        if (MathUtils<T>.IsLessThan(numberOfItemsInSet, sizeOfCombinations) == true)
-            Assert.Throws<ArgumentOutOfRangeException>(() => MathUtils<T>.NumberOfCombinations(numberOfItemsInSet, sizeOfCombinations));
+        if (numberOfItemsInSet.IsLessThan(sizeOfCombinations))
+            Assert.Throws<ArgumentOutOfRangeException>(() => MathUtils.NumberOfCombinations(numberOfItemsInSet, sizeOfCombinations));
         else
         {
-            var actual = MathUtils<T>.NumberOfCombinations(numberOfItemsInSet, sizeOfCombinations);
+            var actual = MathUtils.NumberOfCombinations(numberOfItemsInSet, sizeOfCombinations);
             Assert.That(actual, Is.EqualTo(expected));
         }
     }
@@ -252,7 +260,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MillSecToSec))]
     public void MillSecToSec<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MillSecToSec(first);
+        var actual = MathUtils.MillSecToSec(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -260,7 +268,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MillSecToMin))]
     public void MillSecToMin<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MillSecToMin(first);
+        var actual = MathUtils.MillSecToMin(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -268,7 +276,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MillSecToHour))]
     public void MillSecToHour<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MillSecToHour(first);
+        var actual = MathUtils.MillSecToHour(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -276,7 +284,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MillSecToDay))]
     public void MillSecToDay<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MillSecToDay(first);
+        var actual = MathUtils.MillSecToDay(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -284,7 +292,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MillSecToWeek))]
     public void MillSecToWeek<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MillSecToWeek(first);
+        var actual = MathUtils.MillSecToWeek(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -292,7 +300,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.SecToMillSec))]
     public void SecToMillSec<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.SecToMillSec(first);
+        var actual = MathUtils.SecToMillSec(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -300,7 +308,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.SecToMin))]
     public void SecToMin<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.SecToMin(first);
+        var actual = MathUtils.SecToMin(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -308,7 +316,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.SecToHour))]
     public void SecToHour<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.SecToHour(first);
+        var actual = MathUtils.SecToHour(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -316,7 +324,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.SecToDay))]
     public void SecToDay<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.SecToDay(first);
+        var actual = MathUtils.SecToDay(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -324,7 +332,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.SecToWeek))]
     public void SecToWeek<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.SecToWeek(first);
+        var actual = MathUtils.SecToWeek(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -332,7 +340,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MinToMillSec))]
     public void MinToMillSec<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MinToMillSec(first);
+        var actual = MathUtils.MinToMillSec(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -340,7 +348,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MinToSec))]
     public void MinToSec<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MinToSec(first);
+        var actual = MathUtils.MinToSec(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -348,7 +356,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MinToHour))]
     public void MinToHour<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MinToHour(first);
+        var actual = MathUtils.MinToHour(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -356,7 +364,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MinToDay))]
     public void MinToDay<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MinToDay(first);
+        var actual = MathUtils.MinToDay(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -364,7 +372,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.MinToWeek))]
     public void MinToWeek<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.MinToWeek(first);
+        var actual = MathUtils.MinToWeek(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -372,7 +380,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.HourToMillSec))]
     public void HourToMillSec<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.HourToMillSec(first);
+        var actual = MathUtils.HourToMillSec(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -380,7 +388,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.HourToSec))]
     public void HourToSec<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.HourToSec(first);
+        var actual = MathUtils.HourToSec(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -388,7 +396,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.HourToMin))]
     public void HourToMin<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.HourToMin(first);
+        var actual = MathUtils.HourToMin(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -396,7 +404,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.HourToDay))]
     public void HourToDay<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.HourToDay(first);
+        var actual = MathUtils.HourToDay(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
     
@@ -404,7 +412,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.HourToWeek))]
     public void HourToWeek<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.HourToWeek(first);
+        var actual = MathUtils.HourToWeek(first);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -417,7 +425,7 @@ public class MathUtilsTests
     public void IsBetween<T>(bool expected, T first, T lower, T upper, bool lowerInclusive, bool upperInclusive) where 
         T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsBetween(first, lower, upper, lowerInclusive, upperInclusive);
+        var actual = first.IsBetween(lower, upper, lowerInclusive, upperInclusive);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -429,7 +437,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsGreaterThanOrEqualTo))]
     public void IsGreaterThanOrEqualTo<T>(bool expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsGreaterThanOrEqualTo(first, second);
+        var actual = first.IsGreaterThanOrEqualTo(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -441,7 +449,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsLessThanOrEqualTo))]
     public void IsLessThanOrEqualTo<T>(bool expected, T first, T second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsLessThanOrEqualTo(first, second);
+        var actual = first.IsLessThanOrEqualTo(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -453,7 +461,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.ManhattanDistance))]
     public void ManhattanDistance<T>(T expected, (T, T) first, (T, T) second) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.ManhattanDistance(first, second);
+        var actual = MathUtils.ManhattanDistance(first, second);
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -465,7 +473,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.IsNegative))]
     public void IsNegative<T>(bool expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.IsNegative(first);
+        var actual = first.IsNegative();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -477,7 +485,7 @@ public class MathUtilsTests
     [TestCaseSource(typeof(TestData), nameof(TestData.Abs))]
     public void Abs<T>(T expected, T first) where T: struct, INumber<T>
     {
-        var actual = MathUtils<T>.Abs(first);
+        var actual = first.Abs();
         Assert.That(actual, Is.EqualTo(expected));
     }
 

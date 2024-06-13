@@ -52,10 +52,8 @@ public static class Algorithms<T> where T: struct, INumber<T>, IComparable<T>
             var currentItem = list[i];
             for (var j = i + 1; j < list.Count; j++)
             {
-                if (MathUtils<T>.IsGreaterThan(currentItem, list[j]) == true)
-                {
+                if (currentItem.IsGreaterThan(list[j]))
                     (list[j], currentItem) = (currentItem, list[j]);
-                }
             }
         }
         
