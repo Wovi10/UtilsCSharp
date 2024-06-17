@@ -24,7 +24,7 @@ public static class Searching
                 return currentIndex;
 
             if (lowerBound > upperBound)
-                return inputArray.Length;
+                throw new KeyNotFoundException();
 
             if (inputArray.ElementAt(currentIndex).IsSmallerThan(searchKey))
                 lowerBound = currentIndex + 1;

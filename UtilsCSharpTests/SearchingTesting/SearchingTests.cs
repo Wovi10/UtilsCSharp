@@ -9,7 +9,12 @@ public class SearchingTests
     public void BinarySearchTest<T>(int expected, IEnumerable<T> input, T searchKey)
         where T : struct, IComparable<T>
     {
-        var actual = input.BinarySearch(searchKey);
-        Assert.That(actual, Is.EqualTo(expected));
+        if (expected != -1)
+        {
+            var actual = input.BinarySearch(searchKey);
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+        else
+            Assert.Throws<KeyNotFoundException>(() => input.BinarySearch(searchKey));
     }
 }
