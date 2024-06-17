@@ -4,8 +4,6 @@ namespace UtilsCSharp;
 
 public static class Algorithms
 {
-    #region Floyd's Tortoise and Hare (Cycle Detection)
-
     /// <summary>
     /// Floyd's Tortoise and Hare, cycle detection algorithm.
     /// Limited to a loop of 200 elements. This to prevent slow performance.
@@ -43,49 +41,5 @@ public static class Algorithms
         }
 
         return T.Zero; // No cycle found
-    }
-
-    public static List<T> BubbleSort<T>(List<T> list) where T: struct, INumber<T>
-    {
-        bool swapped;
-        do
-        {
-            swapped = false;
-            for (var i = 0; i < list.Count - 1; i++)
-            {
-                var current = list[i];
-                var next = list[i + 1];
-
-                if (current <= next)
-                    continue;
-
-                (list[i], list[i + 1]) = (next, current);
-                swapped = true;
-            }
-        } while (swapped);
-
-        return list;
-    }
-    
-    #endregion
-
-    public static List<T> SelectionSort<T>(List<T> list) where T : struct, INumber<T>
-    {
-        for (var i = 0; i < list.Count; i++)
-        {
-            var minimum = i;
-            for (var j = i+1; j < list.Count; j++)
-            {
-                if (list[j] < list[minimum])
-                    minimum = j;
-            }
-            
-            if (minimum == i)
-                continue;
-            
-            (list[i], list[minimum]) = (list[minimum], list[i]);
-        }
-
-        return list;
     }
 }

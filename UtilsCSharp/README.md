@@ -1,2 +1,19 @@
-A Utility library that gives access to some C# functions to help with Maths and Algorithms.  
-It also includes some abstract classes, constants and enums that are used in the other libraries.
+# UtilsCSharp
+
+A collection of C# libraries that provide utility functions and classes.
+
+## UtilsCSharp.Algorithms
+
+A Utility library that gives access to some C# functions to help with Algorithms.
+
+## UtilsCSharp.Comparisons
+
+A Utility library that gives access to some C# functions to help with Comparisons.
+
+## UtilsCSharp.MathUtils
+
+A Utility library that gives access to some C# functions to help with Maths.
+
+## UtilsCSharp.Sorting
+
+A Utility library that gives access to some C# functions to help with Sorting.
