@@ -61,4 +61,33 @@ public static class Sorting
 
         return list;
     }
+
+    public static List<T> MergeInto<T>(this List<T> a, List<T> b) where T : struct, IComparable<T>
+    {
+        var outputList = new List<T>();
+
+        var indexA = 0;
+        var indexB = 0;
+
+        var arrayA = a.ToArray();
+        var arrayB = b.ToArray();
+
+        while (indexA < a.Count && indexB < b.Count)
+        {
+            var currentA = arrayA.ElementAt(indexA);
+            var currentB = arrayB.ElementAt(indexB);
+
+            outputList.Add(currentA.IsSmallerThan(currentB)
+                ? arrayA.ElementAt(indexA++)
+                : arrayB.ElementAt(indexB++));
+        }
+
+        while (indexA < a.Count)
+            outputList.Add(arrayA.ElementAt(indexA++));
+
+        while (indexB < b.Count)
+            outputList.Add(arrayB.ElementAt(indexB++));
+
+        return outputList;
+    }
 }

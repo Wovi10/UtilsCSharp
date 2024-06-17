@@ -41,4 +41,15 @@ public class SortingTests
 
     #endregion
     
+    #region Merge
+    
+    [Test, TestOf("Merge")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.MergeCases))]
+    public void Merge<T>(List<T> expected, List<T> listA, List<T> listB) where T : struct, INumber<T>
+    {
+        var actual = listA.MergeInto(listB);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    #endregion
 }
