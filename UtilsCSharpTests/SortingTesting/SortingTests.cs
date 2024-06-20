@@ -52,4 +52,16 @@ public class SortingTests
     }
     
     #endregion
+    
+    # region ShellSort
+    
+    [Test, TestOf("ShellSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void ShellSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.ShellSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    #endregion
 }
