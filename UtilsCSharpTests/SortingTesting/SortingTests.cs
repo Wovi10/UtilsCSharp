@@ -11,7 +11,7 @@ public class SortingTests
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void BubbleSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
     {
-        var actual = Sorting.BubbleSort(list);
+        var actual = list.BubbleSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -23,7 +23,7 @@ public class SortingTests
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void SelectionSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
     {
-        var actual = Sorting.SelectionSort(list);
+        var actual = list.SelectionSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -35,7 +35,7 @@ public class SortingTests
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void InsertionSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
     {
-        var actual = Sorting.InsertionSort(list);
+        var actual = list.InsertionSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
 
@@ -63,5 +63,17 @@ public class SortingTests
         Assert.That(actual, Is.EqualTo(expected));
     }
     
+    #endregion
+
+    #region Cocktail sort
+    
+    [Test, TestOf("CocktailSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void CocktailSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.CocktailSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
     #endregion
 }

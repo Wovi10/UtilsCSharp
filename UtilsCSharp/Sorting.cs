@@ -12,7 +12,7 @@ public static class Sorting
     /// <param name="list"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<T> BubbleSort<T>(List<T> list) where T : struct, IComparable<T>
+    public static List<T> BubbleSort<T>(this List<T> list) where T : struct, IComparable<T>
     {
         bool swapped;
         do
@@ -34,7 +34,53 @@ public static class Sorting
         return list;
     }
 
-    // Cocktail shaker sort
+    /// <summary>
+    /// Bidirectional bubble sort (Slightly improves bubble sort)
+    /// Worst case time complexity: O(n^2)
+    /// BEst case time complexity: O(n)
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> CocktailSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        var isSwapped = true;
+        var start = 0;
+        var end = list.Count;
+
+        while (isSwapped)
+        {
+            isSwapped = false;
+
+            for (var i = start; i < end - 1; i++)
+            {
+                if (list[i].IsSmallerThan(list[i + 1]))
+                    continue;
+
+                (list[i], list[i + 1]) = (list[i + 1], list[i]);
+                isSwapped = true;
+            }
+
+            if (!isSwapped)
+                break;
+
+            isSwapped = false;
+            end--;
+
+            for (var i = end - 1; i >= start; i--)
+            {
+                if (list[i].IsSmallerOrEqualTo(list[i + 1]))
+                    continue;
+
+                (list[i], list[i + 1]) = (list[i + 1], list[i]);
+                isSwapped = true;
+            }
+
+            start++;
+        }
+
+        return list;
+    }
 
     // Odd-even sort
 
@@ -58,7 +104,7 @@ public static class Sorting
     /// <param name="list"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<T> SelectionSort<T>(List<T> list) where T : struct, IComparable<T>
+    public static List<T> SelectionSort<T>(this List<T> list) where T : struct, IComparable<T>
     {
         for (var i = 0; i < list.Count; i++)
         {
@@ -102,7 +148,7 @@ public static class Sorting
     /// <param name="list"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<T> InsertionSort<T>(List<T> list) where T : struct, IComparable<T>
+    public static List<T> InsertionSort<T>(this List<T> list) where T : struct, IComparable<T>
     {
         for (var i = 1; i < list.Count; i++)
         {
