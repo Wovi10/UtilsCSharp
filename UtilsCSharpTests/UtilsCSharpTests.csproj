@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\StupidSorting\StupidSorting.csproj" />
       <ProjectReference Include="..\UtilsCSharp\UtilsCSharp.csproj" />
     </ItemGroup>
 

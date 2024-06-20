@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using StupidSorting;
 using UtilsCSharp;
 
 namespace UtilsCSharpTests.SortingTesting;
@@ -99,5 +100,17 @@ public class SortingTests
         Assert.That(actual, Is.EqualTo(expected));
     }
     
+    #endregion
+
+    #region GnomeSort
+    
+    [Test, TestOf("GnomeSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void GnomeSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.GnomeSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
     #endregion
 }

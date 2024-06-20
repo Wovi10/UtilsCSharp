@@ -158,9 +158,9 @@ public static class Sorting
         }
     }
 
-    // Gnome sort
+    // Gnome sort is in StupidSorting.cs
 
-    // Proportion extend sort
+    // Proportion extend sort (Not practical for the average list)
 
     // Quick sort
 
