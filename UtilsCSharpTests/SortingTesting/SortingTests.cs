@@ -76,4 +76,16 @@ public class SortingTests
     }
 
     #endregion
+
+    #region BrickSort
+    
+    [Test, TestOf("BrickSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void BrickSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.BrickSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
 }

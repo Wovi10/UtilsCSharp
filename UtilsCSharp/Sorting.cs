@@ -23,7 +23,7 @@ public static class Sorting
                 var current = list[i];
                 var next = list[i + 1];
 
-                if (current.IsSmallerOrEqualTo(next))
+                if (current.IsSmallerThanOrEqualTo(next))
                     continue;
 
                 (list[i], list[i + 1]) = (next, current);
@@ -69,7 +69,7 @@ public static class Sorting
 
             for (var i = end - 1; i >= start; i--)
             {
-                if (list[i].IsSmallerOrEqualTo(list[i + 1]))
+                if (list[i].IsSmallerThanOrEqualTo(list[i + 1]))
                     continue;
 
                 (list[i], list[i + 1]) = (list[i + 1], list[i]);
@@ -82,7 +82,43 @@ public static class Sorting
         return list;
     }
 
-    // Odd-even sort
+    /// <summary>
+    /// Bubble sort without compare overlap. (1st with 2nd, 3rd with 4th, etc. i.o. 1st with 2nd, 2nd with 3rd, etc.)
+    /// Worst case time complexity: O(n^2)
+    /// Best case time complexity: O(n)
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> BrickSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        var isSorted = false;
+
+        while (!isSorted)
+        {
+            isSorted = true;
+            
+            for (var i = 1; i <= list.Count - 2; i += 2) // Odd indeces
+            {
+                if (list[i].IsSmallerThanOrEqualTo(list[i + 1])) 
+                    continue;
+
+                (list[i], list[i + 1]) = (list[i + 1], list[i]);
+                isSorted = false;
+            }
+            
+            for (var i = 0; i <= list.Count - 2; i += 2) // Even indeces
+            {
+                if (list[i].IsSmallerThanOrEqualTo(list[i + 1])) 
+                    continue;
+
+                (list[i], list[i + 1]) = (list[i + 1], list[i]);
+                isSorted = false;
+            }
+        }
+        
+        return list;
+    }
 
     // Comb sort
 
