@@ -88,4 +88,16 @@ public class SortingTests
     }
 
     #endregion
+    
+    #region CombSort
+    
+    [Test, TestOf("CombSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void CombSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.CombSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    #endregion
 }

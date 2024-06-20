@@ -97,30 +97,66 @@ public static class Sorting
         while (!isSorted)
         {
             isSorted = true;
-            
+
             for (var i = 1; i <= list.Count - 2; i += 2) // Odd indeces
             {
-                if (list[i].IsSmallerThanOrEqualTo(list[i + 1])) 
+                if (list[i].IsSmallerThanOrEqualTo(list[i + 1]))
                     continue;
 
                 (list[i], list[i + 1]) = (list[i + 1], list[i]);
                 isSorted = false;
             }
-            
+
             for (var i = 0; i <= list.Count - 2; i += 2) // Even indeces
             {
-                if (list[i].IsSmallerThanOrEqualTo(list[i + 1])) 
+                if (list[i].IsSmallerThanOrEqualTo(list[i + 1]))
                     continue;
 
                 (list[i], list[i + 1]) = (list[i + 1], list[i]);
                 isSorted = false;
             }
         }
-        
+
         return list;
     }
 
-    // Comb sort
+    /// <summary>
+    /// Comb sort (Improves bubble sort) (Shrink factor: 1.3)
+    /// Worst case time complexity: O(n^2)
+    /// Best case time complexity: O(n*log(n))
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> CombSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        var length = list.Count;
+        var gap = length;
+        var hasSwapped = true;
+
+        while (gap != 1 || hasSwapped)
+        {
+            gap = GetNextGap(gap);
+            hasSwapped = false;
+
+            for (var i = 0; i < length-gap; i++)
+            {
+                if (list[i].IsSmallerThanOrEqualTo(list[i+gap]))
+                    continue;
+                
+                (list[i], list[i + gap]) = (list[i + gap], list[i]);
+                hasSwapped = true;
+            }
+        }
+
+        return list;
+        
+        int GetNextGap(int currentGap)
+        {
+            currentGap = (int)(currentGap / 1.3);
+            return currentGap < 1 ? 1 : currentGap;
+        }
+    }
 
     // Gnome sort
 
