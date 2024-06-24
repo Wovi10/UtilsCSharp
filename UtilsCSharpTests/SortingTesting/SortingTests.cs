@@ -124,4 +124,28 @@ public class SortingTests
     }
 
     #endregion
+    
+    #region HeapSort
+    
+    [Test, TestOf("HeapSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void HeapSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.HeapSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    #endregion
+
+    #region SmoothSort
+    
+    [Test, TestOf("SmoothSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void SmoothSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.SmoothSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
 }

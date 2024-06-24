@@ -268,9 +268,144 @@ public static class Sorting
         return list;
     }
 
-    // Heap sort
+    /// <summary>
+    /// More advanced version of selection sort. Finds both the minimum and maximum and puts them in the correct position.
+    /// Worst case time complexity: O(n*log(n))
+    /// Average case time complexity: O(n*log(n))
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> HeapSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        var length = list.Count;
 
-    // Smooth sort
+        for (var i = length / 2 - 1; i >= 0; i--)
+            Heapify(list, length, i);
+
+        for (var i = length - 1; i > 0; i--)
+        {
+            (list[0], list[i]) = (list[i], list[0]);
+            Heapify(list, i, 0);
+        }
+
+        return list;
+    }
+
+    private static void Heapify<T>(List<T> list, int length, int index) where T : struct, IComparable<T>
+    {
+        while (true)
+        {
+            var largest = index;
+            var left = 2 * index + 1;
+            var right = 2 * index + 2;
+
+            if (left < length && list[left].IsGreaterThan(list[largest])) largest = left;
+
+            if (right < length && list[right].IsGreaterThan(list[largest])) largest = right;
+
+            if (largest == index)
+                break;
+
+            (list[index], list[largest]) = (list[largest], list[index]);
+            index = largest;
+        }
+    }
+
+    /// <summary>
+    /// Better than heapSort when the list is partly sorted.
+    /// Worst case time complexity: O(n*log(n))
+    /// Average case time complexity: O(n*log(n))
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> SmoothSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        var length = list.Count;
+        var p = length - 1;
+        var q = p;
+        var r = 0;
+
+        while (p > 0)
+        {
+            if ((r & 0x03) == 0) 
+                HeapifySmooth(list, r, q);
+
+            if (Leonardo(r) == p)
+                r++;
+            else
+            {
+                r--;
+                q -= Leonardo(r);
+                HeapifySmooth(list, r, q);
+                q = r - 1;
+                r++;
+            }
+
+            (list[0], list[p]) = (list[p], list[0]);
+            p--;
+        }
+
+        for (var i = 0; i < length - 1; i++)
+        {
+            var j = i + 1;
+            while (j > 0 && list[j].IsSmallerThan(list[j - 1]))
+            {
+                (list[j], list[j - 1]) = (list[j - 1], list[j]);
+                j--;
+            }
+        }
+
+        return list;
+    }
+
+    private static void HeapifySmooth<T>(this List<T> list, int start, int end) where T : struct, IComparable<T>
+    {
+        var i = start;
+        var j = 0;
+        var k = 0;
+
+        while (k < end - start + 1)
+        {
+            if ((k & 0xAAAAAAAA) == 0xAAAAAAAA)
+            {
+                j += i;
+                i >>= 1;
+            }
+            else
+            {
+                i += j;
+                j >>= 1;
+            }
+
+            k++;
+        }
+
+        while (i > 0)
+        {
+            j >>= 1;
+            var l = i + j;
+            while (l < end)
+            {
+                if (list[l].IsGreaterThan(list[l - i]))
+                    break;
+
+                (list[l], list[l - i]) = (list[l - i], list[l]);
+                l += i;
+            }
+
+            i = j;
+        }
+    }
+
+    private static int Leonardo(int index)
+    {
+        if (index < 2)
+            return 1;
+
+        return Leonardo(index - 1) + Leonardo(index - 2) + 1;
+    }
 
     // Cartesian tree sort
 
