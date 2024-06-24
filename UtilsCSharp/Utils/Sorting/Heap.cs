@@ -1,6 +1,6 @@
 ﻿namespace UtilsCSharp.Utils.Sorting;
 
-public static class Heap
+internal  static class Heap
 {
     public static void Heapify<T>(this List<T> list, int length, int index) where T : struct, IComparable<T>
     {

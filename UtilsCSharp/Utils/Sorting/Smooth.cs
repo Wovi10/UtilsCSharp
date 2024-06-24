@@ -1,6 +1,6 @@
 ﻿namespace UtilsCSharp.Utils.Sorting;
 
-public static class Smooth
+internal  static class Smooth
 {
     public static void HeapifySmooth<T>(this List<T> list, int start, int end) where T : struct, IComparable<T>
     {

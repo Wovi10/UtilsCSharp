@@ -1,6 +1,6 @@
 ﻿namespace UtilsCSharp.Utils.Sorting;
 
-public static class Quick
+internal  static class Quick
 {
     public static int Partition<T>(this List<T> list, int low, int high) where T : struct, IComparable<T>
     {

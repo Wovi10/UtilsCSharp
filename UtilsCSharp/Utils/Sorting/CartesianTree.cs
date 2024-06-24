@@ -2,7 +2,7 @@
 
 namespace UtilsCSharp.Utils.Sorting;
 
-public static class CartesianTree
+internal static class CartesianTree
 {
     public static Node<T> BuildCartesianTree<T>(this List<T> list, int listLength) where T : struct, IComparable<T>
     {
