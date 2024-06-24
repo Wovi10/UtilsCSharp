@@ -158,7 +158,33 @@ public static class Sorting
         }
     }
 
-    // Gnome sort is in StupidSorting.cs
+    /// <summary>
+    /// Goes left if the current element is smaller than the previous element, otherwise goes right.
+    /// Worst case time complexity: O(n^2)
+    /// Average case time complexity: O(n^2)
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> GnomeSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        var index = 0;
+        while(index < list.Count)
+        {
+            if (index == 0)
+                index++;
+
+            if (list[index].IsGreaterThanOrEqualTo(list[index - 1]))
+                index++;
+            else
+            {
+                (list[index], list[index - 1]) = (list[index - 1], list[index]);
+                index--;
+            }
+        }
+        
+        return list;
+    }
 
     // Proportion extend sort (Not practical for the average list)
 
