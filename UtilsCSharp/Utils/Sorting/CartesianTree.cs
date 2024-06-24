@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace UtilsCSharp.Utils;
+namespace UtilsCSharp.Utils.Sorting;
 
-public static class SortingUtils
+public static class CartesianTree
 {
     public static Node<T> BuildCartesianTree<T>(this List<T> list, int listLength) where T : struct, IComparable<T>
     {

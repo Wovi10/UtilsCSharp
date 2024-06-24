@@ -1,5 +1,5 @@
 ﻿using System.Numerics;
-using UtilsCSharp.Utils;
+using UtilsCSharp.Utils.Sorting;
 
 namespace UtilsCSharp;
 
@@ -219,24 +219,6 @@ public static class Sorting
         return list;
     }
 
-    private static int Partition<T>(this List<T> list, int low, int high) where T : struct, IComparable<T>
-    {
-        var pivot = list[high];
-        var i = low - 1;
-
-        for (var j = low; j < high; j++)
-        {
-            if (!list[j].IsSmallerThan(pivot))
-                continue;
-
-            i++;
-            (list[i], list[j]) = (list[j], list[i]);
-        }
-
-        (list[i + 1], list[high]) = (list[high], list[i + 1]);
-        return i + 1;
-    }
-
     #endregion
 
     #region Selection sorts
@@ -282,35 +264,15 @@ public static class Sorting
         var length = list.Count;
 
         for (var i = length / 2 - 1; i >= 0; i--)
-            Heapify(list, length, i);
+            list.Heapify(length, i);
 
         for (var i = length - 1; i > 0; i--)
         {
             (list[0], list[i]) = (list[i], list[0]);
-            Heapify(list, i, 0);
+            list.Heapify(i, 0);
         }
 
         return list;
-    }
-
-    private static void Heapify<T>(List<T> list, int length, int index) where T : struct, IComparable<T>
-    {
-        while (true)
-        {
-            var largest = index;
-            var left = 2 * index + 1;
-            var right = 2 * index + 2;
-
-            if (left < length && list[left].IsGreaterThan(list[largest])) largest = left;
-
-            if (right < length && list[right].IsGreaterThan(list[largest])) largest = right;
-
-            if (largest == index)
-                break;
-
-            (list[index], list[largest]) = (list[largest], list[index]);
-            index = largest;
-        }
     }
 
     /// <summary>
@@ -331,15 +293,15 @@ public static class Sorting
         while (p > 0)
         {
             if ((r & 0x03) == 0) 
-                HeapifySmooth(list, r, q);
+                list.HeapifySmooth(r, q);
 
-            if (Leonardo(r) == p)
+            if (Smooth.Leonardo(r) == p)
                 r++;
             else
             {
                 r--;
-                q -= Leonardo(r);
-                HeapifySmooth(list, r, q);
+                q -= Smooth.Leonardo(r);
+                list.HeapifySmooth(r, q);
                 q = r - 1;
                 r++;
             }
@@ -361,53 +323,6 @@ public static class Sorting
         return list;
     }
 
-    private static void HeapifySmooth<T>(this List<T> list, int start, int end) where T : struct, IComparable<T>
-    {
-        var i = start;
-        var j = 0;
-        var k = 0;
-
-        while (k < end - start + 1)
-        {
-            if ((k & 0xAAAAAAAA) == 0xAAAAAAAA)
-            {
-                j += i;
-                i >>= 1;
-            }
-            else
-            {
-                i += j;
-                j >>= 1;
-            }
-
-            k++;
-        }
-
-        while (i > 0)
-        {
-            j >>= 1;
-            var l = i + j;
-            while (l < end)
-            {
-                if (list[l].IsGreaterThan(list[l - i]))
-                    break;
-
-                (list[l], list[l - i]) = (list[l - i], list[l]);
-                l += i;
-            }
-
-            i = j;
-        }
-    }
-
-    private static int Leonardo(int index)
-    {
-        if (index < 2)
-            return 1;
-
-        return Leonardo(index - 1) + Leonardo(index - 2) + 1;
-    }
-
     /// <summary>
     /// Creates a tree structure starting from the smallest item, then takes the smallest to the left and right of the root.
     /// Worst case time complexity: O(n*log(n))
@@ -417,15 +332,13 @@ public static class Sorting
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public static List<T> CartesianTreeSort<T>(this List<T> list) where T : struct, IComparable<T>,INumber<T>
+    public static List<T> CartesianTreeSort<T>(this List<T> list) where T : struct, IComparable<T>, INumber<T>
     {
         var startIndex = list.Count;
         var rootNode = list.BuildCartesianTree(startIndex);
 
-        return SortingUtils.PqBasedTraversal(rootNode);
+        return CartesianTree.PqBasedTraversal(rootNode);
     }
-
-    
 
     // Tournament sort
 
