@@ -124,9 +124,9 @@ public class SortingTests
     }
 
     #endregion
-    
+
     #region HeapSort
-    
+
     [Test, TestOf("HeapSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void HeapSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
@@ -134,11 +134,11 @@ public class SortingTests
         var actual = list.HeapSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     #endregion
 
     #region SmoothSort
-    
+
     [Test, TestOf("SmoothSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void SmoothSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
@@ -150,12 +150,24 @@ public class SortingTests
     #endregion
 
     #region CartesianTreeSort
-    
+
     [Test, TestOf("CartesianTreeSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void CartesianTreeSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
     {
         var actual = list.CartesianTreeSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
+
+    #region TournamentSort
+
+    [Test, TestOf("TournamentSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void TournamentSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.TournamentSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
 

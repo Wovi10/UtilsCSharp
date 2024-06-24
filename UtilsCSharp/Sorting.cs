@@ -340,7 +340,19 @@ public static class Sorting
         return CartesianTree.PqBasedTraversal(rootNode);
     }
 
-    // Tournament sort
+    /// <summary>
+    /// Improves selection sort by dividing the list into smaller sublists.
+    /// Worst case time complexity: O(n*log(n))
+    /// Average case time complexity: O(n*log(n))
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> TournamentSort<T>(this List<T> list) where T : struct, IComparable<T>
+    {
+        
+        return list;
+    }
 
     // Cycle sort
 
