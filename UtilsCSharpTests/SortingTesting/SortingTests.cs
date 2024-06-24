@@ -40,9 +40,9 @@ public class SortingTests
     }
 
     #endregion
-    
+
     #region Merge
-    
+
     [Test, TestOf("Merge")]
     [TestCaseSource(typeof(TestData), nameof(TestData.MergeCases))]
     public void Merge<T>(List<T> expected, List<T> listA, List<T> listB) where T : struct, INumber<T>
@@ -50,11 +50,11 @@ public class SortingTests
         var actual = listA.MergeInto(listB);
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     #endregion
-    
+
     # region ShellSort
-    
+
     [Test, TestOf("ShellSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void ShellSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
@@ -62,11 +62,11 @@ public class SortingTests
         var actual = list.ShellSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     #endregion
 
     #region Cocktail sort
-    
+
     [Test, TestOf("CocktailSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void CocktailSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
@@ -78,7 +78,7 @@ public class SortingTests
     #endregion
 
     #region BrickSort
-    
+
     [Test, TestOf("BrickSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void BrickSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
@@ -88,9 +88,9 @@ public class SortingTests
     }
 
     #endregion
-    
+
     #region CombSort
-    
+
     [Test, TestOf("CombSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void CombSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
@@ -98,16 +98,28 @@ public class SortingTests
         var actual = list.CombSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
-    
+
     #endregion
 
     #region GnomeSort
-    
+
     [Test, TestOf("GnomeSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
     public void GnomeSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
     {
         var actual = list.GnomeSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
+
+    #region QuickSort
+
+    [Test, TestOf("QuickSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void QuickSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.QuickSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
 

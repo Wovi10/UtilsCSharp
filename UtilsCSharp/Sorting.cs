@@ -1,4 +1,6 @@
-﻿namespace UtilsCSharp;
+﻿using System.Numerics;
+
+namespace UtilsCSharp;
 
 public static class Sorting
 {
@@ -139,18 +141,18 @@ public static class Sorting
             gap = GetNextGap(gap);
             hasSwapped = false;
 
-            for (var i = 0; i < length-gap; i++)
+            for (var i = 0; i < length - gap; i++)
             {
-                if (list[i].IsSmallerThanOrEqualTo(list[i+gap]))
+                if (list[i].IsSmallerThanOrEqualTo(list[i + gap]))
                     continue;
-                
+
                 (list[i], list[i + gap]) = (list[i + gap], list[i]);
                 hasSwapped = true;
             }
         }
 
         return list;
-        
+
         int GetNextGap(int currentGap)
         {
             currentGap = (int)(currentGap / 1.3);
@@ -169,7 +171,7 @@ public static class Sorting
     public static List<T> GnomeSort<T>(this List<T> list) where T : struct, IComparable<T>
     {
         var index = 0;
-        while(index < list.Count)
+        while (index < list.Count)
         {
             if (index == 0)
                 index++;
@@ -182,13 +184,57 @@ public static class Sorting
                 index--;
             }
         }
-        
+
         return list;
     }
 
     // Proportion extend sort (Not practical for the average list)
 
-    // Quick sort
+    /// <summary>
+    /// Choose pivot and partition the list into two sublists. Put everything smaller than the pivot to the left and everything greater to the right.
+    /// Repeat.
+    /// Worst case time complexity: O(n^2)
+    /// Average case time complexity: O(n*log(n))
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="low">Lowest index</param>
+    /// <param name="high">Highest index</param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public static List<T> QuickSort<T>(this List<T> list, int? low = null, int? high = null)
+        where T : struct, IComparable<T>, INumber<T>
+    {
+        low ??= 0;
+        high ??= list.Count - 1;
+
+        if (low >= high)
+            return list;
+
+        var pi = list.Partition((int)low, (int)high);
+
+        QuickSort(list, low, pi - 1);
+        QuickSort(list, pi + 1, high);
+
+        return list;
+    }
+
+    private static int Partition<T>(this List<T> list, int low, int high) where T : struct, IComparable<T>
+    {
+        var pivot = list[high];
+        var i = low - 1;
+
+        for (var j = low; j < high; j++)
+        {
+            if (!list[j].IsSmallerThan(pivot))
+                continue;
+
+            i++;
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+
+        (list[i + 1], list[high]) = (list[high], list[i + 1]);
+        return i + 1;
+    }
 
     #endregion
 
