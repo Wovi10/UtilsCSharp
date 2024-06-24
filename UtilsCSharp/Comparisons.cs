@@ -90,7 +90,7 @@ public static class Comparisons
         };
     }
     
-    public static bool IsSmallerOrEqualTo<T>(this T a, T b) where T: struct, IComparable<T>
+    public static bool IsSmallerThanOrEqualTo<T>(this T a, T b) where T: struct, IComparable<T>
         => a.IsLessThanOrEqualTo(b);
 
     #endregion
