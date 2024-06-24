@@ -189,8 +189,6 @@ public static class Sorting
         return list;
     }
 
-    // Proportion extend sort (Not practical for the average list)
-
     /// <summary>
     /// Choose pivot and partition the list into two sublists. Put everything smaller than the pivot to the left and everything greater to the right.
     /// Repeat.
@@ -341,22 +339,53 @@ public static class Sorting
     }
 
     /// <summary>
-    /// Improves selection sort by dividing the list into smaller sublists.
-    /// Worst case time complexity: O(n*log(n))
-    /// Average case time complexity: O(n*log(n))
+    /// Slow in place sorting
+    /// Worst case time complexity: O(n^2)
+    /// Best Case time complexity: O(n^2)
     /// </summary>
     /// <param name="list"></param>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static List<T> TournamentSort<T>(this List<T> list) where T : struct, IComparable<T>
+    public static List<T> CycleSort<T>(this List<T> list) where T : struct, IComparable<T>
     {
-        
+        var length = list.Count;
+ 
+        for (var start = 0; start <= length - 2; start++)
+        {
+            var item = list[start];
+
+            var pos = start;
+            for (var i = start + 1; i < length; i++)
+                if (list[i].IsSmallerThan(item))
+                    pos++;
+
+            if (pos == start)
+                continue;
+
+            while (item.Equals(list[pos]))
+                pos += 1;
+
+            if (pos != start) 
+                (item, list[pos]) = (list[pos], item);
+
+            while (pos != start)
+            {
+                pos = start;
+
+                for (var i = start + 1; i < length; i++)
+                    if (list[i].IsSmallerThan(item))
+                        pos += 1;
+
+                while (item.Equals(list[pos]))
+                    pos += 1;
+
+                if (!item.Equals(list[pos])) 
+                    (item, list[pos]) = (list[pos], item);
+            }
+        }
+
         return list;
     }
-
-    // Cycle sort
-
-    // Weak heap sort
 
     #endregion
 

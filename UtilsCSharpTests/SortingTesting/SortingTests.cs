@@ -160,16 +160,16 @@ public class SortingTests
     }
 
     #endregion
-
-    #region TournamentSort
-
-    [Test, TestOf("TournamentSort")]
+    
+    #region CycleSort
+    
+    [Test, TestOf("CycleSort")]
     [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
-    public void TournamentSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    public void CycleSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
     {
-        var actual = list.TournamentSort();
+        var actual = list.CycleSort();
         Assert.That(actual, Is.EqualTo(expected));
     }
-
+    
     #endregion
 }
