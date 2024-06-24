@@ -148,4 +148,16 @@ public class SortingTests
     }
 
     #endregion
+
+    #region CartesianTreeSort
+    
+    [Test, TestOf("CartesianTreeSort")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Sorting))]
+    public void CartesianTreeSort<T>(List<T> expected, List<T> list) where T : struct, INumber<T>
+    {
+        var actual = list.CartesianTreeSort();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
 }

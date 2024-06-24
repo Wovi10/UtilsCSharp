@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using UtilsCSharp.Utils;
 
 namespace UtilsCSharp;
 
@@ -407,7 +408,24 @@ public static class Sorting
         return Leonardo(index - 1) + Leonardo(index - 2) + 1;
     }
 
-    // Cartesian tree sort
+    /// <summary>
+    /// Creates a tree structure starting from the smallest item, then takes the smallest to the left and right of the root.
+    /// Worst case time complexity: O(n*log(n))
+    /// Best case time complexity: O(n)
+    /// </summary>
+    /// <param name="list"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public static List<T> CartesianTreeSort<T>(this List<T> list) where T : struct, IComparable<T>,INumber<T>
+    {
+        var startIndex = list.Count;
+        var rootNode = list.BuildCartesianTree(startIndex);
+
+        return SortingUtils.PqBasedTraversal(rootNode);
+    }
+
+    
 
     // Tournament sort
 
