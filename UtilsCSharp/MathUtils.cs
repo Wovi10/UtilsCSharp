@@ -94,6 +94,9 @@ public static class MathUtils
 
     public static T Lcm<T>(this T a, T b) where T: struct, INumber<T>
         => a * b / a.GcdWith(b);
+    
+    public static T Lcm<T>(IEnumerable<T> list) where T: struct, INumber<T>
+        => list.Aggregate(Lcm);
 
     #endregion
 

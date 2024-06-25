@@ -93,6 +93,14 @@ public class MathUtilsTests
         var actual = first.Lcm(second);
         Assert.That(actual, Is.EqualTo(expected));
     }
+    
+    [Test, TestOf("LCM")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.LcmEnumerableCases))]
+    public void Lcm<T>(T expected, IEnumerable<T> numbers) where T : struct, INumber<T>
+    {
+        var actual = MathUtils.Lcm(numbers);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
 
     #endregion
 

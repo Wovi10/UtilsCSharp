@@ -71,6 +71,15 @@ public static class TestData
         new object[] {36L, 12L, 9L},
         new object[] {36.0, 12.0, 9.0}
     };
+
+
+    public static object[] LcmEnumerableCases { get; } =
+    {
+        // {expected, numbers}
+        new object[] {36, new List<int> {12, 9}},
+        new object[] {36L, new List<long> {12L, 9L}},
+        new object[] {36.0, new List<double> {12D, 9D}}
+    };
     
     public static object[] IsPrime { get; } =
     {
