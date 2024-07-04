@@ -14,7 +14,7 @@
         <RepositoryType>GitHub</RepositoryType>
         <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
         <PackageReadMeFile>README.md</PackageReadMeFile>
-        <Version>2.2.1</Version>
+        <Version>2.2.2</Version>
     </PropertyGroup>
     
     <ItemGroup>
