@@ -35,11 +35,27 @@ public abstract class NodeBase<T>(T internalX, T internalY) where T : struct
         y = Y;
     }
 
-    public static bool operator ==(NodeBase<T> left, NodeBase<T> right)
-        => left.Equals(right);
+    public static bool operator ==(NodeBase<T>? left, NodeBase<T>? right)
+    {
+        if (left is null && right is null)
+            return true;
+        
+        if (left is null || right is null)
+            return false;
 
-    public static bool operator !=(NodeBase<T> left, NodeBase<T> right)
-        => !left.Equals(right);
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(NodeBase<T>? left, NodeBase<T>? right)
+    {
+        if (left is null && right is null)
+            return false;
+        
+        if (left is null || right is null)
+            return true;
+
+        return !left.Equals(right);
+    }
 
     public abstract (T, T) Move(Direction direction, int distance = 1);
 }

@@ -4,6 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
         <Title>UtilsCSharp</Title>
         <Authors>Wovi10</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -13,7 +14,7 @@
         <RepositoryType>GitHub</RepositoryType>
         <PackageLicenseUrl>https://choosealicense.com/licenses/mit/</PackageLicenseUrl>
         <PackageReadMeFile>README.md</PackageReadMeFile>
-        <Version>2.2.0</Version>
+        <Version>2.2.1</Version>
     </PropertyGroup>
     
     <ItemGroup>

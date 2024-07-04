@@ -335,6 +335,9 @@ public static class Sorting
         var startIndex = list.Count;
         var rootNode = list.BuildCartesianTree(startIndex);
 
+        if (rootNode is null)
+            throw new NotImplementedException("Root node is null");
+        
         return CartesianTree.PqBasedTraversal(rootNode);
     }
 

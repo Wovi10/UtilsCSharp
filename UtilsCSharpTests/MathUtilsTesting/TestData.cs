@@ -78,7 +78,8 @@ public static class TestData
         // {expected, numbers}
         new object[] {36, new List<int> {12, 9}},
         new object[] {36L, new List<long> {12L, 9L}},
-        new object[] {36.0, new List<double> {12D, 9D}}
+        new object[] {36.0, new List<double> {12D, 9D}},
+        new object[] {228300182686739, new List<long>{3911,3917,3929,3793}}
     };
     
     public static object[] IsPrime { get; } =

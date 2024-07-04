@@ -94,7 +94,7 @@ public class MathUtilsTests
         Assert.That(actual, Is.EqualTo(expected));
     }
     
-    [Test, TestOf("LCM")]
+    [Test, TestOf("LCM2")]
     [TestCaseSource(typeof(TestData), nameof(TestData.LcmEnumerableCases))]
     public void Lcm<T>(T expected, IEnumerable<T> numbers) where T : struct, INumber<T>
     {

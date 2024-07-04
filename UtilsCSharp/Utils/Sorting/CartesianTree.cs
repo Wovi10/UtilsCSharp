@@ -4,7 +4,7 @@ namespace UtilsCSharp.Utils.Sorting;
 
 internal static class CartesianTree
 {
-    public static Node<T> BuildCartesianTree<T>(this List<T> list, int listLength) where T : struct, IComparable<T>
+    public static Node<T>? BuildCartesianTree<T>(this List<T> list, int listLength) where T : struct, IComparable<T>
     {
         var parent = new int[listLength];
         var left = new int[listLength];
@@ -50,7 +50,7 @@ internal static class CartesianTree
         return list.BuildCartesianTreeUtil(root, left, right);
     }
 
-    private static Node<T> BuildCartesianTreeUtil<T>(this List<T> list, int root, int[] left, int[]
+    private static Node<T>? BuildCartesianTreeUtil<T>(this List<T> list, int root, int[] left, int[]
         right) where T : struct, IComparable<T>
     {
         if (root == -1)
@@ -68,17 +68,34 @@ internal static class CartesianTree
 
     public class Node<T>
     {
-        public T Value { get; set; }
-        public Node<T> Left { get; set; }
-        public Node<T> Right { get; set; }
+        public T? Value { get; set; }
+        public Node<T>? Left { get; set; }
+        public Node<T>? Right { get; set; }
     }
 
     public class IndexNodePair<T>(T value, Node<T> node) : IComparable<IndexNodePair<T>> where T : struct, IComparable<T>
     {
-        public T Value { get; } = value;
-        public Node<T> Node { get; } = node;
+        public T? Value { get; } = value;
+        public Node<T>? Node { get; } = node;
 
-        public int CompareTo(IndexNodePair<T> other) => Value.CompareTo(other.Value);
+        public int CompareTo(IndexNodePair<T>? other)
+        {
+            if (other is null)
+                return 1; // null is less than anything
+
+            switch (Value)
+            {
+                case null when other.Value is null:
+                    return 0; // null is equal to null
+                case null:
+                    return -1; // null is less than anything
+            }
+
+            if (other.Value is null)
+                return 1; // anything is greater than null
+
+            return (Value.Value).CompareTo((other.Value).Value);
+        }
     }
 
     public static List<T> PqBasedTraversal<T>(Node<T> rootNode) where T : struct, IComparable<T>,INumber<T>
@@ -91,12 +108,13 @@ internal static class CartesianTree
         while (!priorityQueue.IsEmpty())
         {
             var poppedPair = priorityQueue.Dequeue();
-            list.Add(poppedPair.Value);
+            if (poppedPair.Value is not null) 
+                list.Add((poppedPair.Value).Value);
             
-            if (poppedPair.Node.Left != null)
+            if (poppedPair.Node?.Left is not null)
                 priorityQueue.Enqueue(new IndexNodePair<T>(poppedPair.Node.Left.Value, poppedPair.Node.Left));
 
-            if (poppedPair.Node.Right != null)
+            if (poppedPair.Node?.Right is not null)
                 priorityQueue.Enqueue(new IndexNodePair<T>(poppedPair.Node.Right.Value, poppedPair.Node.Right));
         }
 
