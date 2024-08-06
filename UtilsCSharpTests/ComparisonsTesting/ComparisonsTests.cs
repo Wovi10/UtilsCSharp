@@ -129,4 +129,24 @@ public class ComparisonsTests
     }
 
     # endregion
+
+    #region Intersects
+    
+    [Test, TestOf("Intersects")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Intersects))]
+    public void Intersects(bool expected, Range firstRange, Range secondRange)
+    {
+        var actual = firstRange.Intersects(secondRange);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+    
+    [Test, TestOf("Intersects")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.Intersects))]
+    public void IntersectsWith(bool expected, Range firstRange, Range secondRange)
+    {
+        var actual = firstRange.IntersectsWith(secondRange);
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    #endregion
 }

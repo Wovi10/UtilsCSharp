@@ -114,4 +114,14 @@ public static class Comparisons
     }
 
     #endregion
+    
+    #region Intersects
+
+    public static bool Intersects(this Range a, Range b) 
+        => a.Start.Value <= b.End.Value && b.Start.Value <= a.End.Value;
+    
+    public static bool IntersectsWith(this Range a, Range b)
+        => Intersects(a, b);
+
+    #endregion
 }

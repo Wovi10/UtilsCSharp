@@ -133,4 +133,16 @@ public class TestData
         new object[] {false, 3, 3, 7, Constants.Exclusive, Constants.Exclusive},
         new object[] {false, 7, 3, 7, Constants.Exclusive, Constants.Exclusive}
     };
+
+    public static object[] Intersects { get; } =
+    {
+        // {expected, range 1, range 2}
+        new object[]{true, new Range(0,5), new Range(2,6)},
+        new object[]{true, new Range(2,6), new Range(0,5)},
+        new object[]{true, new Range(0,5), new Range(0,5)},
+        new object[]{true, new Range(0,5), new Range(5,10)},
+        new object[]{true, new Range(5,10), new Range(0,5)},
+        new object[]{false, new Range(0,5), new Range(6,10)},
+        new object[]{false, new Range(6,10), new Range(0,5)}
+    };
 }
