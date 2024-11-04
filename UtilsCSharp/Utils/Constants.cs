@@ -14,7 +14,8 @@ public static class Constants
     public const string SemiColon = ";";
     public const string Space = " ";
     public const string QuestionMark = "?";
-    
+    public const string UnderScore = "_";
+
     public const int MillSecInSec = 1000;
     public const int SecInMin = 60;
     public const int MinInHour = 60;
