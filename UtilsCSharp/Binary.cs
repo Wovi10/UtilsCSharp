@@ -1,10 +1,22 @@
 ﻿using System.Text;
-using Microsoft.VisualBasic;
+using UtilsCSharp.Utils;
 
 namespace UtilsCSharp;
 
 public static class Binary
 {
+    public static string BcdToBinary(this string bcd)
+    {
+        var bcdArray = bcd.Split('_');
+
+        return bcdArray
+                .Select(bcdNumber => Convert.ToInt32(bcdNumber, 2))
+                .Select((binaryNumber, i) => binaryNumber * (int)Math.Pow(10, bcdArray.Length - 1 - i))
+                .Sum()
+                .ToBinaryString()
+                .MaskBinaryString();
+    }
+
     public static string BinaryToBcd(this string binary)
     {
         var binaryString = binary;
@@ -20,12 +32,46 @@ public static class Binary
             CheckForGreaterThanFive(bcd0, bcd1, bcd2);
         }
 
-        var bcd2Value = PadNibble(bcd2.ToString());
-        var bcd1Value = PadNibble(bcd1.ToString());
-        var bcd0Value = PadNibble(bcd0.ToString());
+        var bcd2Value = PadToNibble(bcd2.ToString());
+        var bcd1Value = PadToNibble(bcd1.ToString());
+        var bcd0Value = PadToNibble(bcd0.ToString());
 
-        return $"{bcd2Value}_{bcd1Value}_{bcd0Value}";
+        return $"{bcd2Value}{bcd1Value}{bcd0Value}";
     }
+
+    public static string MaskBinaryString(this string binaryString)
+    {
+        var cleanedBinaryString = binaryString.Replace(Constants.UnderScore, string.Empty);
+
+        var leastAmountOfCompleteNibbles = (int)Math.Ceiling(cleanedBinaryString.Length / 4.0) - 1;
+
+        var possibleIncompleteNibbleLength = cleanedBinaryString.Length - leastAmountOfCompleteNibbles * 4;
+
+        var completeNibbles = cleanedBinaryString[possibleIncompleteNibbleLength..];
+        var incompleteNibble = cleanedBinaryString[..possibleIncompleteNibbleLength];
+
+        return $"{incompleteNibble.PadToNibble()}{completeNibbles}";
+    }
+
+    public static string AddNibbleUnderscores(this string binaryString)
+    {
+        var cleanedString = binaryString.Replace(Constants.UnderScore, string.Empty);
+
+        var stringBuilder = new StringBuilder();
+        for (var i = cleanedString.Length - 1; i >= 0; i--)
+        {
+            var index = cleanedString.Length - 1 - i;
+            stringBuilder.Insert(0, cleanedString[i]);
+
+            if (index % 4 == 3 && index != 0 && i != 0)
+                stringBuilder.Insert(0, Constants.UnderScore);
+        }
+
+        return stringBuilder.ToString();
+    }
+
+    public static string ToBinaryString(this int number)
+        => Convert.ToString(number, 2);
 
     private static void ShiftIntoBcd(char charToAppend, StringBuilder bcdToShiftInto, StringBuilder? overflowBcd = null,
         StringBuilder? overflow2Bcd = null)
@@ -50,14 +96,26 @@ public static class Binary
     private static void CheckForGreaterThanFive(StringBuilder? bcd0, StringBuilder? bcd1 = null,
         StringBuilder? bcd2 = null)
     {
-        if (IsGreaterThanOrEqualToFive(bcd0))
-            AddThree(bcd0);
+        bcd0.AddThreeIf(IsGreaterThanOrEqualToFive);
+        bcd1.AddThreeIf(IsGreaterThanOrEqualToFive);
+        bcd2.AddThreeIf(IsGreaterThanOrEqualToFive);
+    }
 
-        if (IsGreaterThanOrEqualToFive(bcd1))
-            AddThree(bcd1);
+    private static void AddThreeIf(this StringBuilder? bcd, Func<StringBuilder?, bool> condition)
+    {
+        if (!condition(bcd) || bcd is null)
+            return;
 
-        if (IsGreaterThanOrEqualToFive(bcd2))
-            AddThree(bcd2);
+        var bcdValue =
+            bcd
+                .ToString()
+                .BinaryStringToInt()
+                .Add(3)
+                .ToBinaryString();
+
+        bcd
+            .Clear()
+            .Append(bcdValue);
     }
 
     private static bool IsGreaterThanOrEqualToFive(StringBuilder? bcd)
@@ -69,19 +127,10 @@ public static class Binary
         return bcdValue.IsGreaterThanOrEqualTo(5);
     }
 
-    private static void AddThree(StringBuilder? bcd)
-    {
-        if (bcd is null)
-            return;
+    private static int BinaryStringToInt(this string binaryString)
+        => Convert.ToInt32(binaryString, 2);
 
-        var bcdValue = Convert.ToInt32(bcd.ToString(), 2);
-        bcdValue += 3;
-
-        bcd.Clear();
-        bcd.Append(Convert.ToString(bcdValue, 2));
-    }
-
-    private static string PadNibble(string? bcd)
+    private static string PadToNibble(this string? bcd)
     {
         bcd ??= string.Empty;
         return bcd.PadLeft(4, '0');

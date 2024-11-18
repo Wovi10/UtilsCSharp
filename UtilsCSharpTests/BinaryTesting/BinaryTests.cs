@@ -1,33 +1,47 @@
 ﻿using UtilsCSharp;
-using UtilsCSharp.Utils;
 
 namespace UtilsCSharpTests.BinaryTesting;
 
 public class BinaryTests
 {
     [Test, TestOf("BCDToBinary")]
-    [TestCaseSource(typeof(TestData), nameof(TestData.BCDToBinary))]
-    public void BCDToBinary(int expected, string bcd)
+    [TestCaseSource(typeof(TestData), nameof(TestData.BcdToBinary))]
+    public void BcdToBinary(string expected, string bcd)
     {
-        var bcdArray = bcd.Split('_');
-
-        var actual = 0;
-        for (var i = 0; i < bcdArray.Length; i++)
-        {
-            var bcdNumber = bcdArray[i];
-            var binaryNumber = Convert.ToInt32(bcdNumber, 2);
-            binaryNumber *= (int) Math.Pow(10, bcdArray.Length - 1 - i);
-            actual += binaryNumber;
-        }
+        var actual = bcd.BcdToBinary();
 
         Assert.That(actual, Is.EqualTo(expected));
     }
 
     [Test, TestOf("BinaryToBCD")]
-    [TestCaseSource(typeof(TestData), nameof(TestData.BinaryToBCD))]
-    public void BinaryToBCD(string expected, string binary)
+    [TestCaseSource(typeof(TestData), nameof(TestData.BinaryToBcd))]
+    public void BinaryToBcd(string expected, string binary)
     {
         var actual = binary.BinaryToBcd();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test, TestOf("MaskBinaryString")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.MaskBinaryString))]
+    public void MaskBinaryString(string expected, string binaryString)
+    {
+        var actual = binaryString.MaskBinaryString();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test, TestOf("AddNibbleUnderscores")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.AddNibbleUnderscores))]
+    public void AddNibbleUnderscores(string expected, string binaryString)
+    {
+        var actual = binaryString.AddNibbleUnderscores();
+        Assert.That(actual, Is.EqualTo(expected));
+    }
+
+    [Test, TestOf("ToBinaryString")]
+    [TestCaseSource(typeof(TestData), nameof(TestData.ToBinaryString))]
+    public void ToBinaryString(string expected, int number)
+    {
+        var actual = number.ToBinaryString();
         Assert.That(actual, Is.EqualTo(expected));
     }
 }
