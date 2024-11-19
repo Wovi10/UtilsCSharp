@@ -7,12 +7,31 @@ public static class BitWiseLogic
     public static string NOT(this string binaryString)
     {
         if (!binaryString.IsBinaryString())
-            return "";
+            return string.Empty;
 
         var result = new StringBuilder();
 
         foreach (var c in binaryString)
             result.Append(c == '1' ? '0' : '1');
+
+        return result.ToString();
+    }
+
+    public static string OR(this string left, string right)
+    {
+        if (!left.IsBinaryString() || !right.IsBinaryString())
+            return string.Empty;
+
+        if (left.Length < right.Length)
+            left = left.PadLeft(right.Length, '0');
+
+        if (right.Length < left.Length)
+            right = right.PadLeft(left.Length, '0');
+
+        var result = new StringBuilder();
+
+        for (var i = 0; i < left.Length; i++)
+            result.Append(left[i] == '1' || right[i] == '1' ? '1' : '0');
 
         return result.ToString();
     }

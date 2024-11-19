@@ -2,7 +2,7 @@
 
 public class TestData
 {
-    public static object[] NOT { get; } =
+    public static object[] Not { get; } =
     {
         // {expected, left, right}
         new object[] {"1111", "0000"},
@@ -23,7 +23,28 @@ public class TestData
         new object[] {"0000", "1111"},
     };
 
-    public static object[] XOR { get; } =
+    public static object[] Or { get; } =
+    {
+        // {expected, left, right}
+        new object[] {"1111", "1110", "0001"},
+        new object[] {"1110", "0000", "1110"},
+        new object[] {"1101", "1001", "0100"},
+        new object[] {"1100", "1100", "1000"},
+        new object[] {"1011", "1000", "0011"},
+        new object[] {"1010", "1010", "0000"},
+        new object[] {"1001", "1001", "0000"},
+        new object[] {"1000", "1000", "0000"},
+        new object[] {"0111", "0111", "0000"},
+        new object[] {"0110", "0110", "0000"},
+        new object[] {"0101", "0101", "0000"},
+        new object[] {"0100", "0100", "0000"},
+        new object[] {"0011", "0011", "0000"},
+        new object[] {"0010", "0010", "0000"},
+        new object[] {"0001", "0001", "0000"},
+        new object[] {"0000", "0000", "0000"}
+    };
+
+    public static object[] Xor { get; } =
     {
         // {expected, left, right}
         new object[] {false, false, false},
@@ -32,7 +53,7 @@ public class TestData
         new object[] {false, true, true}
     };
 
-    public static object[] XORChar { get; } =
+    public static object[] XorChar { get; } =
     {
         // {expected, left, right}
         new object[] {'0', '0', '0'},
